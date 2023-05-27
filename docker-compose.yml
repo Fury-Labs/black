@@ -7,9 +7,9 @@ services:
     ports:
       - "26656-26657:26656-26657"
     volumes:
-      - ./build/node0/blackfuryd:/blackfury:Z
+      - ./build/node0/black:/blackfury:Z
     command:
-      - /blackfuryd start --home /blackfury
+      - /black start --home /blackfury
     networks:
       localnet:
         ipv4_address: 192.167.10.2
@@ -20,9 +20,9 @@ services:
     ports:
       - "26659-26660:26656-26657"
     volumes:
-      - ./build/node1/blackfuryd:/blackfury:Z
+      - ./build/node1/black:/blackfury:Z
     command:
-      - /blackfuryd start --home /blackfury
+      - /black start --home /blackfury
     networks:
       localnet:
         ipv4_address: 192.167.10.3
@@ -33,9 +33,9 @@ services:
     ports:
       - "26661-26662:26656-26657"
     volumes:
-      - ./build/node2/blackfuryd:/blackfury:Z
+      - ./build/node2/black:/blackfury:Z
     command:
-      - /blackfuryd start --home /blackfury
+      - /black start --home /blackfury
     networks:
       localnet:
         ipv4_address: 192.167.10.4
@@ -46,9 +46,9 @@ services:
     ports:
       - "26663-26664:26656-26657"
     volumes:
-      - ./build/node3/blackfuryd:/blackfury:Z
+      - ./build/node3/black:/blackfury:Z
     command:
-      - /blackfuryd start --home /blackfury
+      - /black start --home /blackfury
     networks:
       localnet:
         ipv4_address: 192.167.10.5

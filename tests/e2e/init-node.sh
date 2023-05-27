@@ -12,7 +12,7 @@ TRACE=""
 PRUNING="default"
 #PRUNING="custom"
 
-CHAINDIR="$HOME/.blackfuryd"
+CHAINDIR="$HOME/.black"
 GENESIS="$CHAINDIR/config/genesis.json"
 TMP_GENESIS="$CHAINDIR/config/tmp_genesis.json"
 APP_TOML="$CHAINDIR/config/app.toml"
@@ -25,14 +25,14 @@ command -v jq > /dev/null 2>&1 || { echo >&2 "jq not installed. More info: https
 set -e
 
 # Set client config
-blackfuryd config keyring-backend "$KEYRING"
-blackfuryd config chain-id "$CHAINID"
+black config keyring-backend "$KEYRING"
+black config chain-id "$CHAINID"
 
 # if $KEY exists it should be deleted
-blackfuryd keys add "$KEY" --keyring-backend $KEYRING --algo "$KEYALGO"
+black keys add "$KEY" --keyring-backend $KEYRING --algo "$KEYALGO"
 
 # Set moniker and chain-id for Gridiron (Moniker can be anything, chain-id must be an integer)
-blackfuryd init "$MONIKER" --chain-id "$CHAINID"
+black init "$MONIKER" --chain-id "$CHAINID"
 
 # Change parameter token denominations to afury
 jq '.app_state.staking.params.bond_denom="afury"' "$GENESIS" > "$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
@@ -49,7 +49,7 @@ jq '.app_state.gov.voting_params.voting_period="30s"' "$GENESIS" > "$TMP_GENESIS
 jq '.consensus_params.block.max_gas="10000000"' "$GENESIS" > "$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
 
 # Set claims start time
-node_address=$(blackfuryd keys list | grep  "address: " | cut -c12-)
+node_address=$(black keys list | grep  "address: " | cut -c12-)
 current_date=$(date -u +"%Y-%m-%dT%TZ")
 jq -r --arg current_date "$current_date" '.app_state.claims.params.airdrop_start_time=$current_date' "$GENESIS" > "$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
 
@@ -62,14 +62,14 @@ jq '.app_state.claims.params.duration_of_decay="1000000s"' "$GENESIS" > "$TMP_GE
 jq '.app_state.claims.params.duration_until_decay="100000s"' "$GENESIS" > "$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
 
 # Claim module account:
-# 0xA61808Fe40fEb8B3433778BBC2ecECCAA47c8c47 || blackfury15cvq3ljql6utxseh0zau9m8ve2j8erz89m5wkz
-jq -r --arg amount_to_claim "$amount_to_claim" '.app_state.bank.balances += [{"address":"blackfury15cvq3ljql6utxseh0zau9m8ve2j8erz89m5wkz","coins":[{"denom":"afury", "amount":$amount_to_claim}]}]' "$GENESIS" > "$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
+# 0xA61808Fe40fEb8B3433778BBC2ecECCAA47c8c47 || black15cvq3ljql6utxseh0zau9m8ve2j8erz89m5wkz
+jq -r --arg amount_to_claim "$amount_to_claim" '.app_state.bank.balances += [{"address":"black15cvq3ljql6utxseh0zau9m8ve2j8erz89m5wkz","coins":[{"denom":"afury", "amount":$amount_to_claim}]}]' "$GENESIS" > "$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
 
 # disable produce empty block
 sed -i 's/create_empty_blocks = true/create_empty_blocks = false/g' "$CONFIG_TOML"
 
 # Allocate genesis accounts (cosmos formatted addresses)
-blackfuryd add-genesis-account $KEY 100000000000000000000000000afury --keyring-backend $KEYRING
+black add-genesis-account $KEY 100000000000000000000000000afury --keyring-backend $KEYRING
 
 # Update total supply with claim values
 # Bc is required to add this big numbers
@@ -89,19 +89,19 @@ sed -i 's/pprof_laddr = "localhost:6060"/pprof_laddr = "0.0.0.0:6060"/g' "$CONFI
 sed -i 's/127.0.0.1/0.0.0.0/g' "$APP_TOML"
 
 # Sign genesis transaction
-blackfuryd gentx $KEY 1000000000000000000000afury --keyring-backend $KEYRING --chain-id "$CHAINID"
+black gentx $KEY 1000000000000000000000afury --keyring-backend $KEYRING --chain-id "$CHAINID"
 ## In case you want to create multiple validators at genesis
-## 1. Back to `blackfuryd keys add` step, init more keys
-## 2. Back to `blackfuryd add-genesis-account` step, add balance for those
-## 3. Clone this ~/.blackfuryd home directory into some others, let's say `~/.clonedGridirond`
+## 1. Back to `black keys add` step, init more keys
+## 2. Back to `black add-genesis-account` step, add balance for those
+## 3. Clone this ~/.black home directory into some others, let's say `~/.clonedGridirond`
 ## 4. Run `gentx` in each of those folders
-## 5. Copy the `gentx-*` folders under `~/.clonedGridirond/config/gentx/` folders into the original `~/.blackfuryd/config/gentx`
+## 5. Copy the `gentx-*` folders under `~/.clonedGridirond/config/gentx/` folders into the original `~/.black/config/gentx`
 
 # Collect genesis tx
-blackfuryd collect-gentxs
+black collect-gentxs
 
 # Run this to ensure everything worked and that the genesis file is setup correctly
-blackfuryd validate-genesis
+black validate-genesis
 
 # Start the node (remove the --pruning=nothing flag if historical queries are not needed)
-blackfuryd start "$TRACE" --log_level $LOGLEVEL --minimum-gas-prices=0.0001afury --json-rpc.api eth,txpool,personal,net,debug,web3
+black start "$TRACE" --log_level $LOGLEVEL --minimum-gas-prices=0.0001afury --json-rpc.api eth,txpool,personal,net,debug,web3

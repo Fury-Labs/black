@@ -395,7 +395,7 @@ func (suite *KeeperTestSuite) TestOnRecvPacket() {
 }
 
 func (suite *KeeperTestSuite) TestConvertCoinToERC20FromPacket() {
-	senderAddr := "blackfury1x2w87cvt5mqjncav4lxy8yfreynn273xn5335v"
+	senderAddr := "black1x2w87cvt5mqjncav4lxy8yfreynn273xn5335v"
 
 	testCases := []struct {
 		name     string
@@ -614,7 +614,7 @@ func (suite *KeeperTestSuite) TestOnAcknowledgementPacket() {
 }
 
 func (suite *KeeperTestSuite) TestOnTimeoutPacket() {
-	senderAddr := "blackfury1x2w87cvt5mqjncav4lxy8yfreynn273xn5335v"
+	senderAddr := "black1x2w87cvt5mqjncav4lxy8yfreynn273xn5335v"
 
 	testCases := []struct {
 		name     string

@@ -20,7 +20,7 @@ KEY="dev0"
 CHAINID="blackfury_9000-1"
 MONIKER="mymoniker"
 
-## default port prefixes for blackfuryd
+## default port prefixes for black
 NODE_P2P_PORT="2660"
 NODE_PORT="2663"
 NODE_RPC_PORT="2666"
@@ -67,14 +67,14 @@ make build
 arr=()
 
 init_func() {
-    "$PWD"/build/blackfuryd keys add $KEY"$i" --keyring-backend test --home "$DATA_DIR$i" --no-backup --algo "eth_secp256k1"
-    "$PWD"/build/blackfuryd init $MONIKER --chain-id $CHAINID --home "$DATA_DIR$i"
-    "$PWD"/build/blackfuryd add-genesis-account \
-    "$("$PWD"/build/blackfuryd keys show "$KEY$i" --keyring-backend test -a --home "$DATA_DIR$i")" 1000000000000000000afury,1000000000000000000stake \
+    "$PWD"/build/black keys add $KEY"$i" --keyring-backend test --home "$DATA_DIR$i" --no-backup --algo "eth_secp256k1"
+    "$PWD"/build/black init $MONIKER --chain-id $CHAINID --home "$DATA_DIR$i"
+    "$PWD"/build/black add-genesis-account \
+    "$("$PWD"/build/black keys show "$KEY$i" --keyring-backend test -a --home "$DATA_DIR$i")" 1000000000000000000afury,1000000000000000000stake \
     --keyring-backend test --home "$DATA_DIR$i"
-    "$PWD"/build/blackfuryd gentx "$KEY$i" 1000000000000000000stake --chain-id $CHAINID --keyring-backend test --home "$DATA_DIR$i"
-    "$PWD"/build/blackfuryd collect-gentxs --home "$DATA_DIR$i"
-    "$PWD"/build/blackfuryd validate-genesis --home "$DATA_DIR$i"
+    "$PWD"/build/black gentx "$KEY$i" 1000000000000000000stake --chain-id $CHAINID --keyring-backend test --home "$DATA_DIR$i"
+    "$PWD"/build/black collect-gentxs --home "$DATA_DIR$i"
+    "$PWD"/build/black validate-genesis --home "$DATA_DIR$i"
 
     if [[ $MODE == "pending" ]]; then
       ls $DATA_DIR$i
@@ -104,7 +104,7 @@ init_func() {
 
 start_func() {
     echo "starting blackfury node $i in background ..."
-    "$PWD"/build/blackfuryd start --pruning=nothing --rpc.unsafe \
+    "$PWD"/build/black start --pruning=nothing --rpc.unsafe \
     --p2p.laddr tcp://$IP_ADDR:$NODE_P2P_PORT"$i" --address tcp://$IP_ADDR:$NODE_PORT"$i" --rpc.laddr tcp://$IP_ADDR:$NODE_RPC_PORT"$i" \
     --json-rpc.address=$IP_ADDR:$RPC_PORT"$i" \
     --keyring-backend test --home "$DATA_DIR$i" \

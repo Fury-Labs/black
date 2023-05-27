@@ -11,8 +11,8 @@ MONIKER="localtestnet"
 KEYRING="test"
 KEYALGO="eth_secp256k1"
 LOGLEVEL="info"
-# Set dedicated home directory for the blackfuryd instance
-HOMEDIR="$HOME/.tmp-blackfuryd"
+# Set dedicated home directory for the black instance
+HOMEDIR="$HOME/.tmp-black"
 # to trace evm
 #TRACE="--trace"
 TRACE=""
@@ -51,16 +51,16 @@ if [[ $overwrite == "y" || $overwrite == "Y" ]]; then
 	rm -rf "$HOMEDIR"
 
 	# Set client config
-	blackfuryd config keyring-backend $KEYRING --home "$HOMEDIR"
-	blackfuryd config chain-id $CHAINID --home "$HOMEDIR"
+	black config keyring-backend $KEYRING --home "$HOMEDIR"
+	black config chain-id $CHAINID --home "$HOMEDIR"
 
 	# If keys exist they should be deleted
 	for KEY in "${KEYS[@]}"; do
-		blackfuryd keys add "$KEY" --keyring-backend $KEYRING --algo $KEYALGO --home "$HOMEDIR"
+		black keys add "$KEY" --keyring-backend $KEYRING --algo $KEYALGO --home "$HOMEDIR"
 	done
 
 	# Set moniker and chain-id for Gridiron (Moniker can be anything, chain-id must be an integer)
-	blackfuryd init $MONIKER -o --chain-id $CHAINID --home "$HOMEDIR"
+	black init $MONIKER -o --chain-id $CHAINID --home "$HOMEDIR"
 
 	# Change parameter token denominations to afury
 	jq '.app_state["staking"]["params"]["bond_denom"]="afury"' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
@@ -79,7 +79,7 @@ if [[ $overwrite == "y" || $overwrite == "Y" ]]; then
 	# Set claims records for validator account
 	amount_to_claim=10000
 	claims_key=${KEYS[0]}
-	node_address=$(blackfuryd keys show "$claims_key" --keyring-backend $KEYRING --home "$HOMEDIR" | grep "address" | cut -c12-)
+	node_address=$(black keys show "$claims_key" --keyring-backend $KEYRING --home "$HOMEDIR" | grep "address" | cut -c12-)
 	jq -r --arg node_address "$node_address" --arg amount_to_claim "$amount_to_claim" '.app_state["claims"]["claims_records"]=[{"initial_claimable_amount":$amount_to_claim, "actions_completed":[false, false, false, false],"address":$node_address}]' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
 
 	# Set claims decay
@@ -87,8 +87,8 @@ if [[ $overwrite == "y" || $overwrite == "Y" ]]; then
 	jq '.app_state["claims"]["params"]["duration_until_decay"]="100000s"' >"$TMP_GENESIS" "$GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
 
 	# Claim module account:
-	# 0xA61808Fe40fEb8B3433778BBC2ecECCAA47c8c47 || blackfury15cvq3ljql6utxseh0zau9m8ve2j8erz89m5wkz
-	jq -r --arg amount_to_claim "$amount_to_claim" '.app_state["bank"]["balances"] += [{"address":"blackfury15cvq3ljql6utxseh0zau9m8ve2j8erz89m5wkz","coins":[{"denom":"afury", "amount":$amount_to_claim}]}]' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
+	# 0xA61808Fe40fEb8B3433778BBC2ecECCAA47c8c47 || black15cvq3ljql6utxseh0zau9m8ve2j8erz89m5wkz
+	jq -r --arg amount_to_claim "$amount_to_claim" '.app_state["bank"]["balances"] += [{"address":"black15cvq3ljql6utxseh0zau9m8ve2j8erz89m5wkz","coins":[{"denom":"afury", "amount":$amount_to_claim}]}]' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
 
 	if [[ $1 == "pending" ]]; then
 		if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -134,7 +134,7 @@ if [[ $overwrite == "y" || $overwrite == "Y" ]]; then
 
 	# Allocate genesis accounts (cosmos formatted addresses)
 	for KEY in "${KEYS[@]}"; do
-		blackfuryd add-genesis-account "$KEY" 100000000000000000000000000afury --keyring-backend $KEYRING --home "$HOMEDIR"
+		black add-genesis-account "$KEY" 100000000000000000000000000afury --keyring-backend $KEYRING --home "$HOMEDIR"
 	done
 
 	# bc is required to add these big numbers
@@ -142,19 +142,19 @@ if [[ $overwrite == "y" || $overwrite == "Y" ]]; then
 	jq -r --arg total_supply "$total_supply" '.app_state["bank"]["supply"][0]["amount"]=$total_supply' "$GENESIS" >"$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
 
 	# Sign genesis transaction
-	blackfuryd gentx "${KEYS[0]}" 1000000000000000000000afury --keyring-backend $KEYRING --chain-id $CHAINID --home "$HOMEDIR"
+	black gentx "${KEYS[0]}" 1000000000000000000000afury --keyring-backend $KEYRING --chain-id $CHAINID --home "$HOMEDIR"
 	## In case you want to create multiple validators at genesis
-	## 1. Back to `blackfuryd keys add` step, init more keys
-	## 2. Back to `blackfuryd add-genesis-account` step, add balance for those
-	## 3. Clone this ~/.blackfuryd home directory into some others, let's say `~/.clonedGridirond`
+	## 1. Back to `black keys add` step, init more keys
+	## 2. Back to `black add-genesis-account` step, add balance for those
+	## 3. Clone this ~/.black home directory into some others, let's say `~/.clonedGridirond`
 	## 4. Run `gentx` in each of those folders
-	## 5. Copy the `gentx-*` folders under `~/.clonedGridirond/config/gentx/` folders into the original `~/.blackfuryd/config/gentx`
+	## 5. Copy the `gentx-*` folders under `~/.clonedGridirond/config/gentx/` folders into the original `~/.black/config/gentx`
 
 	# Collect genesis tx
-	blackfuryd collect-gentxs --home "$HOMEDIR"
+	black collect-gentxs --home "$HOMEDIR"
 
 	# Run this to ensure everything worked and that the genesis file is setup correctly
-	blackfuryd validate-genesis --home "$HOMEDIR"
+	black validate-genesis --home "$HOMEDIR"
 
 	if [[ $1 == "pending" ]]; then
 		echo "pending mode is on, please wait for the first block committed."
@@ -162,4 +162,4 @@ if [[ $overwrite == "y" || $overwrite == "Y" ]]; then
 fi
 
 # Start the node (remove the --pruning=nothing flag if historical queries are not needed)
-blackfuryd start --metrics "$TRACE" --log_level $LOGLEVEL --minimum-gas-prices=0.0001afury --json-rpc.api eth,txpool,personal,net,debug,web3 --api.enable --home "$HOMEDIR"
+black start --metrics "$TRACE" --log_level $LOGLEVEL --minimum-gas-prices=0.0001afury --json-rpc.api eth,txpool,personal,net,debug,web3 --api.enable --home "$HOMEDIR"

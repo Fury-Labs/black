@@ -10,12 +10,12 @@ import (
 	"github.com/stretchr/testify/require"
 
 	"github.com/fury-labs/blackfury/v13/app"
-	blackfuryd "github.com/fury-labs/blackfury/v13/cmd/blackfuryd"
+	black "github.com/fury-labs/blackfury/v13/cmd/black"
 	"github.com/fury-labs/blackfury/v13/utils"
 )
 
 func TestInitCmd(t *testing.T) {
-	rootCmd, _ := blackfuryd.NewRootCmd()
+	rootCmd, _ := black.NewRootCmd()
 	rootCmd.SetArgs([]string{
 		"init",       // Test the init cmd
 		"blackfury-test", // Moniker
@@ -23,12 +23,12 @@ func TestInitCmd(t *testing.T) {
 		fmt.Sprintf("--%s=%s", flags.FlagChainID, utils.TestnetChainID+"-1"),
 	})
 
-	err := svrcmd.Execute(rootCmd, "blackfuryd", app.DefaultNodeHome)
+	err := svrcmd.Execute(rootCmd, "black", app.DefaultNodeHome)
 	require.NoError(t, err)
 }
 
 func TestAddKeyLedgerCmd(t *testing.T) {
-	rootCmd, _ := blackfuryd.NewRootCmd()
+	rootCmd, _ := black.NewRootCmd()
 	rootCmd.SetArgs([]string{
 		"keys",
 		"add",

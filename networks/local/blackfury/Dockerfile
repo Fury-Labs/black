@@ -22,10 +22,10 @@ WORKDIR /
 RUN apt-get update
 
 # Copy over binaries from the build-env
-COPY --from=build-env /go/src/github.com/fury-labs/blackfury/build/blackfuryd /
+COPY --from=build-env /go/src/github.com/fury-labs/blackfury/build/black /
 COPY --from=build-env /go/src/github.com/fury-labs/blackfury/scripts/start-docker.sh /
 
 EXPOSE 26656 26657 1317 9090 8545 8546
 
-# Run blackfuryd by default, omit entrypoint to ease using container with blackfuryd
+# Run black by default, omit entrypoint to ease using container with black
 ENTRYPOINT ["/bin/bash", "-c"]

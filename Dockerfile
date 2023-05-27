@@ -13,8 +13,8 @@ RUN apt-get update  \
 
 WORKDIR /root
 
-COPY --from=build-env /go/src/github.com/fury-labs/blackfury/build/blackfuryd /usr/bin/blackfuryd
+COPY --from=build-env /go/src/github.com/fury-labs/blackfury/build/black /usr/bin/black
 
 EXPOSE 26656 26657 1317 9090 8545 8546
 
-CMD ["blackfuryd"]
+CMD ["black"]

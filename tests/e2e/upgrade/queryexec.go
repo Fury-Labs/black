@@ -9,7 +9,7 @@ import (
 // CreateModuleQueryExec creates a Gridiron module query
 func (m *Manager) CreateModuleQueryExec(moduleName, subCommand, chainID string) (string, error) {
 	cmd := []string{
-		"blackfuryd",
+		"black",
 		"q",
 		moduleName,
 		subCommand,

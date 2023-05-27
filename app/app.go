@@ -177,7 +177,7 @@ func init() {
 		panic(err)
 	}
 
-	DefaultNodeHome = filepath.Join(userHomeDir, ".blackfuryd")
+	DefaultNodeHome = filepath.Join(userHomeDir, ".black")
 
 	// manually update the power reduction by replacing micro (u) -> atto (a) blackfury
 	sdk.DefaultPowerReduction = blackfurytypes.PowerReduction
@@ -189,7 +189,7 @@ func init() {
 }
 
 // Name defines the application binary name
-const Name = "blackfuryd"
+const Name = "black"
 
 var (
 	// DefaultNodeHome default home directories for the application daemon

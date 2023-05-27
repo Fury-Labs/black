@@ -198,7 +198,7 @@ func (m *Manager) WaitForHeight(ctx context.Context, height int) (string, error)
 
 // GetNodeHeight calls the Gridiron CLI in the current node container to get the current block height
 func (m *Manager) GetNodeHeight(ctx context.Context) (int, error) {
-	exec, err := m.CreateExec([]string{"blackfuryd", "q", "block"}, m.ContainerID())
+	exec, err := m.CreateExec([]string{"black", "q", "block"}, m.ContainerID())
 	if err != nil {
 		return 0, fmt.Errorf("create exec error: %w", err)
 	}
@@ -233,7 +233,7 @@ func (m *Manager) GetNodeHeight(ctx context.Context) (int, error) {
 // GetNodeVersion calls the Gridiron CLI in the current node container to get the
 // current node version
 func (m *Manager) GetNodeVersion(ctx context.Context) (string, error) {
-	exec, err := m.CreateExec([]string{"blackfuryd", "version"}, m.ContainerID())
+	exec, err := m.CreateExec([]string{"black", "version"}, m.ContainerID())
 	if err != nil {
 		return "", fmt.Errorf("create exec error: %w", err)
 	}

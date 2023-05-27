@@ -17,26 +17,26 @@ set LOGLEVEL="info"
 # to trace evm
 #TRACE="--trace"
 set TRACE=""
-set HOME=%USERPROFILE%\.blackfuryd
+set HOME=%USERPROFILE%\.black
 echo %HOME%
 set ETHCONFIG=%HOME%\config\config.toml
 set GENESIS=%HOME%\config\genesis.json
 set TMPGENESIS=%HOME%\config\tmp_genesis.json
 
 @echo build binary
-go build .\cmd\blackfuryd
+go build .\cmd\black
 
 
 @echo clear home folder
 del /s /q %HOME%
 
-blackfuryd config keyring-backend %KEYRING%
-blackfuryd config chain-id %CHAINID%
+black config keyring-backend %KEYRING%
+black config chain-id %CHAINID%
 
-blackfuryd keys add %KEY% --keyring-backend %KEYRING% --algo %KEYALGO%
+black keys add %KEY% --keyring-backend %KEYRING% --algo %KEYALGO%
 
 rem Set moniker and chain-id for Gridiron (Moniker can be anything, chain-id must be an integer)
-blackfuryd init %MONIKER% --chain-id %CHAINID% 
+black init %MONIKER% --chain-id %CHAINID% 
 
 rem Change parameter token denominations to afury
 cat %GENESIS% | jq ".app_state[\"staking\"][\"params\"][\"bond_denom\"]=\"afury\""   >   %TMPGENESIS% && move %TMPGENESIS% %GENESIS%
@@ -54,18 +54,18 @@ rem setup
 sed -i "s/create_empty_blocks = true/create_empty_blocks = false/g" %ETHCONFIG%
 
 rem Allocate genesis accounts (cosmos formatted addresses)
-blackfuryd add-genesis-account %KEY% 100000000000000000000000000afury --keyring-backend %KEYRING%
+black add-genesis-account %KEY% 100000000000000000000000000afury --keyring-backend %KEYRING%
 
 rem Sign genesis transaction
-blackfuryd gentx %KEY% 1000000000000000000000afury --keyring-backend %KEYRING% --chain-id %CHAINID%
+black gentx %KEY% 1000000000000000000000afury --keyring-backend %KEYRING% --chain-id %CHAINID%
 
 rem Collect genesis tx
-blackfuryd collect-gentxs
+black collect-gentxs
 
 rem Run this to ensure everything worked and that the genesis file is setup correctly
-blackfuryd validate-genesis
+black validate-genesis
 
 
 
 rem Start the node (remove the --pruning=nothing flag if historical queries are not needed)
-blackfuryd start --pruning=nothing %TRACE% --log_level %LOGLEVEL% --minimum-gas-prices=0.0001afury
+black start --pruning=nothing %TRACE% --log_level %LOGLEVEL% --minimum-gas-prices=0.0001afury

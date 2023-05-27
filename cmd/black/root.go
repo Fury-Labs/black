@@ -55,7 +55,7 @@ const (
 	EnvPrefix = "GRIDIRON"
 )
 
-// NewRootCmd creates a new root command for blackfuryd. It is called once in the
+// NewRootCmd creates a new root command for black. It is called once in the
 // main function.
 func NewRootCmd() (*cobra.Command, params.EncodingConfig) {
 	encodingConfig := encoding.MakeConfig(app.ModuleBasics)

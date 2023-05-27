@@ -57,7 +57,7 @@ func TestGetTransferSenderRecipient(t *testing.T) {
 				Data: transfertypes.ModuleCdc.MustMarshalJSON(
 					&transfertypes.FungibleTokenPacketData{
 						Sender:   "cosmos1",
-						Receiver: "blackfury1x2w87cvt5mqjncav4lxy8yfreynn273xn5335v",
+						Receiver: "black1x2w87cvt5mqjncav4lxy8yfreynn273xn5335v",
 						Amount:   "123456",
 					},
 				),
@@ -71,7 +71,7 @@ func TestGetTransferSenderRecipient(t *testing.T) {
 				Data: transfertypes.ModuleCdc.MustMarshalJSON(
 					&transfertypes.FungibleTokenPacketData{
 						Sender:   "cosmos1qql8ag4cluz6r4dz28p3w00dnc9w8ueulg2gmc",
-						Receiver: "blackfury1",
+						Receiver: "black1",
 						Amount:   "123456",
 					},
 				),
@@ -85,13 +85,13 @@ func TestGetTransferSenderRecipient(t *testing.T) {
 				Data: transfertypes.ModuleCdc.MustMarshalJSON(
 					&transfertypes.FungibleTokenPacketData{
 						Sender:   "cosmos1qql8ag4cluz6r4dz28p3w00dnc9w8ueulg2gmc",
-						Receiver: "blackfury1x2w87cvt5mqjncav4lxy8yfreynn273xn5335v",
+						Receiver: "black1x2w87cvt5mqjncav4lxy8yfreynn273xn5335v",
 						Amount:   "123456",
 					},
 				),
 			},
-			"blackfury1qql8ag4cluz6r4dz28p3w00dnc9w8ueuafmxps",
-			"blackfury1x2w87cvt5mqjncav4lxy8yfreynn273xn5335v",
+			"black1qql8ag4cluz6r4dz28p3w00dnc9w8ueuafmxps",
+			"black1x2w87cvt5mqjncav4lxy8yfreynn273xn5335v",
 			false,
 		},
 		{
@@ -99,14 +99,14 @@ func TestGetTransferSenderRecipient(t *testing.T) {
 			channeltypes.Packet{
 				Data: transfertypes.ModuleCdc.MustMarshalJSON(
 					&transfertypes.FungibleTokenPacketData{
-						Sender:   "blackfury1x2w87cvt5mqjncav4lxy8yfreynn273xn5335v",
+						Sender:   "black1x2w87cvt5mqjncav4lxy8yfreynn273xn5335v",
 						Receiver: "cosmos1qql8ag4cluz6r4dz28p3w00dnc9w8ueulg2gmc",
 						Amount:   "123456",
 					},
 				),
 			},
-			"blackfury1x2w87cvt5mqjncav4lxy8yfreynn273xn5335v",
-			"blackfury1qql8ag4cluz6r4dz28p3w00dnc9w8ueuafmxps",
+			"black1x2w87cvt5mqjncav4lxy8yfreynn273xn5335v",
+			"black1qql8ag4cluz6r4dz28p3w00dnc9w8ueuafmxps",
 			false,
 		},
 		{
@@ -115,13 +115,13 @@ func TestGetTransferSenderRecipient(t *testing.T) {
 				Data: transfertypes.ModuleCdc.MustMarshalJSON(
 					&transfertypes.FungibleTokenPacketData{
 						Sender:   "osmo1qql8ag4cluz6r4dz28p3w00dnc9w8ueuhnecd2",
-						Receiver: "blackfury1x2w87cvt5mqjncav4lxy8yfreynn273xn5335v",
+						Receiver: "black1x2w87cvt5mqjncav4lxy8yfreynn273xn5335v",
 						Amount:   "123456",
 					},
 				),
 			},
-			"blackfury1qql8ag4cluz6r4dz28p3w00dnc9w8ueuafmxps",
-			"blackfury1x2w87cvt5mqjncav4lxy8yfreynn273xn5335v",
+			"black1qql8ag4cluz6r4dz28p3w00dnc9w8ueuafmxps",
+			"black1x2w87cvt5mqjncav4lxy8yfreynn273xn5335v",
 			false,
 		},
 	}
@@ -165,7 +165,7 @@ func TestGetTransferAmount(t *testing.T) {
 				Data: transfertypes.ModuleCdc.MustMarshalJSON(
 					&transfertypes.FungibleTokenPacketData{
 						Sender:   "cosmos1qql8ag4cluz6r4dz28p3w00dnc9w8ueulg2gmc",
-						Receiver: "blackfury1x2w87cvt5mqjncav4lxy8yfreynn273xn5335v",
+						Receiver: "black1x2w87cvt5mqjncav4lxy8yfreynn273xn5335v",
 						Amount:   "",
 					},
 				),
@@ -179,7 +179,7 @@ func TestGetTransferAmount(t *testing.T) {
 				Data: transfertypes.ModuleCdc.MustMarshalJSON(
 					&transfertypes.FungibleTokenPacketData{
 						Sender:   "cosmos1qql8ag4cluz6r4dz28p3w00dnc9w8ueulg2gmc",
-						Receiver: "blackfury1x2w87cvt5mqjncav4lxy8yfreynn273xn5335v",
+						Receiver: "black1x2w87cvt5mqjncav4lxy8yfreynn273xn5335v",
 						Amount:   "test",
 					},
 				),
@@ -193,7 +193,7 @@ func TestGetTransferAmount(t *testing.T) {
 				Data: transfertypes.ModuleCdc.MustMarshalJSON(
 					&transfertypes.FungibleTokenPacketData{
 						Sender:   "cosmos1qql8ag4cluz6r4dz28p3w00dnc9w8ueulg2gmc",
-						Receiver: "blackfury1x2w87cvt5mqjncav4lxy8yfreynn273xn5335v",
+						Receiver: "black1x2w87cvt5mqjncav4lxy8yfreynn273xn5335v",
 						Amount:   "10000",
 					},
 				),
@@ -207,7 +207,7 @@ func TestGetTransferAmount(t *testing.T) {
 				Data: transfertypes.ModuleCdc.MustMarshalJSON(
 					&transfertypes.FungibleTokenPacketData{
 						Sender:   "cosmos1qql8ag4cluz6r4dz28p3w00dnc9w8ueulg2gmc",
-						Receiver: "blackfury1x2w87cvt5mqjncav4lxy8yfreynn273xn5335v",
+						Receiver: "black1x2w87cvt5mqjncav4lxy8yfreynn273xn5335v",
 						Amount:   types.IBCTriggerAmt,
 					},
 				),

@@ -94,26 +94,26 @@ func TestGetGridironAddressFromBech32(t *testing.T) {
 		},
 		{
 			"invalid address bytes",
-			"blackfury1123",
+			"black1123",
 			"",
 			true,
 		},
 		{
 			"blackfury address",
-			"blackfury1qql8ag4cluz6r4dz28p3w00dnc9w8ueuafmxps",
-			"blackfury1qql8ag4cluz6r4dz28p3w00dnc9w8ueuafmxps",
+			"black1qql8ag4cluz6r4dz28p3w00dnc9w8ueuafmxps",
+			"black1qql8ag4cluz6r4dz28p3w00dnc9w8ueuafmxps",
 			false,
 		},
 		{
 			"cosmos address",
 			"cosmos1qql8ag4cluz6r4dz28p3w00dnc9w8ueulg2gmc",
-			"blackfury1qql8ag4cluz6r4dz28p3w00dnc9w8ueuafmxps",
+			"black1qql8ag4cluz6r4dz28p3w00dnc9w8ueuafmxps",
 			false,
 		},
 		{
 			"osmosis address",
 			"osmo1qql8ag4cluz6r4dz28p3w00dnc9w8ueuhnecd2",
-			"blackfury1qql8ag4cluz6r4dz28p3w00dnc9w8ueuafmxps",
+			"black1qql8ag4cluz6r4dz28p3w00dnc9w8ueuafmxps",
 			false,
 		},
 	}

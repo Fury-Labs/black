@@ -335,7 +335,7 @@ func New(l Logger, baseDir string, cfg Config) (*Network, error) {
 		ctx.Logger = logger
 
 		nodeDirName := fmt.Sprintf("node%d", i)
-		nodeDir := filepath.Join(network.BaseDir, nodeDirName, "blackfuryd")
+		nodeDir := filepath.Join(network.BaseDir, nodeDirName, "black")
 		clientDir := filepath.Join(network.BaseDir, nodeDirName, "blackfurycli")
 		gentxsDir := filepath.Join(network.BaseDir, "gentxs")
 
