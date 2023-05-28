@@ -1,0 +1,21 @@
+{
+  "metadata": [
+    {
+      "description": "The native staking and governance token of the Black chain",
+      "denom_units": [
+        {
+          "denom": "ablack",
+          "exponent": 0
+        },
+        {
+          "denom": "black",
+          "exponent": 18
+        }
+      ],
+      "base": "ablack",
+      "display": "ablack",
+      "name": "ablack",
+      "symbol": "BLACK"
+    }
+  ]
+}
