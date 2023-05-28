@@ -74,7 +74,7 @@ blackd add-genesis-account $KEY 100000000000000000000000000ablack --keyring-back
 # Update total supply with claim values
 # Bc is required to add this big numbers
 # total_supply=$(bc <<< "$amount_to_claim+$validators_supply")
-total_supply=100000000000000000000010000
+total_supply=42000000000000000000010000
 jq -r --arg total_supply "$total_supply" '.app_state.bank.supply[0].amount=$total_supply' "$GENESIS" > "$TMP_GENESIS" && mv "$TMP_GENESIS" "$GENESIS"
 
 # set custom pruning settings
