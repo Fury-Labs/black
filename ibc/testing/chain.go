@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 
 package ibctesting
 
@@ -21,14 +21,14 @@ import (
 	ibcgotesting "github.com/cosmos/ibc-go/v6/testing"
 	"github.com/cosmos/ibc-go/v6/testing/mock"
 
-	"github.com/fury-labs/blackfury/v13/crypto/ethsecp256k1"
-	blackfurytypes "github.com/fury-labs/blackfury/v13/types"
-	"github.com/fury-labs/blackfury/v13/utils"
-	evmtypes "github.com/fury-labs/blackfury/v13/x/evm/types"
+	"github.com/fury-labs/black/v13/crypto/ethsecp256k1"
+	blacktypes "github.com/fury-labs/black/v13/types"
+	"github.com/fury-labs/black/v13/utils"
+	evmtypes "github.com/fury-labs/black/v13/x/evm/types"
 )
 
-// ChainIDPrefix defines the default chain ID prefix for Gridiron test chains
-var ChainIDPrefix = "blackfury_9000-"
+// ChainIDPrefix defines the default chain ID prefix for Black test chains
+var ChainIDPrefix = "highbury_710-"
 
 func init() {
 	ibcgotesting.ChainIDPrefix = ChainIDPrefix
@@ -62,12 +62,12 @@ func NewTestChain(t *testing.T, coord *ibcgotesting.Coordinator, chainID string)
 
 	baseAcc := authtypes.NewBaseAccount(senderPrivKey.PubKey().Address().Bytes(), senderPrivKey.PubKey(), 0, 0)
 
-	acc := &blackfurytypes.EthAccount{
+	acc := &blacktypes.EthAccount{
 		BaseAccount: baseAcc,
 		CodeHash:    common.BytesToHash(evmtypes.EmptyCodeHash).Hex(),
 	}
 
-	amount := sdk.TokensFromConsensusPower(1, blackfurytypes.PowerReduction)
+	amount := sdk.TokensFromConsensusPower(1, blacktypes.PowerReduction)
 
 	balance := banktypes.Balance{
 		Address: acc.GetAddress().String(),

@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 
 package recovery
 
@@ -12,8 +12,8 @@ import (
 
 	clienttypes "github.com/cosmos/ibc-go/v6/modules/core/02-client/types"
 
-	"github.com/fury-labs/blackfury/v13/ibc"
-	"github.com/fury-labs/blackfury/v13/x/recovery/keeper"
+	"github.com/fury-labs/black/v13/ibc"
+	"github.com/fury-labs/black/v13/x/recovery/keeper"
 )
 
 var _ porttypes.Middleware = &IBCMiddleware{}

@@ -10,13 +10,13 @@ import (
 
 	"github.com/stretchr/testify/suite"
 
-	"github.com/fury-labs/blackfury/v13/tests/e2e/upgrade"
-	"github.com/fury-labs/blackfury/v13/utils"
+	"github.com/fury-labs/black/v13/tests/e2e/upgrade"
+	"github.com/fury-labs/black/v13/utils"
 )
 
 const (
 	// defaultManagerNetwork defines the network used by the upgrade manager
-	defaultManagerNetwork = "blackfury-local"
+	defaultManagerNetwork = "black-local"
 
 	// blocksAfterUpgrade defines how many blocks must be produced after an upgrade is
 	// considered successful
@@ -64,7 +64,7 @@ func (s *IntegrationTestSuite) SetupSuite() {
 	}
 }
 
-// runInitialNode builds a docker image capable of running an Gridiron node with the given version.
+// runInitialNode builds a docker image capable of running an Black node with the given version.
 // After a successful build, it runs the container and checks if the node can produce blocks.
 func (s *IntegrationTestSuite) runInitialNode(version upgrade.VersionConfig) {
 	err := s.upgradeManager.BuildImage(
@@ -74,13 +74,13 @@ func (s *IntegrationTestSuite) runInitialNode(version upgrade.VersionConfig) {
 		".",
 		map[string]string{"INITIAL_VERSION": version.ImageTag},
 	)
-	s.Require().NoError(err, "can't build container with Gridiron version: %s", version.ImageTag)
+	s.Require().NoError(err, "can't build container with Black version: %s", version.ImageTag)
 
 	node := upgrade.NewNode(version.ImageName, version.ImageTag)
 	node.SetEnvVars([]string{fmt.Sprintf("CHAIN_ID=%s", s.upgradeParams.ChainID)})
 
 	err = s.upgradeManager.RunNode(node)
-	s.Require().NoError(err, "can't run node with Gridiron version: %s", version)
+	s.Require().NoError(err, "can't run node with Black version: %s", version)
 
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
@@ -92,13 +92,13 @@ func (s *IntegrationTestSuite) runInitialNode(version upgrade.VersionConfig) {
 	s.T().Logf("successfully started node with version: [%s]", version.ImageTag)
 }
 
-// runNodeWithCurrentChanges builds a docker image using the current branch of the Gridiron repository.
+// runNodeWithCurrentChanges builds a docker image using the current branch of the Black repository.
 // Before running the node, runs a script to modify some configurations for the tests
 // (e.g.: gov proposal voting period, setup accounts, balances, etc..)
 // After a successful build, runs the container.
 func (s *IntegrationTestSuite) runNodeWithCurrentChanges() {
 	const (
-		name    = "e2e-test/blackfury"
+		name    = "e2e-test/black"
 		version = "latest"
 	)
 	// get the current branch name
@@ -119,7 +119,7 @@ func (s *IntegrationTestSuite) runNodeWithCurrentChanges() {
 	node.SetEnvVars([]string{fmt.Sprintf("CHAIN_ID=%s", s.upgradeParams.ChainID)})
 
 	err = s.upgradeManager.RunNode(node)
-	s.Require().NoError(err, "can't run node Gridiron using branch %s", branch)
+	s.Require().NoError(err, "can't run node Black using branch %s", branch)
 }
 
 // proposeUpgrade submits an upgrade proposal to the chain that schedules an upgrade to
@@ -133,9 +133,9 @@ func (s *IntegrationTestSuite) proposeUpgrade(name, target string) {
 	s.Require().NoError(err, "can't get block height from running node")
 	s.upgradeManager.UpgradeHeight = uint(nodeHeight + upgradeHeightDelta)
 
-	// if Gridiron is lower than v10.x.x no need to use the legacy proposal
+	// if Black is lower than v10.x.x no need to use the legacy proposal
 	currentVersion, err := s.upgradeManager.GetNodeVersion(ctx)
-	s.Require().NoError(err, "can't get current Gridiron version")
+	s.Require().NoError(err, "can't get current Black version")
 	isLegacyProposal := upgrade.CheckLegacyProposal(currentVersion)
 
 	// create the proposal
@@ -149,14 +149,14 @@ func (s *IntegrationTestSuite) proposeUpgrade(name, target string) {
 	)
 	s.Require().NoErrorf(
 		err,
-		"can't create the proposal to upgrade Gridiron to %s at height %d with name %s",
+		"can't create the proposal to upgrade Black to %s at height %d with name %s",
 		target, s.upgradeManager.UpgradeHeight, name,
 	)
 
 	outBuf, errBuf, err := s.upgradeManager.RunExec(ctx, exec)
 	s.Require().NoErrorf(
 		err,
-		"failed to submit proposal to upgrade Gridiron to %s at height %d\nstdout: %s,\nstderr: %s",
+		"failed to submit proposal to upgrade Black to %s at height %d\nstdout: %s,\nstderr: %s",
 		target, s.upgradeManager.UpgradeHeight, outBuf.String(), errBuf.String(),
 	)
 

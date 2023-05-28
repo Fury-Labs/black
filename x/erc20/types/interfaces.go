@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 
 package types
 
@@ -16,9 +16,9 @@ import (
 	"github.com/ethereum/go-ethereum/core"
 	"github.com/ethereum/go-ethereum/core/vm"
 
-	claimstypes "github.com/fury-labs/blackfury/v13/x/claims/types"
-	"github.com/fury-labs/blackfury/v13/x/evm/statedb"
-	evmtypes "github.com/fury-labs/blackfury/v13/x/evm/types"
+	claimstypes "github.com/fury-labs/black/v13/x/claims/types"
+	"github.com/fury-labs/black/v13/x/evm/statedb"
+	evmtypes "github.com/fury-labs/black/v13/x/evm/types"
 )
 
 // AccountKeeper defines the expected interface needed to retrieve account info.

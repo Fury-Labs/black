@@ -1,12 +1,12 @@
 package ante_test
 
 import (
-	ethante "github.com/fury-labs/blackfury/v13/app/ante/evm"
-	"github.com/fury-labs/blackfury/v13/encoding"
-	"github.com/fury-labs/blackfury/v13/types"
+	ethante "github.com/fury-labs/black/v13/app/ante/evm"
+	"github.com/fury-labs/black/v13/encoding"
+	"github.com/fury-labs/black/v13/types"
 
-	"github.com/fury-labs/blackfury/v13/app"
-	"github.com/fury-labs/blackfury/v13/app/ante"
+	"github.com/fury-labs/black/v13/app"
+	"github.com/fury-labs/black/v13/app/ante"
 )
 
 func (suite *AnteTestSuite) TestValidateHandlerOptions() {

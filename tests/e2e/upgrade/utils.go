@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 
 package upgrade
 
@@ -15,17 +15,17 @@ import (
 	"github.com/hashicorp/go-version"
 )
 
-// GridironVersions is a custom comparator for sorting semver version strings.
-type GridironVersions []string
+// BlackVersions is a custom comparator for sorting semver version strings.
+type BlackVersions []string
 
 // Len is the number of stored versions..
-func (v GridironVersions) Len() int { return len(v) }
+func (v BlackVersions) Len() int { return len(v) }
 
 // Swap swaps the elements with indexes i and j. It is needed to sort the slice.
-func (v GridironVersions) Swap(i, j int) { v[i], v[j] = v[j], v[i] }
+func (v BlackVersions) Swap(i, j int) { v[i], v[j] = v[j], v[i] }
 
 // Less compares semver versions strings properly
-func (v GridironVersions) Less(i, j int) bool {
+func (v BlackVersions) Less(i, j int) bool {
 	v1, err := version.NewVersion(v[i])
 	if err != nil {
 		log.Fatalf("couldn't interpret version as SemVer string: %s: %s", v[i], err.Error())
@@ -45,7 +45,7 @@ func CheckLegacyProposal(version string) bool {
 	}
 
 	// check if the version is lower than v10.x.x
-	cmp := GridironVersions([]string{version, "v10.0.0"})
+	cmp := BlackVersions([]string{version, "v10.0.0"})
 	isLegacyProposal := !cmp.Less(0, 1)
 
 	return isLegacyProposal
@@ -77,7 +77,7 @@ func RetrieveUpgradesList(upgradesPath string) ([]string, error) {
 		versions[i] = v[1 : len(v)-1]
 	}
 
-	sort.Sort(GridironVersions(versions))
+	sort.Sort(BlackVersions(versions))
 
 	return versions, nil
 }

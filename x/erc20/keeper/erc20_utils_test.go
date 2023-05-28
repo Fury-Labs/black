@@ -6,9 +6,9 @@ import (
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/fury-labs/blackfury/v13/contracts"
-	"github.com/fury-labs/blackfury/v13/x/erc20/types"
-	evm "github.com/fury-labs/blackfury/v13/x/evm/types"
+	"github.com/fury-labs/black/v13/contracts"
+	"github.com/fury-labs/black/v13/x/erc20/types"
+	evm "github.com/fury-labs/black/v13/x/evm/types"
 )
 
 func (suite *KeeperTestSuite) MintERC20Token(contractAddr, from, to common.Address, amount *big.Int) *evm.MsgEthereumTx {

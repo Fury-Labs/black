@@ -4,13 +4,13 @@ import (
 	"testing"
 	"time"
 
-	feemarkettypes "github.com/fury-labs/blackfury/v13/x/feemarket/types"
+	feemarkettypes "github.com/fury-labs/black/v13/x/feemarket/types"
 	"github.com/stretchr/testify/require"
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 
-	simapp "github.com/fury-labs/blackfury/v13/app"
-	"github.com/fury-labs/blackfury/v13/x/epochs"
-	"github.com/fury-labs/blackfury/v13/x/epochs/types"
+	simapp "github.com/fury-labs/black/v13/app"
+	"github.com/fury-labs/black/v13/x/epochs"
+	"github.com/fury-labs/black/v13/x/epochs/types"
 )
 
 func TestEpochsExportGenesis(t *testing.T) {

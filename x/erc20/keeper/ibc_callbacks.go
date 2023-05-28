@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 
 package keeper
 
@@ -16,8 +16,8 @@ import (
 	"github.com/cosmos/ibc-go/v6/modules/core/exported"
 	"github.com/ethereum/go-ethereum/common"
 
-	"github.com/fury-labs/blackfury/v13/ibc"
-	"github.com/fury-labs/blackfury/v13/x/erc20/types"
+	"github.com/fury-labs/black/v13/ibc"
+	"github.com/fury-labs/black/v13/x/erc20/types"
 )
 
 // OnRecvPacket performs the ICS20 middleware receive callback for automatically
@@ -170,7 +170,7 @@ func (k Keeper) ConvertCoinToERC20FromPacket(ctx sdk.Context, data transfertypes
 		WithKVGasConfig(storetypes.GasConfig{}).
 		WithTransientKVGasConfig(storetypes.GasConfig{})
 
-	// assume that all module accounts on Gridiron need to have their tokens in the
+	// assume that all module accounts on Black need to have their tokens in the
 	// IBC representation as opposed to ERC20
 	senderAcc := k.accountKeeper.GetAccount(ctx, sender)
 	if types.IsModuleAccount(senderAcc) {

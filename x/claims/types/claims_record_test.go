@@ -5,8 +5,8 @@ import (
 
 	"cosmossdk.io/math"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	utiltx "github.com/fury-labs/blackfury/v13/testutil/tx"
-	"github.com/fury-labs/blackfury/v13/x/claims/types"
+	utiltx "github.com/fury-labs/black/v13/testutil/tx"
+	"github.com/fury-labs/black/v13/x/claims/types"
 	"github.com/stretchr/testify/require"
 )
 

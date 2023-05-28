@@ -1,4 +1,4 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
+// Copyright Tharsis Labs Ltd.(Black)
 // SPDX-License-Identifier:LGPL-3.0-only
 
 package revenue
@@ -7,8 +7,8 @@ import (
 	errorsmod "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/fury-labs/blackfury/v13/x/revenue/v1/keeper"
-	"github.com/fury-labs/blackfury/v13/x/revenue/v1/types"
+	"github.com/fury-labs/black/v13/x/revenue/v1/keeper"
+	"github.com/fury-labs/black/v13/x/revenue/v1/types"
 )
 
 // InitGenesis import module genesis

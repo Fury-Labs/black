@@ -12,12 +12,12 @@ import (
 	cryptotypes "github.com/cosmos/cosmos-sdk/crypto/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/fury-labs/blackfury/v13/crypto/ethsecp256k1"
+	"github.com/fury-labs/black/v13/crypto/ethsecp256k1"
 )
 
 func init() {
 	cfg := sdk.GetConfig()
-	cfg.SetBech32PrefixForAccount("blackfury", "blackfurypub")
+	cfg.SetBech32PrefixForAccount("black", "blackpub")
 }
 
 func TestIsSupportedKeys(t *testing.T) {
@@ -73,7 +73,7 @@ func TestIsSupportedKeys(t *testing.T) {
 	}
 }
 
-func TestGetGridironAddressFromBech32(t *testing.T) {
+func TestGetBlackAddressFromBech32(t *testing.T) {
 	testCases := []struct {
 		name       string
 		address    string
@@ -88,7 +88,7 @@ func TestGetGridironAddressFromBech32(t *testing.T) {
 		},
 		{
 			"invalid bech32 address",
-			"blackfury",
+			"black",
 			"",
 			true,
 		},
@@ -99,7 +99,7 @@ func TestGetGridironAddressFromBech32(t *testing.T) {
 			true,
 		},
 		{
-			"blackfury address",
+			"black address",
 			"black1qql8ag4cluz6r4dz28p3w00dnc9w8ueuafmxps",
 			"black1qql8ag4cluz6r4dz28p3w00dnc9w8ueuafmxps",
 			false,
@@ -119,7 +119,7 @@ func TestGetGridironAddressFromBech32(t *testing.T) {
 	}
 
 	for _, tc := range testCases {
-		addr, err := GetGridironAddressFromBech32(tc.address)
+		addr, err := GetBlackAddressFromBech32(tc.address)
 		if tc.expError {
 			require.Error(t, err, tc.name)
 		} else {
@@ -129,7 +129,7 @@ func TestGetGridironAddressFromBech32(t *testing.T) {
 	}
 }
 
-func TestGridironCoinDenom(t *testing.T) {
+func TestBlackCoinDenom(t *testing.T) {
 	testCases := []struct {
 		name     string
 		denom    string

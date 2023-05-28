@@ -1,10 +1,10 @@
 syntax = "proto3";
-package blackfury.revenue.v1;
+package black.revenue.v1;
 
-import "blackfury/revenue/v1/revenue.proto";
+import "black/revenue/v1/revenue.proto";
 import "gogoproto/gogo.proto";
 
-option go_package = "github.com/fury-labs/blackfury/v13/x/revenue/v1/types";
+option go_package = "github.com/fury-labs/black/v13/x/revenue/v1/types";
 
 // GenesisState defines the module's genesis state.
 message GenesisState {

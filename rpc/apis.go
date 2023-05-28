@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 package rpc
 
 import (
@@ -10,16 +10,16 @@ import (
 
 	"github.com/ethereum/go-ethereum/rpc"
 
-	"github.com/fury-labs/blackfury/v13/rpc/backend"
-	"github.com/fury-labs/blackfury/v13/rpc/namespaces/ethereum/debug"
-	"github.com/fury-labs/blackfury/v13/rpc/namespaces/ethereum/eth"
-	"github.com/fury-labs/blackfury/v13/rpc/namespaces/ethereum/eth/filters"
-	"github.com/fury-labs/blackfury/v13/rpc/namespaces/ethereum/miner"
-	"github.com/fury-labs/blackfury/v13/rpc/namespaces/ethereum/net"
-	"github.com/fury-labs/blackfury/v13/rpc/namespaces/ethereum/personal"
-	"github.com/fury-labs/blackfury/v13/rpc/namespaces/ethereum/txpool"
-	"github.com/fury-labs/blackfury/v13/rpc/namespaces/ethereum/web3"
-	"github.com/fury-labs/blackfury/v13/types"
+	"github.com/fury-labs/black/v13/rpc/backend"
+	"github.com/fury-labs/black/v13/rpc/namespaces/ethereum/debug"
+	"github.com/fury-labs/black/v13/rpc/namespaces/ethereum/eth"
+	"github.com/fury-labs/black/v13/rpc/namespaces/ethereum/eth/filters"
+	"github.com/fury-labs/black/v13/rpc/namespaces/ethereum/miner"
+	"github.com/fury-labs/black/v13/rpc/namespaces/ethereum/net"
+	"github.com/fury-labs/black/v13/rpc/namespaces/ethereum/personal"
+	"github.com/fury-labs/black/v13/rpc/namespaces/ethereum/txpool"
+	"github.com/fury-labs/black/v13/rpc/namespaces/ethereum/web3"
+	"github.com/fury-labs/black/v13/types"
 
 	rpcclient "github.com/tendermint/tendermint/rpc/jsonrpc/client"
 )

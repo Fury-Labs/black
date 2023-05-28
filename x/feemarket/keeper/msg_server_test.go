@@ -3,7 +3,7 @@ package keeper_test
 import (
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
-	"github.com/fury-labs/blackfury/v13/x/feemarket/types"
+	"github.com/fury-labs/black/v13/x/feemarket/types"
 )
 
 func (suite *KeeperTestSuite) TestUpdateParams() {

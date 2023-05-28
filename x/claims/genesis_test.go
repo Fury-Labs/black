@@ -12,13 +12,13 @@ import (
 	tmversion "github.com/tendermint/tendermint/proto/tendermint/version"
 	"github.com/tendermint/tendermint/version"
 
-	"github.com/fury-labs/blackfury/v13/app"
-	"github.com/fury-labs/blackfury/v13/testutil"
-	utiltx "github.com/fury-labs/blackfury/v13/testutil/tx"
-	"github.com/fury-labs/blackfury/v13/utils"
-	"github.com/fury-labs/blackfury/v13/x/claims"
-	"github.com/fury-labs/blackfury/v13/x/claims/types"
-	feemarkettypes "github.com/fury-labs/blackfury/v13/x/feemarket/types"
+	"github.com/fury-labs/black/v13/app"
+	"github.com/fury-labs/black/v13/testutil"
+	utiltx "github.com/fury-labs/black/v13/testutil/tx"
+	"github.com/fury-labs/black/v13/utils"
+	"github.com/fury-labs/black/v13/x/claims"
+	"github.com/fury-labs/black/v13/x/claims/types"
+	feemarkettypes "github.com/fury-labs/black/v13/x/feemarket/types"
 )
 
 type GenesisTestSuite struct {
@@ -26,7 +26,7 @@ type GenesisTestSuite struct {
 
 	ctx sdk.Context
 
-	app     *app.Gridiron
+	app     *app.Black
 	genesis types.GenesisState
 }
 

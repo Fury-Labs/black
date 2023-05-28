@@ -1,4 +1,4 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
+// Copyright Tharsis Labs Ltd.(Black)
 // SPDX-License-Identifier:LGPL-3.0-only
 
 package keeper
@@ -10,7 +10,7 @@ import (
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 	"github.com/ethereum/go-ethereum/common"
 
-	"github.com/fury-labs/blackfury/v13/x/erc20/types"
+	"github.com/fury-labs/black/v13/x/erc20/types"
 )
 
 // RegisterCoin deploys an erc20 contract and creates the token pair for the
@@ -82,7 +82,7 @@ func (k Keeper) RegisterERC20(
 }
 
 // CreateCoinMetadata generates the metadata to represent the ERC20 token on
-// blackfury.
+// black.
 func (k Keeper) CreateCoinMetadata(
 	ctx sdk.Context,
 	contract common.Address,

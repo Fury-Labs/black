@@ -1,13 +1,13 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 
 package keeper
 
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	v2 "github.com/fury-labs/blackfury/v13/x/inflation/migrations/v2"
-	v3 "github.com/fury-labs/blackfury/v13/x/inflation/migrations/v3"
-	"github.com/fury-labs/blackfury/v13/x/inflation/types"
+	v2 "github.com/fury-labs/black/v13/x/inflation/migrations/v2"
+	v3 "github.com/fury-labs/black/v13/x/inflation/migrations/v3"
+	"github.com/fury-labs/black/v13/x/inflation/types"
 )
 
 // Migrator is a struct for handling in-place store migrations.

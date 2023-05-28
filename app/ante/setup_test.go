@@ -9,12 +9,12 @@ import (
 
 	"github.com/cosmos/cosmos-sdk/client"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/fury-labs/blackfury/v13/app"
-	"github.com/fury-labs/blackfury/v13/crypto/ethsecp256k1"
-	"github.com/fury-labs/blackfury/v13/encoding"
-	"github.com/fury-labs/blackfury/v13/testutil"
-	"github.com/fury-labs/blackfury/v13/utils"
-	feemarkettypes "github.com/fury-labs/blackfury/v13/x/feemarket/types"
+	"github.com/fury-labs/black/v13/app"
+	"github.com/fury-labs/black/v13/crypto/ethsecp256k1"
+	"github.com/fury-labs/black/v13/encoding"
+	"github.com/fury-labs/black/v13/testutil"
+	"github.com/fury-labs/black/v13/utils"
+	feemarkettypes "github.com/fury-labs/black/v13/x/feemarket/types"
 	"github.com/stretchr/testify/require"
 	"github.com/stretchr/testify/suite"
 )
@@ -26,7 +26,7 @@ type AnteTestSuite struct {
 
 	ctx       sdk.Context
 	clientCtx client.Context
-	app       *app.Gridiron
+	app       *app.Black
 	denom     string
 }
 

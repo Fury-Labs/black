@@ -2,9 +2,9 @@ package backend
 
 import (
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-	"github.com/fury-labs/blackfury/v13/rpc/backend/mocks"
-	rpc "github.com/fury-labs/blackfury/v13/rpc/types"
-	feemarkettypes "github.com/fury-labs/blackfury/v13/x/feemarket/types"
+	"github.com/fury-labs/black/v13/rpc/backend/mocks"
+	rpc "github.com/fury-labs/black/v13/rpc/types"
+	feemarkettypes "github.com/fury-labs/black/v13/x/feemarket/types"
 )
 
 var _ feemarkettypes.QueryClient = &mocks.FeeMarketQueryClient{}

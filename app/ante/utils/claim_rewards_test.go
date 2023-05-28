@@ -4,10 +4,10 @@ import (
 	"time"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	anteutils "github.com/fury-labs/blackfury/v13/app/ante/utils"
-	"github.com/fury-labs/blackfury/v13/testutil"
-	testutiltx "github.com/fury-labs/blackfury/v13/testutil/tx"
-	"github.com/fury-labs/blackfury/v13/utils"
+	anteutils "github.com/fury-labs/black/v13/app/ante/utils"
+	"github.com/fury-labs/black/v13/testutil"
+	testutiltx "github.com/fury-labs/black/v13/testutil/tx"
+	"github.com/fury-labs/black/v13/utils"
 )
 
 // TestClaimStakingRewardsIfNecessary tests the ClaimStakingRewardsIfNecessary function

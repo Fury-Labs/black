@@ -8,14 +8,14 @@
           "exponent": 0
         },
         {
-          "denom": "blackfury",
+          "denom": "black",
           "exponent": 18
         }
       ],
       "base": "afury",
       "display": "afury",
       "name": "afury",
-      "symbol": "GRIDIRON"
+      "symbol": "BLACK"
     }
   ]
 }

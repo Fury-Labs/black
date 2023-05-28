@@ -13,12 +13,12 @@ import (
 	authsigning "github.com/cosmos/cosmos-sdk/x/auth/signing"
 	"github.com/cosmos/cosmos-sdk/x/authz"
 
-	"github.com/fury-labs/blackfury/v13/app"
-	cosmosante "github.com/fury-labs/blackfury/v13/app/ante/cosmos"
-	"github.com/fury-labs/blackfury/v13/crypto/ethsecp256k1"
-	"github.com/fury-labs/blackfury/v13/encoding"
-	testutil "github.com/fury-labs/blackfury/v13/testutil"
-	testutiltx "github.com/fury-labs/blackfury/v13/testutil/tx"
+	"github.com/fury-labs/black/v13/app"
+	cosmosante "github.com/fury-labs/black/v13/app/ante/cosmos"
+	"github.com/fury-labs/black/v13/crypto/ethsecp256k1"
+	"github.com/fury-labs/black/v13/encoding"
+	testutil "github.com/fury-labs/black/v13/testutil"
+	testutiltx "github.com/fury-labs/black/v13/testutil/tx"
 )
 
 func (suite *AnteTestSuite) CreateTestCosmosTxBuilder(gasPrice sdkmath.Int, denom string, msgs ...sdk.Msg) client.TxBuilder {

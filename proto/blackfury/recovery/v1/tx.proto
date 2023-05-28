@@ -1,12 +1,12 @@
 syntax = "proto3";
-package blackfury.recovery.v1;
+package black.recovery.v1;
 
 import "cosmos/msg/v1/msg.proto";
 import "cosmos_proto/cosmos.proto";
-import "blackfury/recovery/v1/genesis.proto";
+import "black/recovery/v1/genesis.proto";
 import "gogoproto/gogo.proto";
 
-option go_package = "github.com/fury-labs/blackfury/v13/x/recovery/types";
+option go_package = "github.com/fury-labs/black/v13/x/recovery/types";
 
 // Msg defines the recovery Msg service.
 service Msg {

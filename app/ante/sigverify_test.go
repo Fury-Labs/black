@@ -16,10 +16,10 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/auth/migrations/legacytx"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 
-	"github.com/fury-labs/blackfury/v13/app"
-	"github.com/fury-labs/blackfury/v13/app/ante"
-	"github.com/fury-labs/blackfury/v13/crypto/ethsecp256k1"
-	"github.com/fury-labs/blackfury/v13/encoding"
+	"github.com/fury-labs/black/v13/app"
+	"github.com/fury-labs/black/v13/app/ante"
+	"github.com/fury-labs/black/v13/crypto/ethsecp256k1"
+	"github.com/fury-labs/black/v13/encoding"
 )
 
 func TestConsumeSignatureVerificationGas(t *testing.T) {

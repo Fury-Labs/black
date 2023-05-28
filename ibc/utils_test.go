@@ -3,7 +3,7 @@ package ibc
 import (
 	"testing"
 
-	"github.com/fury-labs/blackfury/v13/x/claims/types"
+	"github.com/fury-labs/black/v13/x/claims/types"
 	"github.com/stretchr/testify/require"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -11,12 +11,12 @@ import (
 	transfertypes "github.com/cosmos/ibc-go/v6/modules/apps/transfer/types"
 	channeltypes "github.com/cosmos/ibc-go/v6/modules/core/04-channel/types"
 	ibctesting "github.com/cosmos/ibc-go/v6/testing"
-	teststypes "github.com/fury-labs/blackfury/v13/types/tests"
+	teststypes "github.com/fury-labs/black/v13/types/tests"
 )
 
 func init() {
 	cfg := sdk.GetConfig()
-	cfg.SetBech32PrefixForAccount("blackfury", "blackfurypub")
+	cfg.SetBech32PrefixForAccount("black", "blackpub")
 }
 
 func TestGetTransferSenderRecipient(t *testing.T) {
@@ -80,7 +80,7 @@ func TestGetTransferSenderRecipient(t *testing.T) {
 			true,
 		},
 		{
-			"valid - cosmos sender, blackfury recipient",
+			"valid - cosmos sender, black recipient",
 			channeltypes.Packet{
 				Data: transfertypes.ModuleCdc.MustMarshalJSON(
 					&transfertypes.FungibleTokenPacketData{
@@ -95,7 +95,7 @@ func TestGetTransferSenderRecipient(t *testing.T) {
 			false,
 		},
 		{
-			"valid - blackfury sender, cosmos recipient",
+			"valid - black sender, cosmos recipient",
 			channeltypes.Packet{
 				Data: transfertypes.ModuleCdc.MustMarshalJSON(
 					&transfertypes.FungibleTokenPacketData{
@@ -110,7 +110,7 @@ func TestGetTransferSenderRecipient(t *testing.T) {
 			false,
 		},
 		{
-			"valid - osmosis sender, blackfury recipient",
+			"valid - osmosis sender, black recipient",
 			channeltypes.Packet{
 				Data: transfertypes.ModuleCdc.MustMarshalJSON(
 					&transfertypes.FungibleTokenPacketData{

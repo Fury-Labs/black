@@ -1,4 +1,4 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
+// Copyright Tharsis Labs Ltd.(Black)
 // SPDX-License-Identifier:LGPL-3.0-only
 
 package cli
@@ -14,9 +14,9 @@ import (
 	"github.com/cosmos/cosmos-sdk/client/tx"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	blackfurytypes "github.com/fury-labs/blackfury/v13/types"
+	blacktypes "github.com/fury-labs/black/v13/types"
 
-	"github.com/fury-labs/blackfury/v13/x/revenue/v1/types"
+	"github.com/fury-labs/black/v13/x/revenue/v1/types"
 )
 
 // NewTxCmd returns a root CLI command handler for certain modules/revenue
@@ -56,7 +56,7 @@ func NewRegisterRevenue() *cobra.Command {
 			deployer := cliCtx.GetFromAddress()
 
 			contract := args[0]
-			if err := blackfurytypes.ValidateNonZeroAddress(contract); err != nil {
+			if err := blacktypes.ValidateNonZeroAddress(contract); err != nil {
 				return fmt.Errorf("invalid contract hex address %w", err)
 			}
 
@@ -114,7 +114,7 @@ func NewCancelRevenue() *cobra.Command {
 			deployer := cliCtx.GetFromAddress()
 
 			contract := args[0]
-			if err := blackfurytypes.ValidateNonZeroAddress(contract); err != nil {
+			if err := blacktypes.ValidateNonZeroAddress(contract); err != nil {
 				return fmt.Errorf("invalid contract hex address %w", err)
 			}
 
@@ -152,7 +152,7 @@ func NewUpdateRevenue() *cobra.Command {
 			deployer := cliCtx.GetFromAddress()
 
 			contract := args[0]
-			if err := blackfurytypes.ValidateNonZeroAddress(contract); err != nil {
+			if err := blacktypes.ValidateNonZeroAddress(contract); err != nil {
 				return fmt.Errorf("invalid contract hex address %w", err)
 			}
 

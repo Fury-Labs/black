@@ -1,7 +1,7 @@
 package keeper_test
 
 import (
-	evmtypes "github.com/fury-labs/blackfury/v13/x/evm/types"
+	evmtypes "github.com/fury-labs/black/v13/x/evm/types"
 	"github.com/tendermint/tendermint/abci/types"
 )
 

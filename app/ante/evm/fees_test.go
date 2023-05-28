@@ -7,10 +7,10 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
-	evmante "github.com/fury-labs/blackfury/v13/app/ante/evm"
-	"github.com/fury-labs/blackfury/v13/testutil"
-	testutiltx "github.com/fury-labs/blackfury/v13/testutil/tx"
-	evmtypes "github.com/fury-labs/blackfury/v13/x/evm/types"
+	evmante "github.com/fury-labs/black/v13/app/ante/evm"
+	"github.com/fury-labs/black/v13/testutil"
+	testutiltx "github.com/fury-labs/black/v13/testutil/tx"
+	evmtypes "github.com/fury-labs/black/v13/x/evm/types"
 )
 
 var execTypes = []struct {

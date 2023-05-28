@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 package server
 
 import (
@@ -14,10 +14,10 @@ import (
 	"github.com/cosmos/cosmos-sdk/server/types"
 	ethlog "github.com/ethereum/go-ethereum/log"
 	ethrpc "github.com/ethereum/go-ethereum/rpc"
-	"github.com/fury-labs/blackfury/v13/rpc"
+	"github.com/fury-labs/black/v13/rpc"
 
-	"github.com/fury-labs/blackfury/v13/server/config"
-	blackfurytypes "github.com/fury-labs/blackfury/v13/types"
+	"github.com/fury-labs/black/v13/server/config"
+	blacktypes "github.com/fury-labs/black/v13/types"
 )
 
 // StartJSONRPC starts the JSON-RPC server
@@ -26,7 +26,7 @@ func StartJSONRPC(ctx *server.Context,
 	tmRPCAddr,
 	tmEndpoint string,
 	config *config.Config,
-	indexer blackfurytypes.EVMTxIndexer,
+	indexer blacktypes.EVMTxIndexer,
 ) (*http.Server, chan struct{}, error) {
 	tmWsClient := ConnectTmWS(tmRPCAddr, tmEndpoint, ctx.Logger)
 

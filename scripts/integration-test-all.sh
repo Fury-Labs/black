@@ -17,7 +17,7 @@ RPC_PORT="854"
 IP_ADDR="0.0.0.0"
 
 KEY="dev0"
-CHAINID="blackfury_9000-1"
+CHAINID="highbury_710-1"
 MONIKER="mymoniker"
 
 ## default port prefixes for black
@@ -52,15 +52,15 @@ done
 
 set -euxo pipefail
 
-DATA_DIR=$(mktemp -d -t blackfury-datadir.XXXXX)
+DATA_DIR=$(mktemp -d -t black-datadir.XXXXX)
 
 if [[ ! "$DATA_DIR" ]]; then
     echo "Could not create $DATA_DIR"
     exit 1
 fi
 
-# Compile blackfury
-echo "compiling blackfury"
+# Compile black
+echo "compiling black"
 make build
 
 # PID array declaration
@@ -103,17 +103,17 @@ init_func() {
 }
 
 start_func() {
-    echo "starting blackfury node $i in background ..."
+    echo "starting black node $i in background ..."
     "$PWD"/build/black start --pruning=nothing --rpc.unsafe \
     --p2p.laddr tcp://$IP_ADDR:$NODE_P2P_PORT"$i" --address tcp://$IP_ADDR:$NODE_PORT"$i" --rpc.laddr tcp://$IP_ADDR:$NODE_RPC_PORT"$i" \
     --json-rpc.address=$IP_ADDR:$RPC_PORT"$i" \
     --keyring-backend test --home "$DATA_DIR$i" \
     >"$DATA_DIR"/node"$i".log 2>&1 & disown
 
-    GRIDIRON_PID=$!
-    echo "started blackfury node, pid=$GRIDIRON_PID"
+    BLACK_PID=$!
+    echo "started black node, pid=$BLACK_PID"
     # add PID to array
-    arr+=("$GRIDIRON_PID")
+    arr+=("$BLACK_PID")
 
     if [[ $MODE == "pending" ]]; then
       echo "waiting for the first block..."
@@ -147,7 +147,7 @@ if [[ -z $TEST || $TEST == "rpc" ||  $TEST == "pending" ]]; then
 
     for i in $(seq 1 "$TEST_QTD"); do
         HOST_RPC=http://$IP_ADDR:$RPC_PORT"$i"
-        echo "going to test blackfury node $HOST_RPC ..."
+        echo "going to test black node $HOST_RPC ..."
         MODE=$MODE HOST=$HOST_RPC go test ./tests/... -timeout=$time_out -v -short
 
         RPC_FAIL=$?
@@ -156,12 +156,12 @@ if [[ -z $TEST || $TEST == "rpc" ||  $TEST == "pending" ]]; then
 fi
 
 stop_func() {
-    GRIDIRON_PID=$i
-    echo "shutting down node, pid=$GRIDIRON_PID ..."
+    BLACK_PID=$i
+    echo "shutting down node, pid=$BLACK_PID ..."
 
-    # Shutdown blackfury node
-    kill -9 "$GRIDIRON_PID"
-    wait "$GRIDIRON_PID"
+    # Shutdown black node
+    kill -9 "$BLACK_PID"
+    wait "$BLACK_PID"
 
     if [ $REMOVE_DATA_DIR == "true" ]
     then

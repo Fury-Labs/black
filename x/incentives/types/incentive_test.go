@@ -8,8 +8,8 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/stretchr/testify/suite"
 
-	utiltx "github.com/fury-labs/blackfury/v13/testutil/tx"
-	"github.com/fury-labs/blackfury/v13/x/incentives/types"
+	utiltx "github.com/fury-labs/black/v13/testutil/tx"
+	"github.com/fury-labs/black/v13/x/incentives/types"
 )
 
 type IncentiveTestSuite struct {
@@ -45,7 +45,7 @@ func (suite *IncentiveTestSuite) TestIncentiveNew() {
 		{
 			"Register incentive - invalid allocation denom",
 			utiltx.GenerateAddress(),
-			sdk.DecCoins{{Denom: "(blackfury", Amount: sdk.OneDec()}},
+			sdk.DecCoins{{Denom: "(black", Amount: sdk.OneDec()}},
 			10,
 			false,
 		},

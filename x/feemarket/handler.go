@@ -1,12 +1,12 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 package feemarket
 
 import (
 	errorsmod "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	errortypes "github.com/cosmos/cosmos-sdk/types/errors"
-	"github.com/fury-labs/blackfury/v13/x/feemarket/types"
+	"github.com/fury-labs/black/v13/x/feemarket/types"
 )
 
 // NewHandler returns a handler for Ethermint type messages.

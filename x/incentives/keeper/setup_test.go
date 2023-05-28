@@ -14,17 +14,17 @@ import (
 	"github.com/stretchr/testify/suite"
 
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
-	evm "github.com/fury-labs/blackfury/v13/x/evm/types"
+	evm "github.com/fury-labs/black/v13/x/evm/types"
 
-	"github.com/fury-labs/blackfury/v13/app"
-	"github.com/fury-labs/blackfury/v13/x/incentives/types"
+	"github.com/fury-labs/black/v13/app"
+	"github.com/fury-labs/black/v13/x/incentives/types"
 )
 
 type KeeperTestSuite struct {
 	suite.Suite
 
 	ctx              sdk.Context
-	app              *app.Gridiron
+	app              *app.Black
 	queryClientEvm   evm.QueryClient
 	queryClient      types.QueryClient
 	address          common.Address

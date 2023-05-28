@@ -13,17 +13,17 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/fury-labs/blackfury/v13/crypto/ethsecp256k1"
-	feemarkettypes "github.com/fury-labs/blackfury/v13/x/feemarket/types"
+	"github.com/fury-labs/black/v13/crypto/ethsecp256k1"
+	feemarkettypes "github.com/fury-labs/black/v13/x/feemarket/types"
 
-	"github.com/fury-labs/blackfury/v13/app"
+	"github.com/fury-labs/black/v13/app"
 )
 
 type UpgradeTestSuite struct {
 	suite.Suite
 
 	ctx         sdk.Context
-	app         *app.Gridiron
+	app         *app.Black
 	consAddress sdk.ConsAddress
 }
 

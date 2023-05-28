@@ -5,10 +5,10 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
-	ethante "github.com/fury-labs/blackfury/v13/app/ante/evm"
-	"github.com/fury-labs/blackfury/v13/testutil"
-	testutiltx "github.com/fury-labs/blackfury/v13/testutil/tx"
-	evmtypes "github.com/fury-labs/blackfury/v13/x/evm/types"
+	ethante "github.com/fury-labs/black/v13/app/ante/evm"
+	"github.com/fury-labs/black/v13/testutil"
+	testutiltx "github.com/fury-labs/black/v13/testutil/tx"
+	evmtypes "github.com/fury-labs/black/v13/x/evm/types"
 )
 
 func (suite *AnteTestSuite) TestEthSigVerificationDecorator() {

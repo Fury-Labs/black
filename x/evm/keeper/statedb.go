@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 package keeper
 
 import (
@@ -12,9 +12,9 @@ import (
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/ethereum/go-ethereum/common"
-	blackfurytypes "github.com/fury-labs/blackfury/v13/types"
-	"github.com/fury-labs/blackfury/v13/x/evm/statedb"
-	"github.com/fury-labs/blackfury/v13/x/evm/types"
+	blacktypes "github.com/fury-labs/black/v13/types"
+	"github.com/fury-labs/black/v13/x/evm/statedb"
+	"github.com/fury-labs/black/v13/x/evm/types"
 )
 
 var _ statedb.Keeper = &Keeper{}
@@ -119,7 +119,7 @@ func (k *Keeper) SetAccount(ctx sdk.Context, addr common.Address, account stated
 
 	codeHash := common.BytesToHash(account.CodeHash)
 
-	if ethAcct, ok := acct.(blackfurytypes.EthAccountI); ok {
+	if ethAcct, ok := acct.(blacktypes.EthAccountI); ok {
 		if err := ethAcct.SetCodeHash(codeHash); err != nil {
 			return err
 		}
@@ -189,7 +189,7 @@ func (k *Keeper) DeleteAccount(ctx sdk.Context, addr common.Address) error {
 	}
 
 	// NOTE: only Ethereum accounts (contracts) can be selfdestructed
-	_, ok := acct.(blackfurytypes.EthAccountI)
+	_, ok := acct.(blacktypes.EthAccountI)
 	if !ok {
 		return errorsmod.Wrapf(types.ErrInvalidAccount, "type %T, address %s", acct, addr)
 	}

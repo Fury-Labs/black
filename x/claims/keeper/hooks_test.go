@@ -7,9 +7,9 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
-	"github.com/fury-labs/blackfury/v13/testutil"
-	utiltx "github.com/fury-labs/blackfury/v13/testutil/tx"
-	"github.com/fury-labs/blackfury/v13/x/claims/types"
+	"github.com/fury-labs/black/v13/testutil"
+	utiltx "github.com/fury-labs/black/v13/testutil/tx"
+	"github.com/fury-labs/black/v13/x/claims/types"
 )
 
 func (suite *KeeperTestSuite) TestAfterProposalVote() {

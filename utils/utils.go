@@ -1,12 +1,12 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 
 package utils
 
 import (
 	"strings"
 
-	"github.com/fury-labs/blackfury/v13/crypto/ethsecp256k1"
+	"github.com/fury-labs/black/v13/crypto/ethsecp256k1"
 
 	errorsmod "cosmossdk.io/errors"
 	"github.com/cosmos/cosmos-sdk/crypto/keys/ed25519"
@@ -17,20 +17,20 @@ import (
 )
 
 const (
-	// MainnetChainID defines the Gridiron EIP155 chain ID for mainnet
-	MainnetChainID = "blackfury_9001"
-	// TestnetChainID defines the Gridiron EIP155 chain ID for testnet
-	TestnetChainID = "blackfury_9000"
-	// BaseDenom defines the Gridiron mainnet denomination
+	// MainnetChainID defines the Black EIP155 chain ID for mainnet
+	MainnetChainID = "clockend_4200"
+	// TestnetChainID defines the Black EIP155 chain ID for testnet
+	TestnetChainID = "highbury_710"
+	// BaseDenom defines the Black mainnet denomination
 	BaseDenom = "afury"
 )
 
-// IsMainnet returns true if the chain-id has the Gridiron mainnet EIP155 chain prefix.
+// IsMainnet returns true if the chain-id has the Black mainnet EIP155 chain prefix.
 func IsMainnet(chainID string) bool {
 	return strings.HasPrefix(chainID, MainnetChainID)
 }
 
-// IsTestnet returns true if the chain-id has the Gridiron testnet EIP155 chain prefix.
+// IsTestnet returns true if the chain-id has the Black testnet EIP155 chain prefix.
 func IsTestnet(chainID string) bool {
 	return strings.HasPrefix(chainID, TestnetChainID)
 }
@@ -63,11 +63,11 @@ func IsSupportedKey(pubkey cryptotypes.PubKey) bool {
 	}
 }
 
-// GetGridironAddressFromBech32 returns the sdk.Account address of given address,
+// GetBlackAddressFromBech32 returns the sdk.Account address of given address,
 // while also changing bech32 human readable prefix (HRP) to the value set on
-// the global sdk.Config (eg: `blackfury`).
+// the global sdk.Config (eg: `black`).
 // The function fails if the provided bech32 address is invalid.
-func GetGridironAddressFromBech32(address string) (sdk.AccAddress, error) {
+func GetBlackAddressFromBech32(address string) (sdk.AccAddress, error) {
 	bech32Prefix := strings.SplitN(address, "1", 2)[0]
 	if bech32Prefix == address {
 		return nil, errorsmod.Wrapf(errortypes.ErrInvalidAddress, "invalid bech32 address: %s", address)

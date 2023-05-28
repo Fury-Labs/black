@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 package filters
 
 import (
@@ -8,8 +8,8 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/fury-labs/blackfury/v13/rpc/backend"
-	"github.com/fury-labs/blackfury/v13/rpc/types"
+	"github.com/fury-labs/black/v13/rpc/backend"
+	"github.com/fury-labs/black/v13/rpc/types"
 
 	"github.com/pkg/errors"
 	"github.com/tendermint/tendermint/libs/log"

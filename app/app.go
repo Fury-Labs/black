@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 
 package app
 
@@ -110,61 +110,61 @@ import (
 	icahosttypes "github.com/cosmos/ibc-go/v6/modules/apps/27-interchain-accounts/host/types"
 	icatypes "github.com/cosmos/ibc-go/v6/modules/apps/27-interchain-accounts/types"
 
-	ethante "github.com/fury-labs/blackfury/v13/app/ante/evm"
-	"github.com/fury-labs/blackfury/v13/encoding"
-	"github.com/fury-labs/blackfury/v13/ethereum/eip712"
-	srvflags "github.com/fury-labs/blackfury/v13/server/flags"
-	blackfurytypes "github.com/fury-labs/blackfury/v13/types"
-	"github.com/fury-labs/blackfury/v13/x/evm"
-	evmkeeper "github.com/fury-labs/blackfury/v13/x/evm/keeper"
-	evmtypes "github.com/fury-labs/blackfury/v13/x/evm/types"
-	"github.com/fury-labs/blackfury/v13/x/feemarket"
-	feemarketkeeper "github.com/fury-labs/blackfury/v13/x/feemarket/keeper"
-	feemarkettypes "github.com/fury-labs/blackfury/v13/x/feemarket/types"
+	ethante "github.com/fury-labs/black/v13/app/ante/evm"
+	"github.com/fury-labs/black/v13/encoding"
+	"github.com/fury-labs/black/v13/ethereum/eip712"
+	srvflags "github.com/fury-labs/black/v13/server/flags"
+	blacktypes "github.com/fury-labs/black/v13/types"
+	"github.com/fury-labs/black/v13/x/evm"
+	evmkeeper "github.com/fury-labs/black/v13/x/evm/keeper"
+	evmtypes "github.com/fury-labs/black/v13/x/evm/types"
+	"github.com/fury-labs/black/v13/x/feemarket"
+	feemarketkeeper "github.com/fury-labs/black/v13/x/feemarket/keeper"
+	feemarkettypes "github.com/fury-labs/black/v13/x/feemarket/types"
 
 	// unnamed import of statik for swagger UI support
-	_ "github.com/fury-labs/blackfury/v13/client/docs/statik"
+	_ "github.com/fury-labs/black/v13/client/docs/statik"
 
-	"github.com/fury-labs/blackfury/v13/app/ante"
-	v10 "github.com/fury-labs/blackfury/v13/app/upgrades/v10"
-	v11 "github.com/fury-labs/blackfury/v13/app/upgrades/v11"
-	v12 "github.com/fury-labs/blackfury/v13/app/upgrades/v12"
-	v13 "github.com/fury-labs/blackfury/v13/app/upgrades/v13"
-	v8 "github.com/fury-labs/blackfury/v13/app/upgrades/v8"
-	v81 "github.com/fury-labs/blackfury/v13/app/upgrades/v8_1"
-	v82 "github.com/fury-labs/blackfury/v13/app/upgrades/v8_2"
-	v9 "github.com/fury-labs/blackfury/v13/app/upgrades/v9"
-	v91 "github.com/fury-labs/blackfury/v13/app/upgrades/v9_1"
-	"github.com/fury-labs/blackfury/v13/x/claims"
-	claimskeeper "github.com/fury-labs/blackfury/v13/x/claims/keeper"
-	claimstypes "github.com/fury-labs/blackfury/v13/x/claims/types"
-	"github.com/fury-labs/blackfury/v13/x/epochs"
-	epochskeeper "github.com/fury-labs/blackfury/v13/x/epochs/keeper"
-	epochstypes "github.com/fury-labs/blackfury/v13/x/epochs/types"
-	"github.com/fury-labs/blackfury/v13/x/erc20"
-	erc20client "github.com/fury-labs/blackfury/v13/x/erc20/client"
-	erc20keeper "github.com/fury-labs/blackfury/v13/x/erc20/keeper"
-	erc20types "github.com/fury-labs/blackfury/v13/x/erc20/types"
-	"github.com/fury-labs/blackfury/v13/x/incentives"
-	incentivesclient "github.com/fury-labs/blackfury/v13/x/incentives/client"
-	incentiveskeeper "github.com/fury-labs/blackfury/v13/x/incentives/keeper"
-	incentivestypes "github.com/fury-labs/blackfury/v13/x/incentives/types"
-	"github.com/fury-labs/blackfury/v13/x/inflation"
-	inflationkeeper "github.com/fury-labs/blackfury/v13/x/inflation/keeper"
-	inflationtypes "github.com/fury-labs/blackfury/v13/x/inflation/types"
-	"github.com/fury-labs/blackfury/v13/x/recovery"
-	recoverykeeper "github.com/fury-labs/blackfury/v13/x/recovery/keeper"
-	recoverytypes "github.com/fury-labs/blackfury/v13/x/recovery/types"
-	revenue "github.com/fury-labs/blackfury/v13/x/revenue/v1"
-	revenuekeeper "github.com/fury-labs/blackfury/v13/x/revenue/v1/keeper"
-	revenuetypes "github.com/fury-labs/blackfury/v13/x/revenue/v1/types"
-	"github.com/fury-labs/blackfury/v13/x/vesting"
-	vestingkeeper "github.com/fury-labs/blackfury/v13/x/vesting/keeper"
-	vestingtypes "github.com/fury-labs/blackfury/v13/x/vesting/types"
+	"github.com/fury-labs/black/v13/app/ante"
+	v10 "github.com/fury-labs/black/v13/app/upgrades/v10"
+	v11 "github.com/fury-labs/black/v13/app/upgrades/v11"
+	v12 "github.com/fury-labs/black/v13/app/upgrades/v12"
+	v13 "github.com/fury-labs/black/v13/app/upgrades/v13"
+	v8 "github.com/fury-labs/black/v13/app/upgrades/v8"
+	v81 "github.com/fury-labs/black/v13/app/upgrades/v8_1"
+	v82 "github.com/fury-labs/black/v13/app/upgrades/v8_2"
+	v9 "github.com/fury-labs/black/v13/app/upgrades/v9"
+	v91 "github.com/fury-labs/black/v13/app/upgrades/v9_1"
+	"github.com/fury-labs/black/v13/x/claims"
+	claimskeeper "github.com/fury-labs/black/v13/x/claims/keeper"
+	claimstypes "github.com/fury-labs/black/v13/x/claims/types"
+	"github.com/fury-labs/black/v13/x/epochs"
+	epochskeeper "github.com/fury-labs/black/v13/x/epochs/keeper"
+	epochstypes "github.com/fury-labs/black/v13/x/epochs/types"
+	"github.com/fury-labs/black/v13/x/erc20"
+	erc20client "github.com/fury-labs/black/v13/x/erc20/client"
+	erc20keeper "github.com/fury-labs/black/v13/x/erc20/keeper"
+	erc20types "github.com/fury-labs/black/v13/x/erc20/types"
+	"github.com/fury-labs/black/v13/x/incentives"
+	incentivesclient "github.com/fury-labs/black/v13/x/incentives/client"
+	incentiveskeeper "github.com/fury-labs/black/v13/x/incentives/keeper"
+	incentivestypes "github.com/fury-labs/black/v13/x/incentives/types"
+	"github.com/fury-labs/black/v13/x/inflation"
+	inflationkeeper "github.com/fury-labs/black/v13/x/inflation/keeper"
+	inflationtypes "github.com/fury-labs/black/v13/x/inflation/types"
+	"github.com/fury-labs/black/v13/x/recovery"
+	recoverykeeper "github.com/fury-labs/black/v13/x/recovery/keeper"
+	recoverytypes "github.com/fury-labs/black/v13/x/recovery/types"
+	revenue "github.com/fury-labs/black/v13/x/revenue/v1"
+	revenuekeeper "github.com/fury-labs/black/v13/x/revenue/v1/keeper"
+	revenuetypes "github.com/fury-labs/black/v13/x/revenue/v1/types"
+	"github.com/fury-labs/black/v13/x/vesting"
+	vestingkeeper "github.com/fury-labs/black/v13/x/vesting/keeper"
+	vestingtypes "github.com/fury-labs/black/v13/x/vesting/types"
 
 	// NOTE: override ICS20 keeper to support IBC transfers of ERC20 tokens
-	"github.com/fury-labs/blackfury/v13/x/ibc/transfer"
-	transferkeeper "github.com/fury-labs/blackfury/v13/x/ibc/transfer/keeper"
+	"github.com/fury-labs/black/v13/x/ibc/transfer"
+	transferkeeper "github.com/fury-labs/black/v13/x/ibc/transfer/keeper"
 
 	// Force-load the tracer engines to trigger registration due to Go-Ethereum v1.10.15 changes
 	_ "github.com/ethereum/go-ethereum/eth/tracers/js"
@@ -179,8 +179,8 @@ func init() {
 
 	DefaultNodeHome = filepath.Join(userHomeDir, ".black")
 
-	// manually update the power reduction by replacing micro (u) -> atto (a) blackfury
-	sdk.DefaultPowerReduction = blackfurytypes.PowerReduction
+	// manually update the power reduction by replacing micro (u) -> atto (a) black
+	sdk.DefaultPowerReduction = blacktypes.PowerReduction
 	// modify fee market parameter defaults through global
 	feemarkettypes.DefaultMinGasPrice = MainnetMinGasPrices
 	feemarkettypes.DefaultMinGasMultiplier = MainnetMinGasMultiplier
@@ -209,7 +209,7 @@ var (
 			[]govclient.ProposalHandler{
 				paramsclient.ProposalHandler, distrclient.ProposalHandler, upgradeclient.LegacyProposalHandler, upgradeclient.LegacyCancelProposalHandler,
 				ibcclientclient.UpdateClientProposalHandler, ibcclientclient.UpgradeProposalHandler,
-				// Gridiron proposal types
+				// Black proposal types
 				erc20client.RegisterCoinProposalHandler, erc20client.RegisterERC20ProposalHandler, erc20client.ToggleTokenConversionProposalHandler,
 				incentivesclient.RegisterIncentiveProposalHandler, incentivesclient.CancelIncentiveProposalHandler,
 			},
@@ -259,14 +259,14 @@ var (
 )
 
 var (
-	_ servertypes.Application = (*Gridiron)(nil)
-	_ ibctesting.TestingApp   = (*Gridiron)(nil)
+	_ servertypes.Application = (*Black)(nil)
+	_ ibctesting.TestingApp   = (*Black)(nil)
 )
 
-// Gridiron implements an extended ABCI application. It is an application
+// Black implements an extended ABCI application. It is an application
 // that may process transactions through Ethereum's EVM running atop of
 // Tendermint consensus.
-type Gridiron struct {
+type Black struct {
 	*baseapp.BaseApp
 
 	// encoding
@@ -307,7 +307,7 @@ type Gridiron struct {
 	EvmKeeper       *evmkeeper.Keeper
 	FeeMarketKeeper feemarketkeeper.Keeper
 
-	// Gridiron keepers
+	// Black keepers
 	InflationKeeper  inflationkeeper.Keeper
 	ClaimsKeeper     *claimskeeper.Keeper
 	Erc20Keeper      erc20keeper.Keeper
@@ -326,8 +326,8 @@ type Gridiron struct {
 	tpsCounter *tpsCounter
 }
 
-// NewGridiron returns a reference to a new initialized Ethermint application.
-func NewGridiron(
+// NewBlack returns a reference to a new initialized Ethermint application.
+func NewBlack(
 	logger log.Logger,
 	db dbm.DB,
 	traceStore io.Writer,
@@ -338,7 +338,7 @@ func NewGridiron(
 	encodingConfig simappparams.EncodingConfig,
 	appOpts servertypes.AppOptions,
 	baseAppOptions ...func(*baseapp.BaseApp),
-) *Gridiron {
+) *Black {
 	appCodec := encodingConfig.Codec
 	cdc := encodingConfig.Amino
 	interfaceRegistry := encodingConfig.InterfaceRegistry
@@ -370,7 +370,7 @@ func NewGridiron(
 		icahosttypes.StoreKey,
 		// ethermint keys
 		evmtypes.StoreKey, feemarkettypes.StoreKey,
-		// blackfury keys
+		// black keys
 		inflationtypes.StoreKey, erc20types.StoreKey, incentivestypes.StoreKey,
 		epochstypes.StoreKey, claimstypes.StoreKey, vestingtypes.StoreKey,
 		revenuetypes.StoreKey, recoverytypes.StoreKey,
@@ -386,7 +386,7 @@ func NewGridiron(
 		os.Exit(1)
 	}
 
-	app := &Gridiron{
+	app := &Black{
 		BaseApp:           bApp,
 		cdc:               cdc,
 		appCodec:          appCodec,
@@ -415,7 +415,7 @@ func NewGridiron(
 
 	// use custom Ethermint account for contracts
 	app.AccountKeeper = authkeeper.NewAccountKeeper(
-		appCodec, keys[authtypes.StoreKey], app.GetSubspace(authtypes.ModuleName), blackfurytypes.ProtoAccount, maccPerms, sdk.GetConfig().GetBech32AccountAddrPrefix(),
+		appCodec, keys[authtypes.StoreKey], app.GetSubspace(authtypes.ModuleName), blacktypes.ProtoAccount, maccPerms, sdk.GetConfig().GetBech32AccountAddrPrefix(),
 	)
 	app.BankKeeper = bankkeeper.NewBaseKeeper(
 		appCodec, keys[banktypes.StoreKey], app.AccountKeeper, app.GetSubspace(banktypes.ModuleName), app.BlockedAddrs(),
@@ -481,7 +481,7 @@ func NewGridiron(
 		&stakingKeeper, govRouter, app.MsgServiceRouter(), govConfig,
 	)
 
-	// Gridiron Keeper
+	// Black Keeper
 	app.InflationKeeper = inflationkeeper.NewKeeper(
 		keys[inflationtypes.StoreKey], appCodec, authtypes.NewModuleAddress(govtypes.ModuleName),
 		app.AccountKeeper, app.BankKeeper, app.DistrKeeper, &stakingKeeper,
@@ -671,7 +671,7 @@ func NewGridiron(
 		// Ethermint app modules
 		evm.NewAppModule(app.EvmKeeper, app.AccountKeeper, app.GetSubspace(evmtypes.ModuleName)),
 		feemarket.NewAppModule(app.FeeMarketKeeper, app.GetSubspace(feemarkettypes.ModuleName)),
-		// Gridiron app modules
+		// Black app modules
 		inflation.NewAppModule(app.InflationKeeper, app.AccountKeeper, app.StakingKeeper,
 			app.GetSubspace(inflationtypes.ModuleName)),
 		erc20.NewAppModule(app.Erc20Keeper, app.AccountKeeper,
@@ -751,7 +751,7 @@ func NewGridiron(
 		feegrant.ModuleName,
 		paramstypes.ModuleName,
 		upgradetypes.ModuleName,
-		// Gridiron modules
+		// Black modules
 		vestingtypes.ModuleName,
 		inflationtypes.ModuleName,
 		erc20types.ModuleName,
@@ -791,7 +791,7 @@ func NewGridiron(
 		feegrant.ModuleName,
 		paramstypes.ModuleName,
 		upgradetypes.ModuleName,
-		// Gridiron modules
+		// Black modules
 		vestingtypes.ModuleName,
 		inflationtypes.ModuleName,
 		erc20types.ModuleName,
@@ -848,14 +848,14 @@ func NewGridiron(
 }
 
 // Name returns the name of the App
-func (app *Gridiron) Name() string { return app.BaseApp.Name() }
+func (app *Black) Name() string { return app.BaseApp.Name() }
 
-func (app *Gridiron) setAnteHandler(txConfig client.TxConfig, maxGasWanted uint64) {
+func (app *Black) setAnteHandler(txConfig client.TxConfig, maxGasWanted uint64) {
 	options := ante.HandlerOptions{
 		Cdc:                    app.appCodec,
 		AccountKeeper:          app.AccountKeeper,
 		BankKeeper:             app.BankKeeper,
-		ExtensionOptionChecker: blackfurytypes.HasDynamicFeeExtensionOption,
+		ExtensionOptionChecker: blacktypes.HasDynamicFeeExtensionOption,
 		EvmKeeper:              app.EvmKeeper,
 		StakingKeeper:          app.StakingKeeper,
 		FeegrantKeeper:         app.FeeGrantKeeper,
@@ -875,7 +875,7 @@ func (app *Gridiron) setAnteHandler(txConfig client.TxConfig, maxGasWanted uint6
 	app.SetAnteHandler(ante.NewAnteHandler(options))
 }
 
-func (app *Gridiron) setPostHandler() {
+func (app *Black) setPostHandler() {
 	postHandler, err := posthandler.NewPostHandler(
 		posthandler.HandlerOptions{},
 	)
@@ -889,19 +889,19 @@ func (app *Gridiron) setPostHandler() {
 // BeginBlocker runs the Tendermint ABCI BeginBlock logic. It executes state changes at the beginning
 // of the new block for every registered module. If there is a registered fork at the current height,
 // BeginBlocker will schedule the upgrade plan and perform the state migration (if any).
-func (app *Gridiron) BeginBlocker(ctx sdk.Context, req abci.RequestBeginBlock) abci.ResponseBeginBlock {
+func (app *Black) BeginBlocker(ctx sdk.Context, req abci.RequestBeginBlock) abci.ResponseBeginBlock {
 	// Perform any scheduled forks before executing the modules logic
 	app.ScheduleForkUpgrade(ctx)
 	return app.mm.BeginBlock(ctx, req)
 }
 
 // EndBlocker updates every end block
-func (app *Gridiron) EndBlocker(ctx sdk.Context, req abci.RequestEndBlock) abci.ResponseEndBlock {
+func (app *Black) EndBlocker(ctx sdk.Context, req abci.RequestEndBlock) abci.ResponseEndBlock {
 	return app.mm.EndBlock(ctx, req)
 }
 
 // The DeliverTx method is intentionally decomposed to calculate the transactions per second.
-func (app *Gridiron) DeliverTx(req abci.RequestDeliverTx) (res abci.ResponseDeliverTx) {
+func (app *Black) DeliverTx(req abci.RequestDeliverTx) (res abci.ResponseDeliverTx) {
 	defer func() {
 		// TODO: Record the count along with the code and or reason so as to display
 		// in the transactions per second live dashboards.
@@ -915,7 +915,7 @@ func (app *Gridiron) DeliverTx(req abci.RequestDeliverTx) (res abci.ResponseDeli
 }
 
 // InitChainer updates at chain initialization
-func (app *Gridiron) InitChainer(ctx sdk.Context, req abci.RequestInitChain) abci.ResponseInitChain {
+func (app *Black) InitChainer(ctx sdk.Context, req abci.RequestInitChain) abci.ResponseInitChain {
 	var genesisState simapp.GenesisState
 	if err := json.Unmarshal(req.AppStateBytes, &genesisState); err != nil {
 		panic(err)
@@ -927,12 +927,12 @@ func (app *Gridiron) InitChainer(ctx sdk.Context, req abci.RequestInitChain) abc
 }
 
 // LoadHeight loads state at a particular height
-func (app *Gridiron) LoadHeight(height int64) error {
+func (app *Black) LoadHeight(height int64) error {
 	return app.LoadVersion(height)
 }
 
 // ModuleAccountAddrs returns all the app's module account addresses.
-func (app *Gridiron) ModuleAccountAddrs() map[string]bool {
+func (app *Black) ModuleAccountAddrs() map[string]bool {
 	modAccAddrs := make(map[string]bool)
 
 	accs := make([]string, 0, len(maccPerms))
@@ -950,7 +950,7 @@ func (app *Gridiron) ModuleAccountAddrs() map[string]bool {
 
 // BlockedAddrs returns all the app's module account addresses that are not
 // allowed to receive external tokens.
-func (app *Gridiron) BlockedAddrs() map[string]bool {
+func (app *Black) BlockedAddrs() map[string]bool {
 	blockedAddrs := make(map[string]bool)
 
 	accs := make([]string, 0, len(maccPerms))
@@ -966,59 +966,59 @@ func (app *Gridiron) BlockedAddrs() map[string]bool {
 	return blockedAddrs
 }
 
-// LegacyAmino returns Gridiron's amino codec.
+// LegacyAmino returns Black's amino codec.
 //
 // NOTE: This is solely to be used for testing purposes as it may be desirable
 // for modules to register their own custom testing types.
-func (app *Gridiron) LegacyAmino() *codec.LegacyAmino {
+func (app *Black) LegacyAmino() *codec.LegacyAmino {
 	return app.cdc
 }
 
-// AppCodec returns Gridiron's app codec.
+// AppCodec returns Black's app codec.
 //
 // NOTE: This is solely to be used for testing purposes as it may be desirable
 // for modules to register their own custom testing types.
-func (app *Gridiron) AppCodec() codec.Codec {
+func (app *Black) AppCodec() codec.Codec {
 	return app.appCodec
 }
 
-// InterfaceRegistry returns Gridiron's InterfaceRegistry
-func (app *Gridiron) InterfaceRegistry() types.InterfaceRegistry {
+// InterfaceRegistry returns Black's InterfaceRegistry
+func (app *Black) InterfaceRegistry() types.InterfaceRegistry {
 	return app.interfaceRegistry
 }
 
 // GetKey returns the KVStoreKey for the provided store key.
 //
 // NOTE: This is solely to be used for testing purposes.
-func (app *Gridiron) GetKey(storeKey string) *storetypes.KVStoreKey {
+func (app *Black) GetKey(storeKey string) *storetypes.KVStoreKey {
 	return app.keys[storeKey]
 }
 
 // GetTKey returns the TransientStoreKey for the provided store key.
 //
 // NOTE: This is solely to be used for testing purposes.
-func (app *Gridiron) GetTKey(storeKey string) *storetypes.TransientStoreKey {
+func (app *Black) GetTKey(storeKey string) *storetypes.TransientStoreKey {
 	return app.tkeys[storeKey]
 }
 
 // GetMemKey returns the MemStoreKey for the provided mem key.
 //
 // NOTE: This is solely used for testing purposes.
-func (app *Gridiron) GetMemKey(storeKey string) *storetypes.MemoryStoreKey {
+func (app *Black) GetMemKey(storeKey string) *storetypes.MemoryStoreKey {
 	return app.memKeys[storeKey]
 }
 
 // GetSubspace returns a param subspace for a given module name.
 //
 // NOTE: This is solely to be used for testing purposes.
-func (app *Gridiron) GetSubspace(moduleName string) paramstypes.Subspace {
+func (app *Black) GetSubspace(moduleName string) paramstypes.Subspace {
 	subspace, _ := app.ParamsKeeper.GetSubspace(moduleName)
 	return subspace
 }
 
 // RegisterAPIRoutes registers all application module routes with the provided
 // API server.
-func (app *Gridiron) RegisterAPIRoutes(apiSvr *api.Server, apiConfig config.APIConfig) {
+func (app *Black) RegisterAPIRoutes(apiSvr *api.Server, apiConfig config.APIConfig) {
 	clientCtx := apiSvr.ClientCtx
 
 	// Register new tx routes from grpc-gateway.
@@ -1037,12 +1037,12 @@ func (app *Gridiron) RegisterAPIRoutes(apiSvr *api.Server, apiConfig config.APIC
 	}
 }
 
-func (app *Gridiron) RegisterTxService(clientCtx client.Context) {
+func (app *Black) RegisterTxService(clientCtx client.Context) {
 	authtx.RegisterTxService(app.BaseApp.GRPCQueryRouter(), clientCtx, app.BaseApp.Simulate, app.interfaceRegistry)
 }
 
 // RegisterTendermintService implements the Application.RegisterTendermintService method.
-func (app *Gridiron) RegisterTendermintService(clientCtx client.Context) {
+func (app *Black) RegisterTendermintService(clientCtx client.Context) {
 	tmservice.RegisterTendermintService(
 		clientCtx,
 		app.BaseApp.GRPCQueryRouter(),
@@ -1053,39 +1053,39 @@ func (app *Gridiron) RegisterTendermintService(clientCtx client.Context) {
 
 // RegisterNodeService registers the node gRPC service on the provided
 // application gRPC query router.
-func (app *Gridiron) RegisterNodeService(clientCtx client.Context) {
+func (app *Black) RegisterNodeService(clientCtx client.Context) {
 	node.RegisterNodeService(clientCtx, app.GRPCQueryRouter())
 }
 
 // IBC Go TestingApp functions
 
 // GetBaseApp implements the TestingApp interface.
-func (app *Gridiron) GetBaseApp() *baseapp.BaseApp {
+func (app *Black) GetBaseApp() *baseapp.BaseApp {
 	return app.BaseApp
 }
 
 // GetStakingKeeper implements the TestingApp interface.
-func (app *Gridiron) GetStakingKeeper() ibctestingtypes.StakingKeeper {
+func (app *Black) GetStakingKeeper() ibctestingtypes.StakingKeeper {
 	return app.StakingKeeper
 }
 
 // GetStakingKeeperSDK implements the TestingApp interface.
-func (app *Gridiron) GetStakingKeeperSDK() stakingkeeper.Keeper {
+func (app *Black) GetStakingKeeperSDK() stakingkeeper.Keeper {
 	return app.StakingKeeper
 }
 
 // GetIBCKeeper implements the TestingApp interface.
-func (app *Gridiron) GetIBCKeeper() *ibckeeper.Keeper {
+func (app *Black) GetIBCKeeper() *ibckeeper.Keeper {
 	return app.IBCKeeper
 }
 
 // GetScopedIBCKeeper implements the TestingApp interface.
-func (app *Gridiron) GetScopedIBCKeeper() capabilitykeeper.ScopedKeeper {
+func (app *Black) GetScopedIBCKeeper() capabilitykeeper.ScopedKeeper {
 	return app.ScopedIBCKeeper
 }
 
 // GetTxConfig implements the TestingApp interface.
-func (app *Gridiron) GetTxConfig() client.TxConfig {
+func (app *Black) GetTxConfig() client.TxConfig {
 	cfg := encoding.MakeConfig(ModuleBasics)
 	return cfg.TxConfig
 }
@@ -1131,7 +1131,7 @@ func initParamsKeeper(
 	// ethermint subspaces
 	paramsKeeper.Subspace(evmtypes.ModuleName).WithKeyTable(evmtypes.ParamKeyTable()) //nolint: staticcheck
 	paramsKeeper.Subspace(feemarkettypes.ModuleName).WithKeyTable(feemarkettypes.ParamKeyTable())
-	// blackfury subspaces
+	// black subspaces
 	paramsKeeper.Subspace(inflationtypes.ModuleName)
 	paramsKeeper.Subspace(erc20types.ModuleName)
 	paramsKeeper.Subspace(claimstypes.ModuleName)
@@ -1141,7 +1141,7 @@ func initParamsKeeper(
 	return paramsKeeper
 }
 
-func (app *Gridiron) setupUpgradeHandlers() {
+func (app *Black) setupUpgradeHandlers() {
 	// v8 upgrade handler
 	app.UpgradeKeeper.SetUpgradeHandler(
 		v8.UpgradeName,

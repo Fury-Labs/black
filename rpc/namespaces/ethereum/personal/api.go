@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 package personal
 
 import (
@@ -8,10 +8,10 @@ import (
 	"os"
 	"time"
 
-	"github.com/fury-labs/blackfury/v13/rpc/backend"
+	"github.com/fury-labs/black/v13/rpc/backend"
 
-	"github.com/fury-labs/blackfury/v13/crypto/hd"
-	"github.com/fury-labs/blackfury/v13/types"
+	"github.com/fury-labs/black/v13/crypto/hd"
+	"github.com/fury-labs/black/v13/types"
 
 	"github.com/tendermint/tendermint/libs/log"
 
@@ -23,7 +23,7 @@ import (
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/crypto"
 
-	evmtypes "github.com/fury-labs/blackfury/v13/x/evm/types"
+	evmtypes "github.com/fury-labs/black/v13/x/evm/types"
 )
 
 // PrivateAccountAPI is the personal_ prefixed set of APIs in the Web3 JSON-RPC spec.
@@ -98,7 +98,7 @@ func (api *PrivateAccountAPI) NewAccount(password string) (common.Address, error
 	}
 	addr := common.BytesToAddress(pubKey.Address().Bytes())
 	api.logger.Info("Your new key was generated", "address", addr.String())
-	api.logger.Info("Please backup your key file!", "path", os.Getenv("HOME")+"/.blackfury/"+name) // TODO: pass the correct binary
+	api.logger.Info("Please backup your key file!", "path", os.Getenv("HOME")+"/.black/"+name) // TODO: pass the correct binary
 	api.logger.Info("Please remember your password!")
 	return addr, nil
 }

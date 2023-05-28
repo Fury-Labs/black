@@ -8,11 +8,11 @@ import (
 
 	"github.com/cosmos/cosmos-sdk/testutil"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/fury-labs/blackfury/v13/app"
-	"github.com/fury-labs/blackfury/v13/encoding"
-	v3 "github.com/fury-labs/blackfury/v13/x/claims/migrations/v3"
-	v3types "github.com/fury-labs/blackfury/v13/x/claims/migrations/v3/types"
-	"github.com/fury-labs/blackfury/v13/x/claims/types"
+	"github.com/fury-labs/black/v13/app"
+	"github.com/fury-labs/black/v13/encoding"
+	v3 "github.com/fury-labs/black/v13/x/claims/migrations/v3"
+	v3types "github.com/fury-labs/black/v13/x/claims/migrations/v3/types"
+	"github.com/fury-labs/black/v13/x/claims/types"
 	"github.com/stretchr/testify/require"
 )
 

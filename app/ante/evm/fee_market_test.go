@@ -8,12 +8,12 @@ import (
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
 
-	"github.com/fury-labs/blackfury/v13/app/ante/evm"
-	"github.com/fury-labs/blackfury/v13/testutil"
-	utiltx "github.com/fury-labs/blackfury/v13/testutil/tx"
-	"github.com/fury-labs/blackfury/v13/types"
-	"github.com/fury-labs/blackfury/v13/utils"
-	evmtypes "github.com/fury-labs/blackfury/v13/x/evm/types"
+	"github.com/fury-labs/black/v13/app/ante/evm"
+	"github.com/fury-labs/black/v13/testutil"
+	utiltx "github.com/fury-labs/black/v13/testutil/tx"
+	"github.com/fury-labs/black/v13/types"
+	"github.com/fury-labs/black/v13/utils"
+	evmtypes "github.com/fury-labs/black/v13/x/evm/types"
 )
 
 func (suite *AnteTestSuite) TestGasWantedDecorator() {

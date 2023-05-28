@@ -4,11 +4,11 @@ import (
 	"time"
 
 	"github.com/cosmos/cosmos-sdk/baseapp"
-	"github.com/fury-labs/blackfury/v13/app"
-	"github.com/fury-labs/blackfury/v13/testutil"
-	epochstypes "github.com/fury-labs/blackfury/v13/x/epochs/types"
-	evm "github.com/fury-labs/blackfury/v13/x/evm/types"
-	"github.com/fury-labs/blackfury/v13/x/inflation/types"
+	"github.com/fury-labs/black/v13/app"
+	"github.com/fury-labs/black/v13/testutil"
+	epochstypes "github.com/fury-labs/black/v13/x/epochs/types"
+	evm "github.com/fury-labs/black/v13/x/evm/types"
+	"github.com/fury-labs/black/v13/x/inflation/types"
 )
 
 // Test helpers
@@ -20,7 +20,7 @@ func (suite *KeeperTestSuite) DoSetupTest() {
 
 	// setup context
 	header := testutil.NewHeader(
-		1, time.Now().UTC(), "blackfury_9001-1", suite.consAddress, nil, nil,
+		1, time.Now().UTC(), "clockend_4200-1", suite.consAddress, nil, nil,
 	)
 	suite.ctx = suite.app.BaseApp.NewContext(checkTx, header)
 

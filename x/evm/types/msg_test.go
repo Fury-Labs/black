@@ -17,12 +17,12 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/fury-labs/blackfury/v13/crypto/ethsecp256k1"
-	utiltx "github.com/fury-labs/blackfury/v13/testutil/tx"
+	"github.com/fury-labs/black/v13/crypto/ethsecp256k1"
+	utiltx "github.com/fury-labs/black/v13/testutil/tx"
 
-	"github.com/fury-labs/blackfury/v13/app"
-	"github.com/fury-labs/blackfury/v13/encoding"
-	"github.com/fury-labs/blackfury/v13/x/evm/types"
+	"github.com/fury-labs/black/v13/app"
+	"github.com/fury-labs/black/v13/encoding"
+	"github.com/fury-labs/black/v13/x/evm/types"
 )
 
 const invalidAddress = "0x0000"
@@ -441,7 +441,7 @@ func (suite *MsgsTestSuite) TestMsgEthereumTx_ValidateBasic() {
 			accessList: &ethtypes.AccessList{},
 			chainID:    hundredInt,
 			expectPass: false,
-			errMsg:     "chain ID must be 9000 or 9001 on Gridiron",
+			errMsg:     "chain ID must be 9000 or 9001 on Black",
 		},
 	}
 

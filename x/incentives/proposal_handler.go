@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 
 package incentives
 
@@ -13,8 +13,8 @@ import (
 	govv1beta1 "github.com/cosmos/cosmos-sdk/x/gov/types/v1beta1"
 	"github.com/ethereum/go-ethereum/common"
 
-	"github.com/fury-labs/blackfury/v13/x/incentives/keeper"
-	"github.com/fury-labs/blackfury/v13/x/incentives/types"
+	"github.com/fury-labs/black/v13/x/incentives/keeper"
+	"github.com/fury-labs/black/v13/x/incentives/types"
 )
 
 // NewIncentivesProposalHandler creates a governance handler to manage new

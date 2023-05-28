@@ -25,18 +25,18 @@ import (
 
 	stakingkeeper "github.com/cosmos/cosmos-sdk/x/staking/keeper"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
-	"github.com/fury-labs/blackfury/v13/crypto/ethsecp256k1"
-	"github.com/fury-labs/blackfury/v13/server/config"
-	"github.com/fury-labs/blackfury/v13/testutil"
-	utiltx "github.com/fury-labs/blackfury/v13/testutil/tx"
-	"github.com/fury-labs/blackfury/v13/utils"
-	"github.com/fury-labs/blackfury/v13/x/evm/statedb"
-	evm "github.com/fury-labs/blackfury/v13/x/evm/types"
-	feemarkettypes "github.com/fury-labs/blackfury/v13/x/feemarket/types"
+	"github.com/fury-labs/black/v13/crypto/ethsecp256k1"
+	"github.com/fury-labs/black/v13/server/config"
+	"github.com/fury-labs/black/v13/testutil"
+	utiltx "github.com/fury-labs/black/v13/testutil/tx"
+	"github.com/fury-labs/black/v13/utils"
+	"github.com/fury-labs/black/v13/x/evm/statedb"
+	evm "github.com/fury-labs/black/v13/x/evm/types"
+	feemarkettypes "github.com/fury-labs/black/v13/x/feemarket/types"
 
-	"github.com/fury-labs/blackfury/v13/app"
-	"github.com/fury-labs/blackfury/v13/contracts"
-	"github.com/fury-labs/blackfury/v13/x/erc20/types"
+	"github.com/fury-labs/black/v13/app"
+	"github.com/fury-labs/black/v13/contracts"
+	"github.com/fury-labs/black/v13/x/erc20/types"
 
 	capabilitytypes "github.com/cosmos/cosmos-sdk/x/capability/types"
 	transfertypes "github.com/cosmos/ibc-go/v6/modules/apps/transfer/types"
@@ -50,7 +50,7 @@ type KeeperTestSuite struct {
 	suite.Suite
 
 	ctx              sdk.Context
-	app              *app.Gridiron
+	app              *app.Black
 	queryClientEvm   evm.QueryClient
 	queryClient      types.QueryClient
 	address          common.Address
@@ -95,7 +95,7 @@ func (suite *KeeperTestSuite) DoSetupTest(t require.TestingT) {
 	// init app
 	suite.app = app.Setup(false, feemarkettypes.DefaultGenesisState())
 	header := testutil.NewHeader(
-		1, time.Now().UTC(), "blackfury_9001-1", suite.consAddress, nil, nil,
+		1, time.Now().UTC(), "clockend_4200-1", suite.consAddress, nil, nil,
 	)
 	suite.ctx = suite.app.BaseApp.NewContext(false, header)
 

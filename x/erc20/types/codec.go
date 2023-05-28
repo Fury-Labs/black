@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 
 package types
 
@@ -27,9 +27,9 @@ var (
 
 const (
 	// Amino names
-	convertERC20Name = "blackfury/MsgConvertERC20"
-	convertCoinName  = "blackfury/MsgConvertCoin"
-	updateParams     = "blackfury/erc20/MsgUpdateParams"
+	convertERC20Name = "black/MsgConvertERC20"
+	convertCoinName  = "black/MsgConvertCoin"
+	updateParams     = "black/erc20/MsgUpdateParams"
 )
 
 // NOTE: This is required for the GetSignBytes function

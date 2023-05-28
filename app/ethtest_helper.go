@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 package app
 
 import (
@@ -17,7 +17,7 @@ import (
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/fury-labs/blackfury/v13/encoding"
+	"github.com/fury-labs/black/v13/encoding"
 	abci "github.com/tendermint/tendermint/abci/types"
 	"github.com/tendermint/tendermint/libs/log"
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
@@ -26,7 +26,7 @@ import (
 )
 
 // EthDefaultConsensusParams defines the default Tendermint consensus params used in
-// GridironApp testing.
+// BlackApp testing.
 var EthDefaultConsensusParams = &abci.ConsensusParams{
 	Block: &abci.BlockParams{
 		MaxBytes: 200000,
@@ -44,14 +44,14 @@ var EthDefaultConsensusParams = &abci.ConsensusParams{
 	},
 }
 
-// EthSetup initializes a new GridironApp. A Nop logger is set in GridironApp.
-func EthSetup(isCheckTx bool, patchGenesis func(*Gridiron, simapp.GenesisState) simapp.GenesisState) *Gridiron {
+// EthSetup initializes a new BlackApp. A Nop logger is set in BlackApp.
+func EthSetup(isCheckTx bool, patchGenesis func(*Black, simapp.GenesisState) simapp.GenesisState) *Black {
 	return EthSetupWithDB(isCheckTx, patchGenesis, dbm.NewMemDB())
 }
 
-// EthSetupWithDB initializes a new GridironApp. A Nop logger is set in GridironApp.
-func EthSetupWithDB(isCheckTx bool, patchGenesis func(*Gridiron, simapp.GenesisState) simapp.GenesisState, db dbm.DB) *Gridiron {
-	app := NewGridiron(log.NewNopLogger(),
+// EthSetupWithDB initializes a new BlackApp. A Nop logger is set in BlackApp.
+func EthSetupWithDB(isCheckTx bool, patchGenesis func(*Black, simapp.GenesisState) simapp.GenesisState, db dbm.DB) *Black {
+	app := NewBlack(log.NewNopLogger(),
 		db,
 		nil,
 		true,
@@ -75,7 +75,7 @@ func EthSetupWithDB(isCheckTx bool, patchGenesis func(*Gridiron, simapp.GenesisS
 		// Initialize the chain
 		app.InitChain(
 			abci.RequestInitChain{
-				ChainId:         "blackfury_9000-1",
+				ChainId:         "highbury_710-1",
 				Validators:      []abci.ValidatorUpdate{},
 				ConsensusParams: DefaultConsensusParams,
 				AppStateBytes:   stateBytes,

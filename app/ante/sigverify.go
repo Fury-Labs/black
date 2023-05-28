@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 
 package ante
 
@@ -15,7 +15,7 @@ import (
 	authante "github.com/cosmos/cosmos-sdk/x/auth/ante"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 
-	"github.com/fury-labs/blackfury/v13/crypto/ethsecp256k1"
+	"github.com/fury-labs/black/v13/crypto/ethsecp256k1"
 )
 
 var _ authante.SignatureVerificationGasConsumer = SigVerificationGasConsumer
@@ -24,7 +24,7 @@ const (
 	Secp256k1VerifyCost uint64 = 21000
 )
 
-// SigVerificationGasConsumer is the Gridiron implementation of SignatureVerificationGasConsumer. It consumes gas
+// SigVerificationGasConsumer is the Black implementation of SignatureVerificationGasConsumer. It consumes gas
 // for signature verification based upon the public key type. The cost is fetched from the given params and is matched
 // by the concrete type.
 // The types of keys supported are:

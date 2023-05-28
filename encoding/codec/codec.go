@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 package codec
 
 import (
@@ -8,8 +8,8 @@ import (
 	"github.com/cosmos/cosmos-sdk/std"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	cryptocodec "github.com/fury-labs/blackfury/v13/crypto/codec"
-	"github.com/fury-labs/blackfury/v13/types"
+	cryptocodec "github.com/fury-labs/black/v13/crypto/codec"
+	"github.com/fury-labs/black/v13/types"
 )
 
 // RegisterLegacyAminoCodec registers Interfaces from types, crypto, and SDK std.

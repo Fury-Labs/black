@@ -12,10 +12,10 @@ import (
 
 	"github.com/ethereum/go-ethereum/common"
 
-	blackfurytypes "github.com/fury-labs/blackfury/v13/types"
-	evmtypes "github.com/fury-labs/blackfury/v13/x/evm/types"
+	blacktypes "github.com/fury-labs/black/v13/types"
+	evmtypes "github.com/fury-labs/black/v13/x/evm/types"
 
-	"github.com/fury-labs/blackfury/v13/x/incentives/types"
+	"github.com/fury-labs/black/v13/x/incentives/types"
 )
 
 var _ = Describe("Performing EVM transactions", Ordered, func() {
@@ -70,7 +70,7 @@ var _ = Describe("Distribution", Ordered, func() {
 		s.Require().NoError(err)
 
 		// set a EOA account for the address
-		eoa := &blackfurytypes.EthAccount{
+		eoa := &blacktypes.EthAccount{
 			BaseAccount: authtypes.NewBaseAccount(sdk.AccAddress(s.address.Bytes()), nil, 0, 0),
 			CodeHash:    common.BytesToHash(evmtypes.EmptyCodeHash).String(),
 		}
@@ -80,9 +80,9 @@ var _ = Describe("Distribution", Ordered, func() {
 		acc := s.app.AccountKeeper.GetAccount(s.ctx, s.address.Bytes())
 		s.Require().NotNil(acc)
 
-		ethAccount, ok := acc.(blackfurytypes.EthAccountI)
+		ethAccount, ok := acc.(blacktypes.EthAccountI)
 		s.Require().True(ok)
-		s.Require().Equal(blackfurytypes.AccountTypeEOA, ethAccount.Type())
+		s.Require().Equal(blacktypes.AccountTypeEOA, ethAccount.Type())
 
 		contractAddr = contract
 		moduleAcc = s.app.AccountKeeper.GetModuleAddress(types.ModuleName)

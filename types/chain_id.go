@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 package types
 
 import (
@@ -17,7 +17,7 @@ var (
 	regexEIP155          = `[1-9][0-9]*`
 	regexEpochSeparator  = `-{1}`
 	regexEpoch           = `[1-9][0-9]*`
-	blackfuryChainID         = regexp.MustCompile(fmt.Sprintf(`^(%s)%s(%s)%s(%s)$`,
+	blackChainID         = regexp.MustCompile(fmt.Sprintf(`^(%s)%s(%s)%s(%s)$`,
 		regexChainID,
 		regexEIP155Separator,
 		regexEIP155,
@@ -31,7 +31,7 @@ func IsValidChainID(chainID string) bool {
 		return false
 	}
 
-	return blackfuryChainID.MatchString(chainID)
+	return blackChainID.MatchString(chainID)
 }
 
 // ParseChainID parses a string chain identifier's epoch to an Ethereum-compatible
@@ -42,7 +42,7 @@ func ParseChainID(chainID string) (*big.Int, error) {
 		return nil, errorsmod.Wrapf(ErrInvalidChainID, "chain-id '%s' cannot exceed 48 chars", chainID)
 	}
 
-	matches := blackfuryChainID.FindStringSubmatch(chainID)
+	matches := blackChainID.FindStringSubmatch(chainID)
 	if matches == nil || len(matches) != 4 || matches[1] == "" {
 		return nil, errorsmod.Wrapf(ErrInvalidChainID, "%s: %v", chainID, matches)
 	}

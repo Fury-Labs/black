@@ -1,11 +1,11 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 
 package types
 
 import (
 	"github.com/ethereum/go-ethereum/common"
-	blackfurytypes "github.com/fury-labs/blackfury/v13/types"
+	blacktypes "github.com/fury-labs/black/v13/types"
 )
 
 // NewGasMeter returns an instance of GasMeter
@@ -23,9 +23,9 @@ func NewGasMeter(
 
 // Validate performs a stateless validation of a Incentive
 func (gm GasMeter) Validate() error {
-	if err := blackfurytypes.ValidateAddress(gm.Contract); err != nil {
+	if err := blacktypes.ValidateAddress(gm.Contract); err != nil {
 		return err
 	}
 
-	return blackfurytypes.ValidateAddress(gm.Participant)
+	return blacktypes.ValidateAddress(gm.Participant)
 }

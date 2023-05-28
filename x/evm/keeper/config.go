@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 package keeper
 
 import (
@@ -10,8 +10,8 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core"
 	"github.com/ethereum/go-ethereum/core/vm"
-	"github.com/fury-labs/blackfury/v13/x/evm/statedb"
-	"github.com/fury-labs/blackfury/v13/x/evm/types"
+	"github.com/fury-labs/black/v13/x/evm/statedb"
+	"github.com/fury-labs/black/v13/x/evm/types"
 )
 
 // EVMConfig creates the EVMConfig based on current state

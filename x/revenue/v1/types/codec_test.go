@@ -25,9 +25,9 @@ func (suite *CodecTestSuite) TestRegisterInterfaces() {
 	impls := registry.ListImplementations(sdk.MsgInterfaceProtoName)
 	suite.Require().Equal(4, len(impls))
 	suite.Require().ElementsMatch([]string{
-		"/blackfury.revenue.v1.MsgRegisterRevenue",
-		"/blackfury.revenue.v1.MsgCancelRevenue",
-		"/blackfury.revenue.v1.MsgUpdateRevenue",
-		"/blackfury.revenue.v1.MsgUpdateParams",
+		"/black.revenue.v1.MsgRegisterRevenue",
+		"/black.revenue.v1.MsgCancelRevenue",
+		"/black.revenue.v1.MsgUpdateRevenue",
+		"/black.revenue.v1.MsgUpdateParams",
 	}, impls)
 }

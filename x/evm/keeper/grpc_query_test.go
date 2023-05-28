@@ -15,10 +15,10 @@ import (
 	ethlogger "github.com/ethereum/go-ethereum/eth/tracers/logger"
 	ethparams "github.com/ethereum/go-ethereum/params"
 
-	"github.com/fury-labs/blackfury/v13/server/config"
-	utiltx "github.com/fury-labs/blackfury/v13/testutil/tx"
-	"github.com/fury-labs/blackfury/v13/x/evm/statedb"
-	"github.com/fury-labs/blackfury/v13/x/evm/types"
+	"github.com/fury-labs/black/v13/server/config"
+	utiltx "github.com/fury-labs/black/v13/testutil/tx"
+	"github.com/fury-labs/black/v13/x/evm/statedb"
+	"github.com/fury-labs/black/v13/x/evm/types"
 )
 
 // Not valid Ethereum address

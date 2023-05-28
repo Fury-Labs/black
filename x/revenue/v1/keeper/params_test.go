@@ -1,6 +1,6 @@
 package keeper_test
 
-import "github.com/fury-labs/blackfury/v13/x/revenue/v1/types"
+import "github.com/fury-labs/black/v13/x/revenue/v1/types"
 
 func (suite *KeeperTestSuite) TestParams() {
 	params := suite.app.RevenueKeeper.GetParams(suite.ctx)

@@ -3,7 +3,7 @@ package types_test
 import (
 	"testing"
 
-	"github.com/fury-labs/blackfury/v13/x/erc20/types"
+	"github.com/fury-labs/black/v13/x/erc20/types"
 	"github.com/stretchr/testify/require"
 )
 

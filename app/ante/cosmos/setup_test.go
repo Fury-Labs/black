@@ -19,25 +19,25 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
 
-	"github.com/fury-labs/blackfury/v13/app"
-	"github.com/fury-labs/blackfury/v13/app/ante"
-	evmante "github.com/fury-labs/blackfury/v13/app/ante/evm"
-	"github.com/fury-labs/blackfury/v13/crypto/ethsecp256k1"
-	"github.com/fury-labs/blackfury/v13/encoding"
-	"github.com/fury-labs/blackfury/v13/ethereum/eip712"
-	"github.com/fury-labs/blackfury/v13/testutil"
-	"github.com/fury-labs/blackfury/v13/types"
-	"github.com/fury-labs/blackfury/v13/utils"
-	"github.com/fury-labs/blackfury/v13/x/evm/statedb"
-	evmtypes "github.com/fury-labs/blackfury/v13/x/evm/types"
-	feemarkettypes "github.com/fury-labs/blackfury/v13/x/feemarket/types"
+	"github.com/fury-labs/black/v13/app"
+	"github.com/fury-labs/black/v13/app/ante"
+	evmante "github.com/fury-labs/black/v13/app/ante/evm"
+	"github.com/fury-labs/black/v13/crypto/ethsecp256k1"
+	"github.com/fury-labs/black/v13/encoding"
+	"github.com/fury-labs/black/v13/ethereum/eip712"
+	"github.com/fury-labs/black/v13/testutil"
+	"github.com/fury-labs/black/v13/types"
+	"github.com/fury-labs/black/v13/utils"
+	"github.com/fury-labs/black/v13/x/evm/statedb"
+	evmtypes "github.com/fury-labs/black/v13/x/evm/types"
+	feemarkettypes "github.com/fury-labs/black/v13/x/feemarket/types"
 )
 
 type AnteTestSuite struct {
 	suite.Suite
 
 	ctx             sdk.Context
-	app             *app.Gridiron
+	app             *app.Black
 	clientCtx       client.Context
 	anteHandler     sdk.AnteHandler
 	ethSigner       ethtypes.Signer
@@ -61,7 +61,7 @@ func (suite *AnteTestSuite) SetupTest() {
 	suite.Require().NoError(err)
 	suite.priv = priv
 
-	suite.app = app.EthSetup(checkTx, func(app *app.Gridiron, genesis simapp.GenesisState) simapp.GenesisState {
+	suite.app = app.EthSetup(checkTx, func(app *app.Black, genesis simapp.GenesisState) simapp.GenesisState {
 		if suite.enableFeemarket {
 			// setup feemarketGenesis params
 			feemarketGenesis := feemarkettypes.DefaultGenesisState()

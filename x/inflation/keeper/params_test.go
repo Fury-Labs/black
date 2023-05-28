@@ -1,7 +1,7 @@
 package keeper_test
 
 import (
-	"github.com/fury-labs/blackfury/v13/x/inflation/types"
+	"github.com/fury-labs/black/v13/x/inflation/types"
 )
 
 func (suite *KeeperTestSuite) TestParams() {

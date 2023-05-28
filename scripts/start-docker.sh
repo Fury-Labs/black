@@ -1,13 +1,13 @@
 #!/bin/bash
 
 KEY="dev0"
-CHAINID="blackfury_9000-1"
+CHAINID="highbury_710-1"
 MONIKER="mymoniker"
-DATA_DIR=$(mktemp -d -t blackfury-datadir.XXXXX)
+DATA_DIR=$(mktemp -d -t black-datadir.XXXXX)
 
 echo "create and add new keys"
 ./black keys add $KEY --home $DATA_DIR --no-backup --chain-id $CHAINID --algo "eth_secp256k1" --keyring-backend test
-echo "init Gridiron with moniker=$MONIKER and chain-id=$CHAINID"
+echo "init Black with moniker=$MONIKER and chain-id=$CHAINID"
 ./black init $MONIKER --chain-id $CHAINID --home $DATA_DIR
 echo "prepare genesis: Allocate genesis accounts"
 ./black add-genesis-account \
@@ -20,10 +20,10 @@ echo "prepare genesis: Collect genesis tx"
 echo "prepare genesis: Run validate-genesis to ensure everything worked and that the genesis file is setup correctly"
 ./black validate-genesis --home $DATA_DIR
 
-echo "starting blackfury node $i in background ..."
+echo "starting black node $i in background ..."
 ./black start --pruning=nothing --rpc.unsafe \
 --keyring-backend test --home $DATA_DIR \
 >$DATA_DIR/node.log 2>&1 & disown
 
-echo "started blackfury node"
+echo "started black node"
 tail -f /dev/null

@@ -9,12 +9,12 @@ import (
 	"github.com/cosmos/cosmos-sdk/crypto/keyring"
 	"github.com/cosmos/cosmos-sdk/simapp/params"
 
-	"github.com/fury-labs/blackfury/v13/app"
-	"github.com/fury-labs/blackfury/v13/crypto/hd"
-	"github.com/fury-labs/blackfury/v13/encoding"
-	"github.com/fury-labs/blackfury/v13/tests/integration/ledger/mocks"
-	"github.com/fury-labs/blackfury/v13/testutil"
-	utiltx "github.com/fury-labs/blackfury/v13/testutil/tx"
+	"github.com/fury-labs/black/v13/app"
+	"github.com/fury-labs/black/v13/crypto/hd"
+	"github.com/fury-labs/black/v13/encoding"
+	"github.com/fury-labs/black/v13/tests/integration/ledger/mocks"
+	"github.com/fury-labs/black/v13/testutil"
+	utiltx "github.com/fury-labs/black/v13/testutil/tx"
 
 	"github.com/spf13/cobra"
 
@@ -52,14 +52,14 @@ var _ = Describe("Ledger CLI and keyring functionality: ", func() {
 	ledgerKey := "ledger_key"
 
 	s.SetupTest()
-	s.SetupGridironApp()
+	s.SetupBlackApp()
 
 	Describe("Adding a key from ledger using the CLI", func() {
 		BeforeEach(func() {
 			krHome = s.T().TempDir()
 			encCfg = encoding.MakeConfig(app.ModuleBasics)
 
-			cmd = s.blackfuryAddKeyCmd()
+			cmd = s.blackAddKeyCmd()
 
 			mockedIn = sdktestutil.ApplyMockIODiscardOutErr(cmd)
 
@@ -107,7 +107,7 @@ var _ = Describe("Ledger CLI and keyring functionality: ", func() {
 			var err error
 
 			// create add key command
-			cmd = s.blackfuryAddKeyCmd()
+			cmd = s.blackAddKeyCmd()
 
 			mockedIn = sdktestutil.ApplyMockIODiscardOutErr(cmd)
 			mocks.MGetAddressPubKeySECP256K1(s.ledger, s.accAddr, s.pubKey)

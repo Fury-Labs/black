@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 
 package network
 
@@ -51,13 +51,13 @@ import (
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 	"github.com/cosmos/cosmos-sdk/x/genutil"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
-	"github.com/fury-labs/blackfury/v13/app"
-	"github.com/fury-labs/blackfury/v13/crypto/hd"
+	"github.com/fury-labs/black/v13/app"
+	"github.com/fury-labs/black/v13/crypto/hd"
 
-	"github.com/fury-labs/blackfury/v13/encoding"
-	"github.com/fury-labs/blackfury/v13/server/config"
-	blackfurytypes "github.com/fury-labs/blackfury/v13/types"
-	evmtypes "github.com/fury-labs/blackfury/v13/x/evm/types"
+	"github.com/fury-labs/black/v13/encoding"
+	"github.com/fury-labs/black/v13/server/config"
+	blacktypes "github.com/fury-labs/black/v13/types"
+	evmtypes "github.com/fury-labs/black/v13/x/evm/types"
 )
 
 // package-wide network lock to only allow one test network at a time
@@ -111,13 +111,13 @@ func DefaultConfig() Config {
 		AppConstructor:    NewAppConstructor(encCfg),
 		GenesisState:      app.ModuleBasics.DefaultGenesis(encCfg.Codec),
 		TimeoutCommit:     3 * time.Second,
-		ChainID:           fmt.Sprintf("blackfury_%d-1", tmrand.Int63n(9999999999999)+1),
+		ChainID:           fmt.Sprintf("highbury_%d-1", tmrand.Int63n(9999999999999)+1),
 		NumValidators:     4,
 		BondDenom:         "afury",
-		MinGasPrices:      fmt.Sprintf("0.000006%s", blackfurytypes.AttoGridiron),
-		AccountTokens:     sdk.TokensFromConsensusPower(1000000000000000000, blackfurytypes.PowerReduction),
-		StakingTokens:     sdk.TokensFromConsensusPower(500000000000000000, blackfurytypes.PowerReduction),
-		BondedTokens:      sdk.TokensFromConsensusPower(100000000000000000, blackfurytypes.PowerReduction),
+		MinGasPrices:      fmt.Sprintf("0.000006%s", blacktypes.AttoBlack),
+		AccountTokens:     sdk.TokensFromConsensusPower(1000000000000000000, blacktypes.PowerReduction),
+		StakingTokens:     sdk.TokensFromConsensusPower(500000000000000000, blacktypes.PowerReduction),
+		BondedTokens:      sdk.TokensFromConsensusPower(100000000000000000, blacktypes.PowerReduction),
 		PruningStrategy:   pruningtypes.PruningOptionNothing,
 		CleanupDir:        true,
 		SigningAlgo:       string(hd.EthSecp256k1Type),
@@ -126,10 +126,10 @@ func DefaultConfig() Config {
 	}
 }
 
-// NewAppConstructor returns a new Gridiron AppConstructor
+// NewAppConstructor returns a new Black AppConstructor
 func NewAppConstructor(encodingCfg params.EncodingConfig) AppConstructor {
 	return func(val Validator) servertypes.Application {
-		return app.NewGridiron(
+		return app.NewBlack(
 			val.Ctx.Logger, dbm.NewMemDB(), nil, true, make(map[int64]bool), val.Ctx.Config.RootDir, 0,
 			encodingCfg,
 			simapp.EmptyAppOptions{},
@@ -220,7 +220,7 @@ func New(l Logger, baseDir string, cfg Config) (*Network, error) {
 	l.Log("acquiring test network lock")
 	lock.Lock()
 
-	if !blackfurytypes.IsValidChainID(cfg.ChainID) {
+	if !blacktypes.IsValidChainID(cfg.ChainID) {
 		return nil, fmt.Errorf("invalid chain-id: %s", cfg.ChainID)
 	}
 
@@ -336,7 +336,7 @@ func New(l Logger, baseDir string, cfg Config) (*Network, error) {
 
 		nodeDirName := fmt.Sprintf("node%d", i)
 		nodeDir := filepath.Join(network.BaseDir, nodeDirName, "black")
-		clientDir := filepath.Join(network.BaseDir, nodeDirName, "blackfurycli")
+		clientDir := filepath.Join(network.BaseDir, nodeDirName, "blackcli")
 		gentxsDir := filepath.Join(network.BaseDir, "gentxs")
 
 		err := os.MkdirAll(filepath.Join(nodeDir, "config"), 0o750)
@@ -415,7 +415,7 @@ func New(l Logger, baseDir string, cfg Config) (*Network, error) {
 
 		genFiles = append(genFiles, tmCfg.GenesisFile())
 		genBalances = append(genBalances, banktypes.Balance{Address: addr.String(), Coins: balances.Sort()})
-		genAccounts = append(genAccounts, &blackfurytypes.EthAccount{
+		genAccounts = append(genAccounts, &blacktypes.EthAccount{
 			BaseAccount: authtypes.NewBaseAccount(addr, nil, 0, 0),
 			CodeHash:    common.BytesToHash(evmtypes.EmptyCodeHash).Hex(),
 		})
@@ -473,7 +473,7 @@ func New(l Logger, baseDir string, cfg Config) (*Network, error) {
 			return nil, err
 		}
 
-		customAppTemplate, _ := config.AppConfig(blackfurytypes.AttoGridiron)
+		customAppTemplate, _ := config.AppConfig(blacktypes.AttoBlack)
 		srvconfig.SetConfigTemplate(customAppTemplate)
 		srvconfig.WriteConfigFile(filepath.Join(nodeDir, "config/app.toml"), appCfg)
 

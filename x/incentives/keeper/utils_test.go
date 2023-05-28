@@ -17,18 +17,18 @@ import (
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/fury-labs/blackfury/v13/app"
-	"github.com/fury-labs/blackfury/v13/contracts"
-	"github.com/fury-labs/blackfury/v13/crypto/ethsecp256k1"
-	"github.com/fury-labs/blackfury/v13/encoding"
-	"github.com/fury-labs/blackfury/v13/server/config"
-	"github.com/fury-labs/blackfury/v13/testutil"
-	utiltx "github.com/fury-labs/blackfury/v13/testutil/tx"
-	blackfurytypes "github.com/fury-labs/blackfury/v13/types"
-	"github.com/fury-labs/blackfury/v13/utils"
-	epochstypes "github.com/fury-labs/blackfury/v13/x/epochs/types"
-	evm "github.com/fury-labs/blackfury/v13/x/evm/types"
-	"github.com/fury-labs/blackfury/v13/x/incentives/types"
+	"github.com/fury-labs/black/v13/app"
+	"github.com/fury-labs/black/v13/contracts"
+	"github.com/fury-labs/black/v13/crypto/ethsecp256k1"
+	"github.com/fury-labs/black/v13/encoding"
+	"github.com/fury-labs/black/v13/server/config"
+	"github.com/fury-labs/black/v13/testutil"
+	utiltx "github.com/fury-labs/black/v13/testutil/tx"
+	blacktypes "github.com/fury-labs/black/v13/types"
+	"github.com/fury-labs/black/v13/utils"
+	epochstypes "github.com/fury-labs/black/v13/x/epochs/types"
+	evm "github.com/fury-labs/black/v13/x/evm/types"
+	"github.com/fury-labs/black/v13/x/incentives/types"
 	"github.com/stretchr/testify/require"
 )
 
@@ -79,7 +79,7 @@ func (suite *KeeperTestSuite) DoSetupTest(t require.TestingT) {
 
 	// Set Context
 	header := testutil.NewHeader(
-		1, time.Now().UTC(), "blackfury_9001-1", suite.consAddress, nil, nil,
+		1, time.Now().UTC(), "clockend_4200-1", suite.consAddress, nil, nil,
 	)
 	suite.ctx = suite.app.BaseApp.NewContext(checkTx, header)
 
@@ -103,7 +103,7 @@ func (suite *KeeperTestSuite) DoSetupTest(t require.TestingT) {
 		suite.app.EpochsKeeper.SetEpochInfo(suite.ctx, epoch)
 	}
 
-	acc := &blackfurytypes.EthAccount{
+	acc := &blacktypes.EthAccount{
 		BaseAccount: authtypes.NewBaseAccount(sdk.AccAddress(suite.address.Bytes()), nil, 0, 0),
 		CodeHash:    common.BytesToHash(crypto.Keccak256(nil)).String(),
 	}

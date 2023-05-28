@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 
 // This accounts represent the affected accounts during the Claims record clawback incident on block 5074187
 // with the respective balance on block 5074186.
@@ -11,7 +11,7 @@
 // - They had a balance of 0 after block 5074187
 // NOTE community and claims module account were removed from this list since they were not affected by this bug.
 
-// The scripts that were used to find affected accounts were made public at https://github.com/blackfury/claims_fixer
+// The scripts that were used to find affected accounts were made public at https://github.com/black/claims_fixer
 // with detail instructions on how to run them.
 
 package v9

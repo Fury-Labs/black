@@ -1,4 +1,4 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
+// Copyright Tharsis Labs Ltd.(Black)
 // SPDX-License-Identifier:LGPL-3.0-only
 
 package types

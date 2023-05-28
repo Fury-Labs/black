@@ -8,8 +8,8 @@ import (
 
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/params"
-	"github.com/fury-labs/blackfury/v13/x/evm/statedb"
-	"github.com/fury-labs/blackfury/v13/x/evm/types"
+	"github.com/fury-labs/black/v13/x/evm/statedb"
+	"github.com/fury-labs/black/v13/x/evm/types"
 )
 
 func (suite *KeeperTestSuite) TestEthereumTx() {

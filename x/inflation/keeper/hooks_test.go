@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	epochstypes "github.com/fury-labs/blackfury/v13/x/epochs/types"
-	"github.com/fury-labs/blackfury/v13/x/inflation/types"
+	epochstypes "github.com/fury-labs/black/v13/x/epochs/types"
+	"github.com/fury-labs/black/v13/x/inflation/types"
 )
 
 func (suite *KeeperTestSuite) TestEpochIdentifierAfterEpochEnd() {

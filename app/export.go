@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 
 package app
 
@@ -16,7 +16,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/staking"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 
-	"github.com/fury-labs/blackfury/v13/encoding"
+	"github.com/fury-labs/black/v13/encoding"
 )
 
 // NewDefaultGenesisState generates the default state for the application.
@@ -27,7 +27,7 @@ func NewDefaultGenesisState() simapp.GenesisState {
 
 // ExportAppStateAndValidators exports the state of the application for a genesis
 // file.
-func (app *Gridiron) ExportAppStateAndValidators(
+func (app *Black) ExportAppStateAndValidators(
 	forZeroHeight bool, jailAllowedAddrs []string,
 ) (servertypes.ExportedApp, error) {
 	// Creates context with current height and checks txs for ctx to be usable by start of next block
@@ -67,7 +67,7 @@ func (app *Gridiron) ExportAppStateAndValidators(
 // NOTE zero height genesis is a temporary feature which will be deprecated
 //
 //	in favor of export at a block height
-func (app *Gridiron) prepForZeroHeightGenesis(ctx sdk.Context, jailAllowedAddrs []string) error {
+func (app *Black) prepForZeroHeightGenesis(ctx sdk.Context, jailAllowedAddrs []string) error {
 	applyAllowedAddrs := false
 
 	// check if there is a allowed address list

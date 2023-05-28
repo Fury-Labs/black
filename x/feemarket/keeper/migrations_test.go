@@ -2,8 +2,8 @@ package keeper_test
 
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	feemarketkeeper "github.com/fury-labs/blackfury/v13/x/feemarket/keeper"
-	"github.com/fury-labs/blackfury/v13/x/feemarket/types"
+	feemarketkeeper "github.com/fury-labs/black/v13/x/feemarket/keeper"
+	"github.com/fury-labs/black/v13/x/feemarket/types"
 )
 
 type mockSubspace struct {

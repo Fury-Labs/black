@@ -9,7 +9,7 @@ import (
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/core/vm"
 	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/fury-labs/blackfury/v13/x/evm/statedb"
+	"github.com/fury-labs/black/v13/x/evm/statedb"
 	"github.com/stretchr/testify/suite"
 )
 

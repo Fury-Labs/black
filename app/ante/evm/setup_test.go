@@ -15,20 +15,20 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/fury-labs/blackfury/v13/app"
-	ante "github.com/fury-labs/blackfury/v13/app/ante"
-	"github.com/fury-labs/blackfury/v13/encoding"
-	"github.com/fury-labs/blackfury/v13/ethereum/eip712"
-	"github.com/fury-labs/blackfury/v13/utils"
-	evmtypes "github.com/fury-labs/blackfury/v13/x/evm/types"
-	feemarkettypes "github.com/fury-labs/blackfury/v13/x/feemarket/types"
+	"github.com/fury-labs/black/v13/app"
+	ante "github.com/fury-labs/black/v13/app/ante"
+	"github.com/fury-labs/black/v13/encoding"
+	"github.com/fury-labs/black/v13/ethereum/eip712"
+	"github.com/fury-labs/black/v13/utils"
+	evmtypes "github.com/fury-labs/black/v13/x/evm/types"
+	feemarkettypes "github.com/fury-labs/black/v13/x/feemarket/types"
 )
 
 type AnteTestSuite struct {
 	suite.Suite
 
 	ctx                      sdk.Context
-	app                      *app.Gridiron
+	app                      *app.Black
 	clientCtx                client.Context
 	anteHandler              sdk.AnteHandler
 	ethSigner                types.Signer
@@ -44,7 +44,7 @@ const TestGasLimit uint64 = 100000
 func (suite *AnteTestSuite) SetupTest() {
 	checkTx := false
 
-	suite.app = app.EthSetup(checkTx, func(app *app.Gridiron, genesis simapp.GenesisState) simapp.GenesisState {
+	suite.app = app.EthSetup(checkTx, func(app *app.Black, genesis simapp.GenesisState) simapp.GenesisState {
 		if suite.enableFeemarket {
 			// setup feemarketGenesis params
 			feemarketGenesis := feemarkettypes.DefaultGenesisState()
@@ -78,7 +78,7 @@ func (suite *AnteTestSuite) SetupTest() {
 	suite.ctx = suite.ctx.WithBlockGasMeter(sdk.NewGasMeter(1000000000000000000))
 	suite.app.EvmKeeper.WithChainID(suite.ctx)
 
-	// set staking denomination to Gridiron denom
+	// set staking denomination to Black denom
 	params := suite.app.StakingKeeper.GetParams(suite.ctx)
 	params.BondDenom = utils.BaseDenom
 	suite.app.StakingKeeper.SetParams(suite.ctx, params)

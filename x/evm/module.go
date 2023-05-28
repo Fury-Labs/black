@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 package evm
 
 import (
@@ -21,9 +21,9 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/module"
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 
-	"github.com/fury-labs/blackfury/v13/x/evm/client/cli"
-	"github.com/fury-labs/blackfury/v13/x/evm/keeper"
-	"github.com/fury-labs/blackfury/v13/x/evm/types"
+	"github.com/fury-labs/black/v13/x/evm/client/cli"
+	"github.com/fury-labs/black/v13/x/evm/keeper"
+	"github.com/fury-labs/black/v13/x/evm/types"
 )
 
 var (

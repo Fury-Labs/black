@@ -9,16 +9,16 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/genutil/client/cli"
 	"github.com/stretchr/testify/require"
 
-	"github.com/fury-labs/blackfury/v13/app"
-	black "github.com/fury-labs/blackfury/v13/cmd/black"
-	"github.com/fury-labs/blackfury/v13/utils"
+	"github.com/fury-labs/black/v13/app"
+	black "github.com/fury-labs/black/v13/cmd/black"
+	"github.com/fury-labs/black/v13/utils"
 )
 
 func TestInitCmd(t *testing.T) {
 	rootCmd, _ := black.NewRootCmd()
 	rootCmd.SetArgs([]string{
 		"init",       // Test the init cmd
-		"blackfury-test", // Moniker
+		"black-test", // Moniker
 		fmt.Sprintf("--%s=%s", cli.FlagOverwrite, "true"), // Overwrite genesis.json, in case it already exists
 		fmt.Sprintf("--%s=%s", flags.FlagChainID, utils.TestnetChainID+"-1"),
 	})
@@ -36,6 +36,6 @@ func TestAddKeyLedgerCmd(t *testing.T) {
 		fmt.Sprintf("--%s", flags.FlagUseLedger),
 	})
 
-	err := svrcmd.Execute(rootCmd, "GRIDIROND", app.DefaultNodeHome)
+	err := svrcmd.Execute(rootCmd, "BLACKD", app.DefaultNodeHome)
 	require.Error(t, err)
 }

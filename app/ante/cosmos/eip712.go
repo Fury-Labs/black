@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 package cosmos
 
 import (
@@ -19,19 +19,19 @@ import (
 	ethcrypto "github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/crypto/secp256k1"
 	"github.com/ethereum/go-ethereum/signer/core/apitypes"
-	"github.com/fury-labs/blackfury/v13/crypto/ethsecp256k1"
-	"github.com/fury-labs/blackfury/v13/ethereum/eip712"
-	"github.com/fury-labs/blackfury/v13/types"
+	"github.com/fury-labs/black/v13/crypto/ethsecp256k1"
+	"github.com/fury-labs/black/v13/ethereum/eip712"
+	"github.com/fury-labs/black/v13/types"
 
-	evmtypes "github.com/fury-labs/blackfury/v13/x/evm/types"
+	evmtypes "github.com/fury-labs/black/v13/x/evm/types"
 )
 
-var blackfuryCodec codec.ProtoCodecMarshaler
+var blackCodec codec.ProtoCodecMarshaler
 
 func init() {
 	registry := codectypes.NewInterfaceRegistry()
 	types.RegisterInterfaces(registry)
-	blackfuryCodec = codec.NewProtoCodec(registry)
+	blackCodec = codec.NewProtoCodec(registry)
 }
 
 // Deprecated: LegacyEip712SigVerificationDecorator Verify all signatures for a tx and return an error if any are invalid. Note,
@@ -226,7 +226,7 @@ func VerifySignature(
 			FeePayer: feePayer,
 		}
 
-		typedData, err := eip712.LegacyWrapTxToTypedData(blackfuryCodec, extOpt.TypedDataChainID, msgs[0], txBytes, feeDelegation)
+		typedData, err := eip712.LegacyWrapTxToTypedData(blackCodec, extOpt.TypedDataChainID, msgs[0], txBytes, feeDelegation)
 		if err != nil {
 			return errorsmod.Wrap(err, "failed to create EIP-712 typed data from tx")
 		}

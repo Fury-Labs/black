@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 
 package keeper
 
@@ -11,8 +11,8 @@ import (
 	channeltypes "github.com/cosmos/ibc-go/v6/modules/core/04-channel/types"
 	"github.com/cosmos/ibc-go/v6/modules/core/exported"
 
-	"github.com/fury-labs/blackfury/v13/ibc"
-	"github.com/fury-labs/blackfury/v13/x/claims/types"
+	"github.com/fury-labs/black/v13/ibc"
+	"github.com/fury-labs/black/v13/x/claims/types"
 )
 
 // OnAcknowledgementPacket performs an IBC send callback. Once a user submits an
@@ -117,7 +117,7 @@ func (k Keeper) OnRecvPacket(
 	// If the packet is sent from a non-EVM chain, the sender address is not an
 	// ethereum key (i.e. `ethsecp256k1`). Thus, if `sameAddress` is true, the
 	// recipient address must be a non-ethereum key as well, which is not
-	// supported on Gridiron. To prevent funds getting stuck, return an error, unless
+	// supported on Black. To prevent funds getting stuck, return an error, unless
 	// the destination channel from a connection to a chain is EVM-compatible or
 	// supports ethereum keys (eg: Cronos, Injective).
 	if sameAddress && !fromEVMChain {

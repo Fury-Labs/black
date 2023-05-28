@@ -3,7 +3,7 @@ package keeper_test
 import (
 	"reflect"
 
-	"github.com/fury-labs/blackfury/v13/x/feemarket/types"
+	"github.com/fury-labs/black/v13/x/feemarket/types"
 )
 
 func (suite *KeeperTestSuite) TestSetGetParams() {

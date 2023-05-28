@@ -6,14 +6,14 @@ import (
 	storetypes "github.com/cosmos/cosmos-sdk/store/types"
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 
-	v2 "github.com/fury-labs/blackfury/v13/x/inflation/migrations/v2"
-	"github.com/fury-labs/blackfury/v13/x/inflation/types"
+	v2 "github.com/fury-labs/black/v13/x/inflation/migrations/v2"
+	"github.com/fury-labs/black/v13/x/inflation/types"
 
 	"github.com/cosmos/cosmos-sdk/testutil"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/fury-labs/blackfury/v13/app"
-	"github.com/fury-labs/blackfury/v13/encoding"
-	v2types "github.com/fury-labs/blackfury/v13/x/inflation/migrations/v2/types"
+	"github.com/fury-labs/black/v13/app"
+	"github.com/fury-labs/black/v13/encoding"
+	v2types "github.com/fury-labs/black/v13/x/inflation/migrations/v2/types"
 	"github.com/stretchr/testify/require"
 )
 

@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 package cli
 
 import (
@@ -14,8 +14,8 @@ import (
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
-	rpctypes "github.com/fury-labs/blackfury/v13/rpc/types"
-	"github.com/fury-labs/blackfury/v13/x/evm/types"
+	rpctypes "github.com/fury-labs/black/v13/rpc/types"
+	"github.com/fury-labs/black/v13/x/evm/types"
 )
 
 // GetTxCmd returns the transaction commands for this module

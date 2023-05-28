@@ -11,10 +11,10 @@ import (
 	"github.com/stretchr/testify/suite"
 
 	"github.com/ethereum/go-ethereum/ethclient"
-	"github.com/fury-labs/blackfury/v13/server/config"
-	"github.com/fury-labs/blackfury/v13/testutil/network"
+	"github.com/fury-labs/black/v13/server/config"
+	"github.com/fury-labs/black/v13/testutil/network"
 
-	blackfurynetwork "github.com/fury-labs/blackfury/v13/testutil/network"
+	blacknetwork "github.com/fury-labs/black/v13/testutil/network"
 )
 
 type IntegrationTestSuite struct {
@@ -27,7 +27,7 @@ func (s *IntegrationTestSuite) SetupSuite() {
 	s.T().Log("setting up integration test suite")
 
 	var err error
-	cfg := blackfurynetwork.DefaultConfig()
+	cfg := blacknetwork.DefaultConfig()
 	cfg.JSONRPCAddress = config.DefaultJSONRPCAddress
 	cfg.NumValidators = 1
 

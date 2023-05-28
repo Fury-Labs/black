@@ -9,19 +9,19 @@ import (
 
 	"github.com/stretchr/testify/suite"
 
-	ibctesting "github.com/fury-labs/blackfury/v13/ibc/testing"
-	"github.com/fury-labs/blackfury/v13/testutil"
-	utiltx "github.com/fury-labs/blackfury/v13/testutil/tx"
-	"github.com/fury-labs/blackfury/v13/utils"
-	feemarkettypes "github.com/fury-labs/blackfury/v13/x/feemarket/types"
+	ibctesting "github.com/fury-labs/black/v13/ibc/testing"
+	"github.com/fury-labs/black/v13/testutil"
+	utiltx "github.com/fury-labs/black/v13/testutil/tx"
+	"github.com/fury-labs/black/v13/utils"
+	feemarkettypes "github.com/fury-labs/black/v13/x/feemarket/types"
 
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	ibcgotesting "github.com/cosmos/ibc-go/v6/testing"
 
-	"github.com/fury-labs/blackfury/v13/app"
-	claimstypes "github.com/fury-labs/blackfury/v13/x/claims/types"
-	"github.com/fury-labs/blackfury/v13/x/recovery/types"
+	"github.com/fury-labs/black/v13/app"
+	claimstypes "github.com/fury-labs/black/v13/x/claims/types"
+	"github.com/fury-labs/black/v13/x/recovery/types"
 )
 
 var (
@@ -35,7 +35,7 @@ type KeeperTestSuite struct {
 
 	ctx sdk.Context
 
-	app         *app.Gridiron
+	app         *app.Black
 	queryClient types.QueryClient
 }
 
@@ -45,7 +45,7 @@ func (suite *KeeperTestSuite) SetupTest() {
 
 	suite.app = app.Setup(false, feemarkettypes.DefaultGenesisState())
 	header := testutil.NewHeader(
-		1, time.Now().UTC(), "blackfury_9001-1", consAddress, nil, nil,
+		1, time.Now().UTC(), "clockend_4200-1", consAddress, nil, nil,
 	)
 	suite.ctx = suite.app.BaseApp.NewContext(false, header)
 
@@ -72,12 +72,12 @@ type IBCTestingSuite struct {
 	coordinator *ibcgotesting.Coordinator
 
 	// testing chains used for convenience and readability
-	GridironChain      *ibcgotesting.TestChain
+	BlackChain      *ibcgotesting.TestChain
 	IBCOsmosisChain *ibcgotesting.TestChain
 	IBCCosmosChain  *ibcgotesting.TestChain
 
-	pathOsmosisGridiron  *ibctesting.Path
-	pathCosmosGridiron   *ibctesting.Path
+	pathOsmosisBlack  *ibctesting.Path
+	pathCosmosBlack   *ibctesting.Path
 	pathOsmosisCosmos *ibctesting.Path
 }
 

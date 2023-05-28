@@ -8,11 +8,11 @@ import (
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	sdkvesting "github.com/cosmos/cosmos-sdk/x/auth/vesting/types"
 
-	ethante "github.com/fury-labs/blackfury/v13/app/ante/evm"
-	"github.com/fury-labs/blackfury/v13/testutil"
-	testutiltx "github.com/fury-labs/blackfury/v13/testutil/tx"
-	evmtypes "github.com/fury-labs/blackfury/v13/x/evm/types"
-	vestingtypes "github.com/fury-labs/blackfury/v13/x/vesting/types"
+	ethante "github.com/fury-labs/black/v13/app/ante/evm"
+	"github.com/fury-labs/black/v13/testutil"
+	testutiltx "github.com/fury-labs/black/v13/testutil/tx"
+	evmtypes "github.com/fury-labs/black/v13/x/evm/types"
+	vestingtypes "github.com/fury-labs/black/v13/x/vesting/types"
 )
 
 // global variables used for testing the eth vesting ante handler

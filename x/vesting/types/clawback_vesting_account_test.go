@@ -11,8 +11,8 @@ import (
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	sdkvesting "github.com/cosmos/cosmos-sdk/x/auth/vesting/types"
 
-	utiltx "github.com/fury-labs/blackfury/v13/testutil/tx"
-	"github.com/fury-labs/blackfury/v13/x/vesting/types"
+	utiltx "github.com/fury-labs/black/v13/testutil/tx"
+	"github.com/fury-labs/black/v13/x/vesting/types"
 )
 
 var (

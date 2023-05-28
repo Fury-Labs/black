@@ -1,4 +1,4 @@
-module github.com/fury-labs/blackfury/v13
+module github.com/fury-labs/black/v13
 
 go 1.20
 
@@ -15,8 +15,8 @@ require (
 	github.com/cosmos/ibc-go/v6 v6.1.1
 	github.com/davecgh/go-spew v1.1.1
 	github.com/ethereum/go-ethereum v1.11.5
-	github.com/fury-labs/blackfury-ledger-go v0.4.0
-	github.com/blackfury/precompiles v0.0.0-20230424072603-c30314b7d71b
+	github.com/fury-labs/black-ledger-go v0.4.0
+	github.com/black/precompiles v0.0.0-20230424072603-c30314b7d71b
 	github.com/gogo/protobuf v1.3.3
 	github.com/golang/protobuf v1.5.3
 	github.com/gorilla/mux v1.8.0
@@ -222,9 +222,9 @@ replace (
 	// use cosmos fork of keyring
 	github.com/99designs/keyring => github.com/cosmos/keyring v1.2.0
 	// use Cosmos-SDK fork to enable Ledger functionality
-	github.com/cosmos/cosmos-sdk => github.com/blackfury/cosmos-sdk v0.46.11-alpha.ledger.7
-	// use Gridiron geth fork
-	github.com/ethereum/go-ethereum => github.com/blackfury/go-ethereum v1.10.26-blackfury-rc1
+	github.com/cosmos/cosmos-sdk => github.com/black/cosmos-sdk v0.46.11-alpha.ledger.7
+	// use Black geth fork
+	github.com/ethereum/go-ethereum => github.com/black/go-ethereum v1.10.26-black-rc1
 	// Security Advisory https://github.com/advisories/GHSA-h395-qcrw-5vmq
 	github.com/gin-gonic/gin => github.com/gin-gonic/gin v1.7.7
 	// use cosmos flavored protobufs

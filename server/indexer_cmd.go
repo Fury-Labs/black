@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 package server
 
 import (
@@ -9,7 +9,7 @@ import (
 
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/server"
-	"github.com/fury-labs/blackfury/v13/indexer"
+	"github.com/fury-labs/black/v13/indexer"
 	tmnode "github.com/tendermint/tendermint/node"
 	sm "github.com/tendermint/tendermint/state"
 	tmstore "github.com/tendermint/tendermint/store"

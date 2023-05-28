@@ -4,8 +4,8 @@ import (
 	"testing"
 
 	"github.com/ethereum/go-ethereum/common"
-	utiltx "github.com/fury-labs/blackfury/v13/testutil/tx"
-	"github.com/fury-labs/blackfury/v13/types"
+	utiltx "github.com/fury-labs/black/v13/testutil/tx"
+	"github.com/fury-labs/black/v13/types"
 	"github.com/stretchr/testify/require"
 )
 

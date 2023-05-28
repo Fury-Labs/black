@@ -6,11 +6,11 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
-	"github.com/fury-labs/blackfury/v13/crypto/ethsecp256k1"
-	blackfurytypes "github.com/fury-labs/blackfury/v13/types"
-	"github.com/fury-labs/blackfury/v13/x/evm"
-	"github.com/fury-labs/blackfury/v13/x/evm/statedb"
-	"github.com/fury-labs/blackfury/v13/x/evm/types"
+	"github.com/fury-labs/black/v13/crypto/ethsecp256k1"
+	blacktypes "github.com/fury-labs/black/v13/types"
+	"github.com/fury-labs/black/v13/x/evm"
+	"github.com/fury-labs/black/v13/x/evm/statedb"
+	"github.com/fury-labs/black/v13/x/evm/types"
 )
 
 func (suite *EvmTestSuite) TestInitGenesis() {
@@ -118,7 +118,7 @@ func (suite *EvmTestSuite) TestInitGenesis() {
 		{
 			"ignore empty account code checking with non-empty codehash",
 			func() {
-				ethAcc := &blackfurytypes.EthAccount{
+				ethAcc := &blacktypes.EthAccount{
 					BaseAccount: authtypes.NewBaseAccount(address.Bytes(), nil, 0, 0),
 					CodeHash:    common.BytesToHash([]byte{1, 2, 3}).Hex(),
 				}

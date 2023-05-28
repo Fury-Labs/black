@@ -1,10 +1,10 @@
 syntax = "proto3";
-package blackfury.incentives.v1;
-import "blackfury/incentives/v1/incentives.proto";
+package black.incentives.v1;
+import "black/incentives/v1/incentives.proto";
 
 import "gogoproto/gogo.proto";
 
-option go_package = "github.com/fury-labs/blackfury/v13/x/incentives/types";
+option go_package = "github.com/fury-labs/black/v13/x/incentives/types";
 
 // GenesisState defines the module's genesis state.
 message GenesisState {

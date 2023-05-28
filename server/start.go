@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 package server
 
 import (
@@ -48,11 +48,11 @@ import (
 	"github.com/cosmos/cosmos-sdk/server/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/fury-labs/blackfury/v13/indexer"
-	ethdebug "github.com/fury-labs/blackfury/v13/rpc/namespaces/ethereum/debug"
-	"github.com/fury-labs/blackfury/v13/server/config"
-	srvflags "github.com/fury-labs/blackfury/v13/server/flags"
-	blackfurytypes "github.com/fury-labs/blackfury/v13/types"
+	"github.com/fury-labs/black/v13/indexer"
+	ethdebug "github.com/fury-labs/black/v13/rpc/namespaces/ethereum/debug"
+	"github.com/fury-labs/black/v13/server/config"
+	srvflags "github.com/fury-labs/black/v13/server/flags"
+	blacktypes "github.com/fury-labs/black/v13/types"
 )
 
 // DBOpener is a function to open `application.db`, potentially with customized options.
@@ -186,7 +186,7 @@ which accepts a path for the resulting pprof file.
 	cmd.Flags().String(srvflags.JSONRPCAddress, config.DefaultJSONRPCAddress, "the JSON-RPC server address to listen on")
 	cmd.Flags().String(srvflags.JSONWsAddress, config.DefaultJSONRPCWsAddress, "the JSON-RPC WS server address to listen on")
 	cmd.Flags().Uint64(srvflags.JSONRPCGasCap, config.DefaultGasCap, "Sets a cap on gas that can be used in eth_call/estimateGas unit is afury (0=infinite)")     //nolint:lll
-	cmd.Flags().Float64(srvflags.JSONRPCTxFeeCap, config.DefaultTxFeeCap, "Sets a cap on transaction fee that can be sent via the RPC APIs (1 = default 1 blackfury)") //nolint:lll
+	cmd.Flags().Float64(srvflags.JSONRPCTxFeeCap, config.DefaultTxFeeCap, "Sets a cap on transaction fee that can be sent via the RPC APIs (1 = default 1 black)") //nolint:lll
 	cmd.Flags().Int32(srvflags.JSONRPCFilterCap, config.DefaultFilterCap, "Sets the global cap for total number of filters that can be created")
 	cmd.Flags().Duration(srvflags.JSONRPCEVMTimeout, config.DefaultEVMTimeout, "Sets a timeout used for eth_call (0=infinite)")
 	cmd.Flags().Duration(srvflags.JSONRPCHTTPTimeout, config.DefaultHTTPTimeout, "Sets a read/write timeout for json-rpc http server (0=infinite)")
@@ -410,7 +410,7 @@ func startInProcess(ctx *server.Context, clientCtx client.Context, opts StartOpt
 		ethmetricsexp.Setup(config.JSONRPC.MetricsAddress)
 	}
 
-	var idxer blackfurytypes.EVMTxIndexer
+	var idxer blacktypes.EVMTxIndexer
 	if config.JSONRPC.EnableIndexer {
 		idxDB, err := OpenIndexerDB(home, server.GetAppDBBackend(ctx.Viper))
 		if err != nil {

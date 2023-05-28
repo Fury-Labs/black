@@ -15,10 +15,10 @@ import (
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 
-	cosmosante "github.com/fury-labs/blackfury/v13/app/ante/cosmos"
-	testutil "github.com/fury-labs/blackfury/v13/testutil"
-	utiltx "github.com/fury-labs/blackfury/v13/testutil/tx"
-	evmtypes "github.com/fury-labs/blackfury/v13/x/evm/types"
+	cosmosante "github.com/fury-labs/black/v13/app/ante/cosmos"
+	testutil "github.com/fury-labs/black/v13/testutil"
+	utiltx "github.com/fury-labs/black/v13/testutil/tx"
+	evmtypes "github.com/fury-labs/black/v13/x/evm/types"
 )
 
 func TestAuthzLimiterDecorator(t *testing.T) {

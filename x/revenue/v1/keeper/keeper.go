@@ -1,4 +1,4 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
+// Copyright Tharsis Labs Ltd.(Black)
 // SPDX-License-Identifier:LGPL-3.0-only
 
 package keeper
@@ -11,7 +11,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/tendermint/tendermint/libs/log"
 
-	"github.com/fury-labs/blackfury/v13/x/revenue/v1/types"
+	"github.com/fury-labs/black/v13/x/revenue/v1/types"
 )
 
 // Keeper of this module maintains collections of revenues for contracts

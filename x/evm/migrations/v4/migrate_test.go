@@ -1,18 +1,18 @@
-// Copyright 2022 Gridiron Foundation
-// This file is part of the Gridiron Network packages.
+// Copyright 2022 Black Foundation
+// This file is part of the Black Network packages.
 //
-// Gridiron is free software: you can redistribute it and/or modify
+// Black is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// The Gridiron packages are distributed in the hope that it will be useful,
+// The Black packages are distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with the Gridiron packages. If not, see https://github.com/fury-labs/blackfury/blob/main/LICENSE
+// along with the Black packages. If not, see https://github.com/fury-labs/black/blob/main/LICENSE
 package v4_test
 
 import (
@@ -20,14 +20,14 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/fury-labs/blackfury/v13/x/evm/types"
+	"github.com/fury-labs/black/v13/x/evm/types"
 
 	"github.com/cosmos/cosmos-sdk/testutil"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/fury-labs/blackfury/v13/app"
-	"github.com/fury-labs/blackfury/v13/encoding"
-	v4 "github.com/fury-labs/blackfury/v13/x/evm/migrations/v4"
-	v4types "github.com/fury-labs/blackfury/v13/x/evm/migrations/v4/types"
+	"github.com/fury-labs/black/v13/app"
+	"github.com/fury-labs/black/v13/encoding"
+	v4 "github.com/fury-labs/black/v13/x/evm/migrations/v4"
+	v4types "github.com/fury-labs/black/v13/x/evm/migrations/v4/types"
 )
 
 type mockSubspace struct {

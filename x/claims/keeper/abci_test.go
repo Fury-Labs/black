@@ -9,11 +9,11 @@ import (
 	distrtypes "github.com/cosmos/cosmos-sdk/x/distribution/types"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
-	testutil "github.com/fury-labs/blackfury/v13/testutil"
-	utiltx "github.com/fury-labs/blackfury/v13/testutil/tx"
-	blackfurytypes "github.com/fury-labs/blackfury/v13/types"
-	"github.com/fury-labs/blackfury/v13/x/claims/types"
-	vestingtypes "github.com/fury-labs/blackfury/v13/x/vesting/types"
+	testutil "github.com/fury-labs/black/v13/testutil"
+	utiltx "github.com/fury-labs/black/v13/testutil/tx"
+	blacktypes "github.com/fury-labs/black/v13/types"
+	"github.com/fury-labs/black/v13/x/claims/types"
+	vestingtypes "github.com/fury-labs/black/v13/x/vesting/types"
 )
 
 func (suite *KeeperTestSuite) TestEndBlock() {
@@ -145,7 +145,7 @@ func (suite *KeeperTestSuite) TestClawbackEmptyAccounts() {
 			types.GenesisDust,
 			func() {
 				baseAccount := authtypes.NewBaseAccount(addr, nil, 0, 0)
-				ethAccount := blackfurytypes.EthAccount{
+				ethAccount := blacktypes.EthAccount{
 					BaseAccount: baseAccount,
 					CodeHash:    common.BytesToHash(crypto.Keccak256(nil)).String(),
 				}

@@ -12,13 +12,13 @@ import (
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/fury-labs/blackfury/v13/crypto/ethsecp256k1"
-	"github.com/fury-labs/blackfury/v13/testutil"
-	utiltx "github.com/fury-labs/blackfury/v13/testutil/tx"
-	blackfurytypes "github.com/fury-labs/blackfury/v13/types"
-	inflationtypes "github.com/fury-labs/blackfury/v13/x/inflation/types"
+	"github.com/fury-labs/black/v13/crypto/ethsecp256k1"
+	"github.com/fury-labs/black/v13/testutil"
+	utiltx "github.com/fury-labs/black/v13/testutil/tx"
+	blacktypes "github.com/fury-labs/black/v13/types"
+	inflationtypes "github.com/fury-labs/black/v13/x/inflation/types"
 
-	"github.com/fury-labs/blackfury/v13/x/claims/types"
+	"github.com/fury-labs/black/v13/x/claims/types"
 )
 
 func (suite *KeeperTestSuite) TestGetClaimableAmountForAction() {
@@ -760,8 +760,8 @@ func (suite *KeeperTestSuite) TestDelegationAutoWithdrawAndDelegateMore() {
 	err = suite.app.StakingKeeper.AfterValidatorCreated(suite.ctx, validator.GetOperator())
 	suite.Require().NoError(err)
 
-	validator, _ = validator.AddTokensFromDel(sdk.TokensFromConsensusPower(1, blackfurytypes.PowerReduction))
-	delAmount := sdk.TokensFromConsensusPower(1, blackfurytypes.PowerReduction)
+	validator, _ = validator.AddTokensFromDel(sdk.TokensFromConsensusPower(1, blacktypes.PowerReduction))
+	delAmount := sdk.TokensFromConsensusPower(1, blacktypes.PowerReduction)
 
 	err = testutil.FundAccount(suite.ctx, suite.app.BankKeeper, addrs[1], sdk.NewCoins(sdk.NewCoin(params.GetClaimsDenom(), delAmount)))
 	suite.Require().NoError(err)
@@ -1077,7 +1077,7 @@ func (suite *KeeperTestSuite) TestClawbackEmptyAccountsAirdrop() {
 		addr, err := sdk.AccAddressFromBech32(tc.address)
 		suite.Require().NoError(err, tc.name)
 
-		acc := &blackfurytypes.EthAccount{
+		acc := &blacktypes.EthAccount{
 			BaseAccount: authtypes.NewBaseAccount(sdk.AccAddress(addr.Bytes()), nil, 0, 0),
 			CodeHash:    common.BytesToHash(crypto.Keccak256(nil)).String(),
 		}

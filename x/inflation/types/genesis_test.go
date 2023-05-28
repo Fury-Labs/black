@@ -3,7 +3,7 @@ package types
 import (
 	"testing"
 
-	epochstypes "github.com/fury-labs/blackfury/v13/x/epochs/types"
+	epochstypes "github.com/fury-labs/black/v13/x/epochs/types"
 	"github.com/stretchr/testify/suite"
 )
 

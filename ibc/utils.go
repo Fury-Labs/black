@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 
 package ibc
 
@@ -11,7 +11,7 @@ import (
 	transfertypes "github.com/cosmos/ibc-go/v6/modules/apps/transfer/types"
 	channeltypes "github.com/cosmos/ibc-go/v6/modules/core/04-channel/types"
 
-	"github.com/fury-labs/blackfury/v13/utils"
+	"github.com/fury-labs/black/v13/utils"
 )
 
 // GetTransferSenderRecipient returns the sender and recipient sdk.AccAddresses
@@ -32,15 +32,15 @@ func GetTransferSenderRecipient(packet channeltypes.Packet) (
 	}
 
 	// validate the sender bech32 address from the counterparty chain
-	// and change the bech32 human readable prefix (HRP) of the sender to `blackfury`
-	sender, err = utils.GetGridironAddressFromBech32(data.Sender)
+	// and change the bech32 human readable prefix (HRP) of the sender to `black`
+	sender, err = utils.GetBlackAddressFromBech32(data.Sender)
 	if err != nil {
 		return nil, nil, "", "", errorsmod.Wrap(err, "invalid sender")
 	}
 
 	// validate the recipient bech32 address from the counterparty chain
-	// and change the bech32 human readable prefix (HRP) of the recipient to `blackfury`
-	recipient, err = utils.GetGridironAddressFromBech32(data.Receiver)
+	// and change the bech32 human readable prefix (HRP) of the recipient to `black`
+	recipient, err = utils.GetBlackAddressFromBech32(data.Receiver)
 	if err != nil {
 		return nil, nil, "", "", errorsmod.Wrap(err, "invalid recipient")
 	}

@@ -3,7 +3,7 @@ package keeper_test
 import (
 	"testing"
 
-	"github.com/fury-labs/blackfury/v13/x/evm/types"
+	"github.com/fury-labs/black/v13/x/evm/types"
 )
 
 func BenchmarkSetParams(b *testing.B) {

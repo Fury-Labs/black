@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/fury-labs/blackfury/v13/utils"
+	"github.com/fury-labs/black/v13/utils"
 
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
@@ -24,14 +24,14 @@ import (
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/params"
-	"github.com/fury-labs/blackfury/v13/app"
-	"github.com/fury-labs/blackfury/v13/crypto/ethsecp256k1"
-	"github.com/fury-labs/blackfury/v13/encoding"
-	"github.com/fury-labs/blackfury/v13/testutil"
-	utiltx "github.com/fury-labs/blackfury/v13/testutil/tx"
-	blackfurytypes "github.com/fury-labs/blackfury/v13/types"
-	evmtypes "github.com/fury-labs/blackfury/v13/x/evm/types"
-	feemarkettypes "github.com/fury-labs/blackfury/v13/x/feemarket/types"
+	"github.com/fury-labs/black/v13/app"
+	"github.com/fury-labs/black/v13/crypto/ethsecp256k1"
+	"github.com/fury-labs/black/v13/encoding"
+	"github.com/fury-labs/black/v13/testutil"
+	utiltx "github.com/fury-labs/black/v13/testutil/tx"
+	blacktypes "github.com/fury-labs/black/v13/types"
+	evmtypes "github.com/fury-labs/black/v13/x/evm/types"
+	feemarkettypes "github.com/fury-labs/black/v13/x/feemarket/types"
 	"github.com/stretchr/testify/require"
 	"github.com/stretchr/testify/suite"
 	abci "github.com/tendermint/tendermint/abci/types"
@@ -43,7 +43,7 @@ type KeeperTestSuite struct {
 	suite.Suite
 
 	ctx         sdk.Context
-	app         *app.Gridiron
+	app         *app.Black
 	queryClient evmtypes.QueryClient
 	address     common.Address
 	consAddress sdk.ConsAddress
@@ -106,7 +106,7 @@ func (suite *KeeperTestSuite) SetupAppWithT(checkTx bool, t require.TestingT) {
 	require.NoError(t, err)
 	suite.consAddress = sdk.ConsAddress(priv.PubKey().Address())
 
-	suite.app = app.EthSetup(checkTx, func(app *app.Gridiron, genesis simapp.GenesisState) simapp.GenesisState {
+	suite.app = app.EthSetup(checkTx, func(app *app.Black, genesis simapp.GenesisState) simapp.GenesisState {
 		feemarketGenesis := feemarkettypes.DefaultGenesisState()
 		if suite.enableFeemarket {
 			feemarketGenesis.Params.EnableHeight = 1
@@ -153,7 +153,7 @@ func (suite *KeeperTestSuite) SetupAppWithT(checkTx bool, t require.TestingT) {
 		// Initialize the chain
 		suite.app.InitChain(
 			abci.RequestInitChain{
-				ChainId:         "blackfury_9000-1",
+				ChainId:         "highbury_710-1",
 				Validators:      []abci.ValidatorUpdate{},
 				ConsensusParams: app.DefaultConsensusParams,
 				AppStateBytes:   stateBytes,
@@ -162,7 +162,7 @@ func (suite *KeeperTestSuite) SetupAppWithT(checkTx bool, t require.TestingT) {
 	}
 
 	header := testutil.NewHeader(
-		1, time.Now().UTC(), "blackfury_9000-1", suite.consAddress,
+		1, time.Now().UTC(), "highbury_710-1", suite.consAddress,
 		tmhash.Sum([]byte("app")), tmhash.Sum([]byte("validators")),
 	)
 	suite.ctx = suite.app.NewContext(checkTx, header)
@@ -171,7 +171,7 @@ func (suite *KeeperTestSuite) SetupAppWithT(checkTx bool, t require.TestingT) {
 	evmtypes.RegisterQueryServer(queryHelper, suite.app.EvmKeeper)
 	suite.queryClient = evmtypes.NewQueryClient(queryHelper)
 
-	acc := &blackfurytypes.EthAccount{
+	acc := &blacktypes.EthAccount{
 		BaseAccount: authtypes.NewBaseAccount(sdk.AccAddress(suite.address.Bytes()), nil, 0, 0),
 		CodeHash:    common.BytesToHash(crypto.Keccak256(nil)).String(),
 	}

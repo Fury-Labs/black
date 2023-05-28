@@ -11,10 +11,10 @@ import (
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/fury-labs/blackfury/v13/server/config"
-	"github.com/fury-labs/blackfury/v13/testutil"
-	"github.com/fury-labs/blackfury/v13/x/evm/statedb"
-	evmtypes "github.com/fury-labs/blackfury/v13/x/evm/types"
+	"github.com/fury-labs/black/v13/server/config"
+	"github.com/fury-labs/black/v13/testutil"
+	"github.com/fury-labs/black/v13/x/evm/statedb"
+	evmtypes "github.com/fury-labs/black/v13/x/evm/types"
 	"github.com/stretchr/testify/require"
 )
 

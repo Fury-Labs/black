@@ -6,8 +6,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/fury-labs/blackfury/v13/utils"
-	"github.com/fury-labs/blackfury/v13/x/evm/keeper"
+	"github.com/fury-labs/black/v13/utils"
+	"github.com/fury-labs/black/v13/x/evm/keeper"
 
 	sdkmath "cosmossdk.io/math"
 	"github.com/gogo/protobuf/proto"
@@ -19,7 +19,7 @@ import (
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 
-	feemarkettypes "github.com/fury-labs/blackfury/v13/x/feemarket/types"
+	feemarkettypes "github.com/fury-labs/black/v13/x/feemarket/types"
 
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 	"github.com/ethereum/go-ethereum/common"
@@ -33,13 +33,13 @@ import (
 	"github.com/cosmos/cosmos-sdk/crypto/keyring"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/fury-labs/blackfury/v13/app"
-	"github.com/fury-labs/blackfury/v13/crypto/ethsecp256k1"
-	utiltx "github.com/fury-labs/blackfury/v13/testutil/tx"
-	blackfurytypes "github.com/fury-labs/blackfury/v13/types"
-	"github.com/fury-labs/blackfury/v13/x/evm"
-	"github.com/fury-labs/blackfury/v13/x/evm/statedb"
-	"github.com/fury-labs/blackfury/v13/x/evm/types"
+	"github.com/fury-labs/black/v13/app"
+	"github.com/fury-labs/black/v13/crypto/ethsecp256k1"
+	utiltx "github.com/fury-labs/black/v13/testutil/tx"
+	blacktypes "github.com/fury-labs/black/v13/types"
+	"github.com/fury-labs/black/v13/x/evm"
+	"github.com/fury-labs/black/v13/x/evm/statedb"
+	"github.com/fury-labs/black/v13/x/evm/types"
 
 	"github.com/tendermint/tendermint/crypto/tmhash"
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
@@ -53,7 +53,7 @@ type EvmTestSuite struct {
 
 	ctx     sdk.Context
 	handler sdk.Handler
-	app     *app.Gridiron
+	app     *app.Black
 	chainID *big.Int
 
 	signer    keyring.Signer
@@ -79,7 +79,7 @@ func (suite *EvmTestSuite) DoSetupTest(t require.TestingT) {
 	require.NoError(t, err)
 	consAddress := sdk.ConsAddress(priv.PubKey().Address())
 
-	suite.app = app.EthSetup(checkTx, func(app *app.Gridiron, genesis simapp.GenesisState) simapp.GenesisState {
+	suite.app = app.EthSetup(checkTx, func(app *app.Black, genesis simapp.GenesisState) simapp.GenesisState {
 		if suite.dynamicTxFee {
 			feemarketGenesis := feemarkettypes.DefaultGenesisState()
 			feemarketGenesis.Params.EnableHeight = 1
@@ -148,7 +148,7 @@ func (suite *EvmTestSuite) DoSetupTest(t require.TestingT) {
 	queryHelper := baseapp.NewQueryServerTestHelper(suite.ctx, suite.app.InterfaceRegistry())
 	types.RegisterQueryServer(queryHelper, suite.app.EvmKeeper)
 
-	acc := &blackfurytypes.EthAccount{
+	acc := &blacktypes.EthAccount{
 		BaseAccount: authtypes.NewBaseAccount(sdk.AccAddress(address.Bytes()), nil, 0, 0),
 		CodeHash:    common.BytesToHash(crypto.Keccak256(nil)).String(),
 	}

@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 package testutil
 
 import (
@@ -19,10 +19,10 @@ import (
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
 
-	"github.com/fury-labs/blackfury/v13/app"
-	"github.com/fury-labs/blackfury/v13/crypto/ethsecp256k1"
-	"github.com/fury-labs/blackfury/v13/testutil/tx"
-	evm "github.com/fury-labs/blackfury/v13/x/evm/types"
+	"github.com/fury-labs/black/v13/app"
+	"github.com/fury-labs/black/v13/crypto/ethsecp256k1"
+	"github.com/fury-labs/black/v13/testutil/tx"
+	evm "github.com/fury-labs/black/v13/x/evm/types"
 )
 
 // ContractArgs are the params used for calling a smart contract.
@@ -55,15 +55,15 @@ type ContractCallArgs struct {
 // compiled contract data and constructor arguments
 func DeployContract(
 	ctx sdk.Context,
-	blackfuryApp *app.Gridiron,
+	blackApp *app.Black,
 	priv cryptotypes.PrivKey,
 	queryClientEvm evm.QueryClient,
 	contract evm.CompiledContract,
 	constructorArgs ...interface{},
 ) (common.Address, error) {
-	chainID := blackfuryApp.EvmKeeper.ChainID()
+	chainID := blackApp.EvmKeeper.ChainID()
 	from := common.BytesToAddress(priv.PubKey().Address().Bytes())
-	nonce := blackfuryApp.EvmKeeper.GetNonce(ctx, from)
+	nonce := blackApp.EvmKeeper.GetNonce(ctx, from)
 
 	ctorArgs, err := contract.ABI.Pack("", constructorArgs...)
 	if err != nil {
@@ -80,19 +80,19 @@ func DeployContract(
 		ChainID:   chainID,
 		Nonce:     nonce,
 		GasLimit:  gas,
-		GasFeeCap: blackfuryApp.FeeMarketKeeper.GetBaseFee(ctx),
+		GasFeeCap: blackApp.FeeMarketKeeper.GetBaseFee(ctx),
 		GasTipCap: big.NewInt(1),
 		Input:     data,
 		Accesses:  &ethtypes.AccessList{},
 	})
 	msgEthereumTx.From = from.String()
 
-	res, err := DeliverEthTx(blackfuryApp, priv, msgEthereumTx)
+	res, err := DeliverEthTx(blackApp, priv, msgEthereumTx)
 	if err != nil {
 		return common.Address{}, err
 	}
 
-	if _, err := CheckEthTxResponse(res, blackfuryApp.AppCodec()); err != nil {
+	if _, err := CheckEthTxResponse(res, blackApp.AppCodec()); err != nil {
 		return common.Address{}, err
 	}
 
@@ -103,14 +103,14 @@ func DeployContract(
 // with the provided factoryAddress
 func DeployContractWithFactory(
 	ctx sdk.Context,
-	blackfuryApp *app.Gridiron,
+	blackApp *app.Black,
 	priv cryptotypes.PrivKey,
 	factoryAddress common.Address,
 ) (common.Address, abci.ResponseDeliverTx, error) {
-	chainID := blackfuryApp.EvmKeeper.ChainID()
+	chainID := blackApp.EvmKeeper.ChainID()
 	from := common.BytesToAddress(priv.PubKey().Address().Bytes())
-	factoryNonce := blackfuryApp.EvmKeeper.GetNonce(ctx, factoryAddress)
-	nonce := blackfuryApp.EvmKeeper.GetNonce(ctx, from)
+	factoryNonce := blackApp.EvmKeeper.GetNonce(ctx, factoryAddress)
+	nonce := blackApp.EvmKeeper.GetNonce(ctx, from)
 
 	msgEthereumTx := evm.NewTx(&evm.EvmTxArgs{
 		ChainID:  chainID,
@@ -121,12 +121,12 @@ func DeployContractWithFactory(
 	})
 	msgEthereumTx.From = from.String()
 
-	res, err := DeliverEthTx(blackfuryApp, priv, msgEthereumTx)
+	res, err := DeliverEthTx(blackApp, priv, msgEthereumTx)
 	if err != nil {
 		return common.Address{}, abci.ResponseDeliverTx{}, err
 	}
 
-	if _, err := CheckEthTxResponse(res, blackfuryApp.AppCodec()); err != nil {
+	if _, err := CheckEthTxResponse(res, blackApp.AppCodec()); err != nil {
 		return common.Address{}, abci.ResponseDeliverTx{}, err
 	}
 
@@ -162,11 +162,11 @@ func CheckEthTxResponse(r abci.ResponseDeliverTx, cdc codec.Codec) (*evm.MsgEthe
 }
 
 // CallContract is a helper function to call any arbitrary smart contract.
-func CallContract(ctx sdk.Context, blackfuryApp *app.Gridiron, args ContractCallArgs) (res abci.ResponseDeliverTx, ethRes *evm.MsgEthereumTxResponse, err error) {
+func CallContract(ctx sdk.Context, blackApp *app.Black, args ContractCallArgs) (res abci.ResponseDeliverTx, ethRes *evm.MsgEthereumTxResponse, err error) {
 	var nonce uint64
 	var (
 		gasLimit = args.GasLimit
-		cdc      = blackfuryApp.AppCodec()
+		cdc      = blackApp.AppCodec()
 	)
 
 	pk, ok := args.PrivKey.(*ethsecp256k1.PrivKey)
@@ -182,7 +182,7 @@ func CallContract(ctx sdk.Context, blackfuryApp *app.Gridiron, args ContractCall
 	addr := crypto.PubkeyToAddress(key.PublicKey)
 
 	if args.Nonce == nil {
-		nonce = blackfuryApp.EvmKeeper.GetNonce(ctx, addr)
+		nonce = blackApp.EvmKeeper.GetNonce(ctx, addr)
 	} else {
 		nonce = args.Nonce.Uint64()
 	}
@@ -200,20 +200,20 @@ func CallContract(ctx sdk.Context, blackfuryApp *app.Gridiron, args ContractCall
 	}
 
 	msg := evm.NewTx(&evm.EvmTxArgs{
-		ChainID:   blackfuryApp.EvmKeeper.ChainID(),
+		ChainID:   blackApp.EvmKeeper.ChainID(),
 		Nonce:     nonce,
 		To:        &args.Contract.Addr,
 		Amount:    args.Amount,
 		GasLimit:  gasLimit,
 		GasPrice:  app.MainnetMinGasPrices.BigInt(),
-		GasFeeCap: blackfuryApp.FeeMarketKeeper.GetBaseFee(ctx),
+		GasFeeCap: blackApp.FeeMarketKeeper.GetBaseFee(ctx),
 		GasTipCap: big.NewInt(1),
 		Input:     input,
 		Accesses:  &ethtypes.AccessList{},
 	})
 	msg.From = addr.Hex()
 
-	res, err = DeliverEthTx(blackfuryApp, args.PrivKey, msg)
+	res, err = DeliverEthTx(blackApp, args.PrivKey, msg)
 	if err != nil {
 		return res, ethRes, fmt.Errorf("error during deliver tx: %s", err)
 	}

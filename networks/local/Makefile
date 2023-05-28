@@ -1,4 +1,4 @@
 all:
-	docker build --no-cache --tag blackfury/node ../.. -f blackfury/Dockerfile
+	docker build --no-cache --tag black/node ../.. -f black/Dockerfile
 
 .PHONY: all

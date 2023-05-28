@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 package indexer
 
 import (
@@ -11,14 +11,14 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	authante "github.com/cosmos/cosmos-sdk/x/auth/ante"
 	"github.com/ethereum/go-ethereum/common"
-	rpctypes "github.com/fury-labs/blackfury/v13/rpc/types"
+	rpctypes "github.com/fury-labs/black/v13/rpc/types"
 	abci "github.com/tendermint/tendermint/abci/types"
 	"github.com/tendermint/tendermint/libs/log"
 	tmtypes "github.com/tendermint/tendermint/types"
 	dbm "github.com/tendermint/tm-db"
 
-	blackfurytypes "github.com/fury-labs/blackfury/v13/types"
-	evmtypes "github.com/fury-labs/blackfury/v13/x/evm/types"
+	blacktypes "github.com/fury-labs/black/v13/types"
+	evmtypes "github.com/fury-labs/black/v13/x/evm/types"
 )
 
 const (
@@ -29,7 +29,7 @@ const (
 	TxIndexKeyLength = 1 + 8 + 8
 )
 
-var _ blackfurytypes.EVMTxIndexer = &KVIndexer{}
+var _ blacktypes.EVMTxIndexer = &KVIndexer{}
 
 // KVIndexer implements a eth tx indexer on a KV db.
 type KVIndexer struct {
@@ -83,7 +83,7 @@ func (kv *KVIndexer) IndexBlock(block *tmtypes.Block, txResults []*abci.Response
 			ethMsg := msg.(*evmtypes.MsgEthereumTx)
 			txHash := common.HexToHash(ethMsg.Hash)
 
-			txResult := blackfurytypes.TxResult{
+			txResult := blacktypes.TxResult{
 				Height:     height,
 				TxIndex:    uint32(txIndex),
 				MsgIndex:   uint32(msgIndex),
@@ -133,7 +133,7 @@ func (kv *KVIndexer) FirstIndexedBlock() (int64, error) {
 }
 
 // GetByTxHash finds eth tx by eth tx hash
-func (kv *KVIndexer) GetByTxHash(hash common.Hash) (*blackfurytypes.TxResult, error) {
+func (kv *KVIndexer) GetByTxHash(hash common.Hash) (*blacktypes.TxResult, error) {
 	bz, err := kv.db.Get(TxHashKey(hash))
 	if err != nil {
 		return nil, errorsmod.Wrapf(err, "GetByTxHash %s", hash.Hex())
@@ -141,7 +141,7 @@ func (kv *KVIndexer) GetByTxHash(hash common.Hash) (*blackfurytypes.TxResult, er
 	if len(bz) == 0 {
 		return nil, fmt.Errorf("tx not found, hash: %s", hash.Hex())
 	}
-	var txKey blackfurytypes.TxResult
+	var txKey blacktypes.TxResult
 	if err := kv.clientCtx.Codec.Unmarshal(bz, &txKey); err != nil {
 		return nil, errorsmod.Wrapf(err, "GetByTxHash %s", hash.Hex())
 	}
@@ -149,7 +149,7 @@ func (kv *KVIndexer) GetByTxHash(hash common.Hash) (*blackfurytypes.TxResult, er
 }
 
 // GetByBlockAndIndex finds eth tx by block number and eth tx index
-func (kv *KVIndexer) GetByBlockAndIndex(blockNumber int64, txIndex int32) (*blackfurytypes.TxResult, error) {
+func (kv *KVIndexer) GetByBlockAndIndex(blockNumber int64, txIndex int32) (*blacktypes.TxResult, error) {
 	bz, err := kv.db.Get(TxIndexKey(blockNumber, txIndex))
 	if err != nil {
 		return nil, errorsmod.Wrapf(err, "GetByBlockAndIndex %d %d", blockNumber, txIndex)
@@ -212,7 +212,7 @@ func isEthTx(tx sdk.Tx) bool {
 }
 
 // saveTxResult index the txResult into the kv db batch
-func saveTxResult(codec codec.Codec, batch dbm.Batch, txHash common.Hash, txResult *blackfurytypes.TxResult) error {
+func saveTxResult(codec codec.Codec, batch dbm.Batch, txHash common.Hash, txResult *blacktypes.TxResult) error {
 	bz := codec.MustMarshal(txResult)
 	if err := batch.Set(TxHashKey(txHash), bz); err != nil {
 		return errorsmod.Wrap(err, "set tx-hash key")

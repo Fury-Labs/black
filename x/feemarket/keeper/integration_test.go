@@ -10,9 +10,9 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
-	"github.com/fury-labs/blackfury/v13/crypto/ethsecp256k1"
-	"github.com/fury-labs/blackfury/v13/testutil"
-	utiltx "github.com/fury-labs/blackfury/v13/testutil/tx"
+	"github.com/fury-labs/black/v13/crypto/ethsecp256k1"
+	"github.com/fury-labs/black/v13/testutil"
+	utiltx "github.com/fury-labs/black/v13/testutil/tx"
 
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 )

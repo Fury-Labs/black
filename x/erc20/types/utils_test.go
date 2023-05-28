@@ -6,7 +6,7 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
-	"github.com/fury-labs/blackfury/v13/x/erc20/types"
+	"github.com/fury-labs/black/v13/x/erc20/types"
 	"github.com/stretchr/testify/require"
 )
 
@@ -61,36 +61,36 @@ func TestEqualMetadata(t *testing.T) {
 			"equal metadata",
 			banktypes.Metadata{
 				Base:        "afury",
-				Display:     "blackfury",
-				Name:        "Gridiron",
-				Symbol:      "GRIDIRON",
-				Description: "EVM, staking and governance denom of Gridiron",
+				Display:     "black",
+				Name:        "Black",
+				Symbol:      "BLACK",
+				Description: "EVM, staking and governance denom of Black",
 				DenomUnits: []*banktypes.DenomUnit{
 					{
 						Denom:    "afury",
 						Exponent: 0,
-						Aliases:  []string{"atto blackfury"},
+						Aliases:  []string{"atto black"},
 					},
 					{
-						Denom:    "blackfury",
+						Denom:    "black",
 						Exponent: 18,
 					},
 				},
 			},
 			banktypes.Metadata{
 				Base:        "afury",
-				Display:     "blackfury",
-				Name:        "Gridiron",
-				Symbol:      "GRIDIRON",
-				Description: "EVM, staking and governance denom of Gridiron",
+				Display:     "black",
+				Name:        "Black",
+				Symbol:      "BLACK",
+				Description: "EVM, staking and governance denom of Black",
 				DenomUnits: []*banktypes.DenomUnit{
 					{
 						Denom:    "afury",
 						Exponent: 0,
-						Aliases:  []string{"atto blackfury"},
+						Aliases:  []string{"atto black"},
 					},
 					{
-						Denom:    "blackfury",
+						Denom:    "black",
 						Exponent: 18,
 					},
 				},
@@ -111,33 +111,33 @@ func TestEqualMetadata(t *testing.T) {
 			"different denom units length",
 			banktypes.Metadata{
 				Base:        "afury",
-				Display:     "blackfury",
-				Name:        "Gridiron",
-				Symbol:      "GRIDIRON",
-				Description: "EVM, staking and governance denom of Gridiron",
+				Display:     "black",
+				Name:        "Black",
+				Symbol:      "BLACK",
+				Description: "EVM, staking and governance denom of Black",
 				DenomUnits: []*banktypes.DenomUnit{
 					{
 						Denom:    "afury",
 						Exponent: 0,
-						Aliases:  []string{"atto blackfury"},
+						Aliases:  []string{"atto black"},
 					},
 					{
-						Denom:    "blackfury",
+						Denom:    "black",
 						Exponent: 18,
 					},
 				},
 			},
 			banktypes.Metadata{
 				Base:        "afury",
-				Display:     "blackfury",
-				Name:        "Gridiron",
-				Symbol:      "GRIDIRON",
-				Description: "EVM, staking and governance denom of Gridiron",
+				Display:     "black",
+				Name:        "Black",
+				Symbol:      "BLACK",
+				Description: "EVM, staking and governance denom of Black",
 				DenomUnits: []*banktypes.DenomUnit{
 					{
 						Denom:    "afury",
 						Exponent: 0,
-						Aliases:  []string{"atto blackfury"},
+						Aliases:  []string{"atto black"},
 					},
 				},
 			},
@@ -147,46 +147,46 @@ func TestEqualMetadata(t *testing.T) {
 			"different denom units",
 			banktypes.Metadata{
 				Base:        "afury",
-				Display:     "blackfury",
-				Name:        "Gridiron",
-				Symbol:      "GRIDIRON",
-				Description: "EVM, staking and governance denom of Gridiron",
+				Display:     "black",
+				Name:        "Black",
+				Symbol:      "BLACK",
+				Description: "EVM, staking and governance denom of Black",
 				DenomUnits: []*banktypes.DenomUnit{
 					{
 						Denom:    "afury",
 						Exponent: 0,
-						Aliases:  []string{"atto blackfury"},
+						Aliases:  []string{"atto black"},
 					},
 					{
-						Denom:    "ublackfury",
+						Denom:    "ublack",
 						Exponent: 12,
-						Aliases:  []string{"micro blackfury"},
+						Aliases:  []string{"micro black"},
 					},
 					{
-						Denom:    "blackfury",
+						Denom:    "black",
 						Exponent: 18,
 					},
 				},
 			},
 			banktypes.Metadata{
 				Base:        "afury",
-				Display:     "blackfury",
-				Name:        "Gridiron",
-				Symbol:      "GRIDIRON",
-				Description: "EVM, staking and governance denom of Gridiron",
+				Display:     "black",
+				Name:        "Black",
+				Symbol:      "BLACK",
+				Description: "EVM, staking and governance denom of Black",
 				DenomUnits: []*banktypes.DenomUnit{
 					{
 						Denom:    "afury",
 						Exponent: 0,
-						Aliases:  []string{"atto blackfury"},
+						Aliases:  []string{"atto black"},
 					},
 					{
-						Denom:    "Ublackfury",
+						Denom:    "Ublack",
 						Exponent: 12,
-						Aliases:  []string{"micro blackfury"},
+						Aliases:  []string{"micro black"},
 					},
 					{
-						Denom:    "blackfury",
+						Denom:    "black",
 						Exponent: 18,
 					},
 				},
@@ -221,25 +221,25 @@ func TestEqualAliases(t *testing.T) {
 		{
 			"different lengths",
 			[]string{},
-			[]string{"atto blackfury"},
+			[]string{"atto black"},
 			false,
 		},
 		{
 			"different values",
-			[]string{"attoblackfury"},
-			[]string{"atto blackfury"},
+			[]string{"attoblack"},
+			[]string{"atto black"},
 			false,
 		},
 		{
 			"same values, unsorted",
-			[]string{"atto blackfury", "afury"},
-			[]string{"afury", "atto blackfury"},
+			[]string{"atto black", "afury"},
+			[]string{"afury", "atto black"},
 			false,
 		},
 		{
 			"same values, sorted",
-			[]string{"afury", "atto blackfury"},
-			[]string{"afury", "atto blackfury"},
+			[]string{"afury", "atto black"},
+			[]string{"afury", "atto black"},
 			true,
 		},
 	}

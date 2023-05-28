@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 package backend
 
 import (
@@ -15,8 +15,8 @@ import (
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/trie"
-	rpctypes "github.com/fury-labs/blackfury/v13/rpc/types"
-	evmtypes "github.com/fury-labs/blackfury/v13/x/evm/types"
+	rpctypes "github.com/fury-labs/black/v13/rpc/types"
+	evmtypes "github.com/fury-labs/black/v13/x/evm/types"
 	"github.com/pkg/errors"
 	tmrpctypes "github.com/tendermint/tendermint/rpc/core/types"
 	"google.golang.org/grpc"

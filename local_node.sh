@@ -3,7 +3,7 @@
 KEYS[0]="dev0"
 KEYS[1]="dev1"
 KEYS[2]="dev2"
-CHAINID="blackfury_9000-1"
+CHAINID="highbury_710-1"
 MONIKER="localtestnet"
 # Remember to change to other types of keyring like 'file' in-case exposing to outside world,
 # otherwise your balance will be wiped quickly
@@ -59,7 +59,7 @@ if [[ $overwrite == "y" || $overwrite == "Y" ]]; then
 		black keys add "$KEY" --keyring-backend $KEYRING --algo $KEYALGO --home "$HOMEDIR"
 	done
 
-	# Set moniker and chain-id for Gridiron (Moniker can be anything, chain-id must be an integer)
+	# Set moniker and chain-id for Black (Moniker can be anything, chain-id must be an integer)
 	black init $MONIKER -o --chain-id $CHAINID --home "$HOMEDIR"
 
 	# Change parameter token denominations to afury
@@ -146,9 +146,9 @@ if [[ $overwrite == "y" || $overwrite == "Y" ]]; then
 	## In case you want to create multiple validators at genesis
 	## 1. Back to `black keys add` step, init more keys
 	## 2. Back to `black add-genesis-account` step, add balance for those
-	## 3. Clone this ~/.black home directory into some others, let's say `~/.clonedGridirond`
+	## 3. Clone this ~/.black home directory into some others, let's say `~/.clonedBlackd`
 	## 4. Run `gentx` in each of those folders
-	## 5. Copy the `gentx-*` folders under `~/.clonedGridirond/config/gentx/` folders into the original `~/.black/config/gentx`
+	## 5. Copy the `gentx-*` folders under `~/.clonedBlackd/config/gentx/` folders into the original `~/.black/config/gentx`
 
 	# Collect genesis tx
 	black collect-gentxs --home "$HOMEDIR"

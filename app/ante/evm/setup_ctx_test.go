@@ -3,13 +3,13 @@ package evm_test
 import (
 	"math/big"
 
-	evmante "github.com/fury-labs/blackfury/v13/app/ante/evm"
-	"github.com/fury-labs/blackfury/v13/testutil"
+	evmante "github.com/fury-labs/black/v13/app/ante/evm"
+	"github.com/fury-labs/black/v13/testutil"
 
 	storetypes "github.com/cosmos/cosmos-sdk/store/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	testutiltx "github.com/fury-labs/blackfury/v13/testutil/tx"
-	evmtypes "github.com/fury-labs/blackfury/v13/x/evm/types"
+	testutiltx "github.com/fury-labs/black/v13/testutil/tx"
+	evmtypes "github.com/fury-labs/black/v13/x/evm/types"
 )
 
 func (suite *AnteTestSuite) TestEthSetupContextDecorator() {

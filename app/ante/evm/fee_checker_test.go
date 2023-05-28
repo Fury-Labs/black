@@ -11,9 +11,9 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/module"
 	authtx "github.com/cosmos/cosmos-sdk/x/auth/tx"
 	"github.com/ethereum/go-ethereum/params"
-	"github.com/fury-labs/blackfury/v13/encoding"
-	"github.com/fury-labs/blackfury/v13/types"
-	evmtypes "github.com/fury-labs/blackfury/v13/x/evm/types"
+	"github.com/fury-labs/black/v13/encoding"
+	"github.com/fury-labs/black/v13/types"
+	evmtypes "github.com/fury-labs/black/v13/x/evm/types"
 	"github.com/tendermint/tendermint/libs/log"
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 )

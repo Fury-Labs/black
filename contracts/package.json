@@ -1,5 +1,5 @@
 {
-  "name": "blackfury",
+  "name": "black",
   "version": "1.0.0",
   "description": "<!-- parent:   order: false -->",
   "main": "index.js",
@@ -15,12 +15,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fury-labs/blackfury.git"
+    "url": "git+https://github.com/fury-labs/black.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/fury-labs/blackfury/issues"
+    "url": "https://github.com/fury-labs/black/issues"
   },
-  "homepage": "https://github.com/fury-labs/blackfury#readme"
+  "homepage": "https://github.com/fury-labs/black#readme"
 }

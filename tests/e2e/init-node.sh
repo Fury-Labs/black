@@ -1,7 +1,7 @@
 #!/bin/bash
 
 KEY="mykey"
-CHAINID="${CHAIN_ID:-blackfury_9000-1}"
+CHAINID="${CHAIN_ID:-highbury_710-1}"
 MONIKER="localtestnet"
 KEYRING="test" # remember to change to other types of keyring like 'file' in-case exposing to outside world, otherwise your balance will be wiped quickly. The keyring test does not require private key to steal tokens from you
 KEYALGO="eth_secp256k1" #gitleaks:allow
@@ -31,7 +31,7 @@ black config chain-id "$CHAINID"
 # if $KEY exists it should be deleted
 black keys add "$KEY" --keyring-backend $KEYRING --algo "$KEYALGO"
 
-# Set moniker and chain-id for Gridiron (Moniker can be anything, chain-id must be an integer)
+# Set moniker and chain-id for Black (Moniker can be anything, chain-id must be an integer)
 black init "$MONIKER" --chain-id "$CHAINID"
 
 # Change parameter token denominations to afury
@@ -93,9 +93,9 @@ black gentx $KEY 1000000000000000000000afury --keyring-backend $KEYRING --chain-
 ## In case you want to create multiple validators at genesis
 ## 1. Back to `black keys add` step, init more keys
 ## 2. Back to `black add-genesis-account` step, add balance for those
-## 3. Clone this ~/.black home directory into some others, let's say `~/.clonedGridirond`
+## 3. Clone this ~/.black home directory into some others, let's say `~/.clonedBlackd`
 ## 4. Run `gentx` in each of those folders
-## 5. Copy the `gentx-*` folders under `~/.clonedGridirond/config/gentx/` folders into the original `~/.black/config/gentx`
+## 5. Copy the `gentx-*` folders under `~/.clonedBlackd/config/gentx/` folders into the original `~/.black/config/gentx`
 
 # Collect genesis tx
 black collect-gentxs

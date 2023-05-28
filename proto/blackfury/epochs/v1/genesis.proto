@@ -1,11 +1,11 @@
 syntax = "proto3";
-package blackfury.epochs.v1;
+package black.epochs.v1;
 
 import "gogoproto/gogo.proto";
 import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
 
-option go_package = "github.com/fury-labs/blackfury/v13/x/epochs/types";
+option go_package = "github.com/fury-labs/black/v13/x/epochs/types";
 
 // EpochInfo defines the message interface containing the relevant informations about
 // an epoch.

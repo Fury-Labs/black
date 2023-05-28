@@ -2,8 +2,8 @@ package keeper_test
 
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	evmkeeper "github.com/fury-labs/blackfury/v13/x/evm/keeper"
-	"github.com/fury-labs/blackfury/v13/x/evm/types"
+	evmkeeper "github.com/fury-labs/black/v13/x/evm/keeper"
+	"github.com/fury-labs/black/v13/x/evm/types"
 )
 
 type mockSubspace struct {

@@ -8,9 +8,9 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core"
 	"github.com/ethereum/go-ethereum/core/vm"
-	"github.com/fury-labs/blackfury/v13/x/erc20/types"
-	"github.com/fury-labs/blackfury/v13/x/evm/statedb"
-	evm "github.com/fury-labs/blackfury/v13/x/evm/types"
+	"github.com/fury-labs/black/v13/x/erc20/types"
+	"github.com/fury-labs/black/v13/x/evm/statedb"
+	evm "github.com/fury-labs/black/v13/x/evm/types"
 	"github.com/stretchr/testify/mock"
 )
 

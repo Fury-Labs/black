@@ -1,12 +1,12 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 
 package types
 
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	blackfurytypes "github.com/fury-labs/blackfury/v13/types"
+	blacktypes "github.com/fury-labs/black/v13/types"
 )
 
 // CalculateEpochProvisions returns mint provision per epoch
@@ -42,9 +42,9 @@ func CalculateEpochMintProvision(
 	// epochProvision = periodProvision / epochsPerPeriod
 	epochProvision := periodProvision.Quo(sdk.NewDec(epochsPerPeriod))
 
-	// Multiply epochMintProvision with power reduction (10^18 for blackfury) as the
-	// calculation is based on `blackfury` and the issued tokens need to be given in
+	// Multiply epochMintProvision with power reduction (10^18 for black) as the
+	// calculation is based on `black` and the issued tokens need to be given in
 	// `afury`
-	epochProvision = epochProvision.Mul(sdk.NewDecFromInt(blackfurytypes.PowerReduction))
+	epochProvision = epochProvision.Mul(sdk.NewDecFromInt(blacktypes.PowerReduction))
 	return epochProvision
 }

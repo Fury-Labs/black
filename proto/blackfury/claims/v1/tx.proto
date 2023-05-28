@@ -1,12 +1,12 @@
 syntax = "proto3";
-package blackfury.claims.v1;
+package black.claims.v1;
 
 import "cosmos/msg/v1/msg.proto";
 import "cosmos_proto/cosmos.proto";
-import "blackfury/claims/v1/genesis.proto";
+import "black/claims/v1/genesis.proto";
 import "gogoproto/gogo.proto";
 
-option go_package = "github.com/fury-labs/blackfury/v13/x/claims/types";
+option go_package = "github.com/fury-labs/black/v13/x/claims/types";
 
 // Msg defines the claims Msg service.
 service Msg {

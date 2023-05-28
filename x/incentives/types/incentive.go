@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 
 package types
 
@@ -8,7 +8,7 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/ethereum/go-ethereum/common"
-	blackfurytypes "github.com/fury-labs/blackfury/v13/types"
+	blacktypes "github.com/fury-labs/black/v13/types"
 )
 
 // NewIncentive returns an instance of Incentive
@@ -27,7 +27,7 @@ func NewIncentive(
 
 // Validate performs a stateless validation of a Incentive
 func (i Incentive) Validate() error {
-	if err := blackfurytypes.ValidateAddress(i.Contract); err != nil {
+	if err := blacktypes.ValidateAddress(i.Contract); err != nil {
 		return err
 	}
 

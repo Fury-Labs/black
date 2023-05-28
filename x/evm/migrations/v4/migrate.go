@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 package v4
 
 import (
@@ -7,8 +7,8 @@ import (
 	storetypes "github.com/cosmos/cosmos-sdk/store/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	v4types "github.com/fury-labs/blackfury/v13/x/evm/migrations/v4/types"
-	"github.com/fury-labs/blackfury/v13/x/evm/types"
+	v4types "github.com/fury-labs/black/v13/x/evm/migrations/v4/types"
+	"github.com/fury-labs/black/v13/x/evm/types"
 )
 
 // MigrateStore migrates the x/evm module state from the consensus version 3 to

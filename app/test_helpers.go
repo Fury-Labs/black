@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 
 package app
 
@@ -24,11 +24,11 @@ import (
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 
-	"github.com/fury-labs/blackfury/v13/encoding"
-	feemarkettypes "github.com/fury-labs/blackfury/v13/x/feemarket/types"
+	"github.com/fury-labs/black/v13/encoding"
+	feemarkettypes "github.com/fury-labs/black/v13/x/feemarket/types"
 
-	"github.com/fury-labs/blackfury/v13/cmd/config"
-	"github.com/fury-labs/blackfury/v13/utils"
+	"github.com/fury-labs/black/v13/cmd/config"
+	"github.com/fury-labs/black/v13/utils"
 )
 
 func init() {
@@ -41,7 +41,7 @@ func init() {
 var DefaultTestingAppInit func() (ibctesting.TestingApp, map[string]json.RawMessage) = SetupTestingApp
 
 // DefaultConsensusParams defines the default Tendermint consensus params used in
-// Gridiron testing.
+// Black testing.
 var DefaultConsensusParams = &abci.ConsensusParams{
 	Block: &abci.BlockParams{
 		MaxBytes: 200000,
@@ -66,11 +66,11 @@ func init() {
 	config.SetBip44CoinType(cfg)
 }
 
-// Setup initializes a new Gridiron. A Nop logger is set in Gridiron.
+// Setup initializes a new Black. A Nop logger is set in Black.
 func Setup(
 	isCheckTx bool,
 	feemarketGenesis *feemarkettypes.GenesisState,
-) *Gridiron {
+) *Black {
 	privVal := mock.NewPV()
 	pubKey, _ := privVal.GetPubKey()
 
@@ -88,7 +88,7 @@ func Setup(
 
 	db := dbm.NewMemDB()
 
-	app := NewGridiron(log.NewNopLogger(), db, nil, true, map[int64]bool{}, DefaultNodeHome, 5, encoding.MakeConfig(ModuleBasics), simapp.EmptyAppOptions{})
+	app := NewBlack(log.NewNopLogger(), db, nil, true, map[int64]bool{}, DefaultNodeHome, 5, encoding.MakeConfig(ModuleBasics), simapp.EmptyAppOptions{})
 	if !isCheckTx {
 		// init chain must be called to stop deliverState from being nil
 		genesisState := NewDefaultGenesisState()
@@ -122,7 +122,7 @@ func Setup(
 	return app
 }
 
-func GenesisStateWithValSet(app *Gridiron, genesisState simapp.GenesisState,
+func GenesisStateWithValSet(app *Black, genesisState simapp.GenesisState,
 	valSet *tmtypes.ValidatorSet, genAccs []authtypes.GenesisAccount,
 	balances ...banktypes.Balance,
 ) simapp.GenesisState {
@@ -189,6 +189,6 @@ func GenesisStateWithValSet(app *Gridiron, genesisState simapp.GenesisState,
 func SetupTestingApp() (ibctesting.TestingApp, map[string]json.RawMessage) {
 	db := dbm.NewMemDB()
 	cfg := encoding.MakeConfig(ModuleBasics)
-	app := NewGridiron(log.NewNopLogger(), db, nil, true, map[int64]bool{}, DefaultNodeHome, 5, cfg, simapp.EmptyAppOptions{})
+	app := NewBlack(log.NewNopLogger(), db, nil, true, map[int64]bool{}, DefaultNodeHome, 5, cfg, simapp.EmptyAppOptions{})
 	return app, NewDefaultGenesisState()
 }

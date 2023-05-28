@@ -1,12 +1,12 @@
 syntax = "proto3";
-package blackfury.incentives.v1;
+package black.incentives.v1;
 
 import "cosmos/msg/v1/msg.proto";
 import "cosmos_proto/cosmos.proto";
-import "blackfury/incentives/v1/genesis.proto";
+import "black/incentives/v1/genesis.proto";
 import "gogoproto/gogo.proto";
 
-option go_package = "github.com/fury-labs/blackfury/v13/x/incentives/types";
+option go_package = "github.com/fury-labs/black/v13/x/incentives/types";
 
 // Msg defines the incentives Msg service.
 service Msg {

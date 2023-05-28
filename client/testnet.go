@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 package client
 
 // DONTCOVER
@@ -40,13 +40,13 @@ import (
 	mintypes "github.com/cosmos/cosmos-sdk/x/mint/types"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 
-	"github.com/fury-labs/blackfury/v13/crypto/hd"
-	"github.com/fury-labs/blackfury/v13/server/config"
-	srvflags "github.com/fury-labs/blackfury/v13/server/flags"
-	blackfurytypes "github.com/fury-labs/blackfury/v13/types"
-	evmtypes "github.com/fury-labs/blackfury/v13/x/evm/types"
+	"github.com/fury-labs/black/v13/crypto/hd"
+	"github.com/fury-labs/black/v13/server/config"
+	srvflags "github.com/fury-labs/black/v13/server/flags"
+	blacktypes "github.com/fury-labs/black/v13/types"
+	evmtypes "github.com/fury-labs/black/v13/x/evm/types"
 
-	"github.com/fury-labs/blackfury/v13/testutil/network"
+	"github.com/fury-labs/black/v13/testutil/network"
 )
 
 var (
@@ -93,7 +93,7 @@ func addTestnetFlagsToCmd(cmd *cobra.Command) {
 	cmd.Flags().String(flags.FlagChainID, "", "genesis file chain-id, if left blank will be randomly created")
 	cmd.Flags().String(sdkserver.FlagMinGasPrices,
 		fmt.Sprintf("0.000006%s",
-			blackfurytypes.AttoGridiron),
+			blacktypes.AttoBlack),
 		"Minimum gas prices to accept for transactions; All fees in a tx must meet this minimum (e.g. 0.01photino,0.001stake)")
 	cmd.Flags().String(flags.FlagKeyAlgorithm, string(hd.EthSecp256k1Type), "Key signing algorithm to generate keys for")
 }
@@ -298,22 +298,22 @@ func initTestnetFiles(
 			return err
 		}
 
-		accStakingTokens := sdk.TokensFromConsensusPower(5000, blackfurytypes.PowerReduction)
+		accStakingTokens := sdk.TokensFromConsensusPower(5000, blacktypes.PowerReduction)
 		coins := sdk.Coins{
-			sdk.NewCoin(blackfurytypes.AttoGridiron, accStakingTokens),
+			sdk.NewCoin(blacktypes.AttoBlack, accStakingTokens),
 		}
 
 		genBalances = append(genBalances, banktypes.Balance{Address: addr.String(), Coins: coins.Sort()})
-		genAccounts = append(genAccounts, &blackfurytypes.EthAccount{
+		genAccounts = append(genAccounts, &blacktypes.EthAccount{
 			BaseAccount: authtypes.NewBaseAccount(addr, nil, 0, 0),
 			CodeHash:    common.BytesToHash(evmtypes.EmptyCodeHash).Hex(),
 		})
 
-		valTokens := sdk.TokensFromConsensusPower(100, blackfurytypes.PowerReduction)
+		valTokens := sdk.TokensFromConsensusPower(100, blacktypes.PowerReduction)
 		createValMsg, err := stakingtypes.NewMsgCreateValidator(
 			sdk.ValAddress(addr),
 			valPubKeys[i],
-			sdk.NewCoin(blackfurytypes.AttoGridiron, valTokens),
+			sdk.NewCoin(blacktypes.AttoBlack, valTokens),
 			stakingtypes.NewDescription(nodeDirName, "", "", "", ""),
 			stakingtypes.NewCommissionRates(sdk.OneDec(), sdk.OneDec(), sdk.OneDec()),
 			sdk.OneInt(),
@@ -349,7 +349,7 @@ func initTestnetFiles(
 			return err
 		}
 
-		customAppTemplate, customAppConfig := config.AppConfig(blackfurytypes.AttoGridiron)
+		customAppTemplate, customAppConfig := config.AppConfig(blacktypes.AttoBlack)
 		srvconfig.SetConfigTemplate(customAppTemplate)
 		if err := sdkserver.InterceptConfigsPreRunHandler(cmd, customAppTemplate, customAppConfig, tmconfig.DefaultConfig()); err != nil {
 			return err
@@ -358,7 +358,7 @@ func initTestnetFiles(
 		srvconfig.WriteConfigFile(filepath.Join(nodeDir, "config/app.toml"), appConfig)
 	}
 
-	if err := initGenFiles(clientCtx, mbm, args.chainID, blackfurytypes.AttoGridiron, genAccounts, genBalances, genFiles, args.numValidators); err != nil {
+	if err := initGenFiles(clientCtx, mbm, args.chainID, blacktypes.AttoBlack, genAccounts, genBalances, genFiles, args.numValidators); err != nil {
 		return err
 	}
 

@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 
 package cli
 
@@ -18,9 +18,9 @@ import (
 
 	"github.com/ethereum/go-ethereum/common"
 
-	blackfurytypes "github.com/fury-labs/blackfury/v13/types"
+	blacktypes "github.com/fury-labs/black/v13/types"
 
-	"github.com/fury-labs/blackfury/v13/x/erc20/types"
+	"github.com/fury-labs/black/v13/x/erc20/types"
 )
 
 // NewTxCmd returns a root CLI command handler for erc20 transaction commands
@@ -62,7 +62,7 @@ func NewConvertCoinCmd() *cobra.Command {
 
 			if len(args) == 2 {
 				receiver = args[1]
-				if err := blackfurytypes.ValidateAddress(receiver); err != nil {
+				if err := blacktypes.ValidateAddress(receiver); err != nil {
 					return fmt.Errorf("invalid receiver hex address %w", err)
 				}
 			} else {
@@ -100,7 +100,7 @@ func NewConvertERC20Cmd() *cobra.Command {
 			}
 
 			contract := args[0]
-			if err := blackfurytypes.ValidateAddress(contract); err != nil {
+			if err := blacktypes.ValidateAddress(contract); err != nil {
 				return fmt.Errorf("invalid ERC20 contract address %w", err)
 			}
 

@@ -14,10 +14,10 @@ import (
 	"github.com/ethereum/go-ethereum/signer/core/apitypes"
 	"google.golang.org/grpc/metadata"
 
-	"github.com/fury-labs/blackfury/v13/crypto/ethsecp256k1"
-	"github.com/fury-labs/blackfury/v13/rpc/backend/mocks"
-	utiltx "github.com/fury-labs/blackfury/v13/testutil/tx"
-	evmtypes "github.com/fury-labs/blackfury/v13/x/evm/types"
+	"github.com/fury-labs/black/v13/crypto/ethsecp256k1"
+	"github.com/fury-labs/black/v13/rpc/backend/mocks"
+	utiltx "github.com/fury-labs/black/v13/testutil/tx"
+	evmtypes "github.com/fury-labs/black/v13/x/evm/types"
 )
 
 func (suite *BackendTestSuite) TestSendTransaction() {

@@ -14,13 +14,13 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/auth/ante"
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 
-	"github.com/fury-labs/blackfury/v13/app"
-	"github.com/fury-labs/blackfury/v13/cmd/config"
-	"github.com/fury-labs/blackfury/v13/encoding"
-	"github.com/fury-labs/blackfury/v13/ethereum/eip712"
-	utiltx "github.com/fury-labs/blackfury/v13/testutil/tx"
-	"github.com/fury-labs/blackfury/v13/types"
-	"github.com/fury-labs/blackfury/v13/utils"
+	"github.com/fury-labs/black/v13/app"
+	"github.com/fury-labs/black/v13/cmd/config"
+	"github.com/fury-labs/black/v13/encoding"
+	"github.com/fury-labs/black/v13/ethereum/eip712"
+	utiltx "github.com/fury-labs/black/v13/testutil/tx"
+	"github.com/fury-labs/black/v13/types"
+	"github.com/fury-labs/black/v13/utils"
 	"github.com/stretchr/testify/require"
 )
 

@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 
 package main
 
@@ -10,8 +10,8 @@ import (
 	svrcmd "github.com/cosmos/cosmos-sdk/server/cmd"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/fury-labs/blackfury/v13/app"
-	cmdcfg "github.com/fury-labs/blackfury/v13/cmd/config"
+	"github.com/fury-labs/black/v13/app"
+	cmdcfg "github.com/fury-labs/black/v13/cmd/config"
 )
 
 func main() {

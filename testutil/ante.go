@@ -1,11 +1,11 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 package testutil
 
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/fury-labs/blackfury/v13/app"
-	"github.com/fury-labs/blackfury/v13/encoding"
+	"github.com/fury-labs/black/v13/app"
+	"github.com/fury-labs/black/v13/encoding"
 )
 
 // NextFn is a no-op function that returns the context and no error in order to mock

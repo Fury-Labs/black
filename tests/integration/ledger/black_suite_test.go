@@ -18,20 +18,20 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/spf13/cobra"
 
-	"github.com/fury-labs/blackfury/v13/app"
-	"github.com/fury-labs/blackfury/v13/crypto/hd"
-	"github.com/fury-labs/blackfury/v13/tests/integration/ledger/mocks"
-	utiltx "github.com/fury-labs/blackfury/v13/testutil/tx"
-	"github.com/fury-labs/blackfury/v13/utils"
+	"github.com/fury-labs/black/v13/app"
+	"github.com/fury-labs/black/v13/crypto/hd"
+	"github.com/fury-labs/black/v13/tests/integration/ledger/mocks"
+	utiltx "github.com/fury-labs/black/v13/testutil/tx"
+	"github.com/fury-labs/black/v13/utils"
 	"github.com/stretchr/testify/suite"
 	"github.com/tendermint/tendermint/crypto/tmhash"
 	"github.com/tendermint/tendermint/version"
 
 	cosmosledger "github.com/cosmos/cosmos-sdk/crypto/ledger"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	clientkeys "github.com/fury-labs/blackfury/v13/client/keys"
-	blackfurykeyring "github.com/fury-labs/blackfury/v13/crypto/keyring"
-	feemarkettypes "github.com/fury-labs/blackfury/v13/x/feemarket/types"
+	clientkeys "github.com/fury-labs/black/v13/client/keys"
+	blackkeyring "github.com/fury-labs/black/v13/crypto/keyring"
+	feemarkettypes "github.com/fury-labs/black/v13/x/feemarket/types"
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 	tmversion "github.com/tendermint/tendermint/proto/tendermint/version"
 	rpcclientmock "github.com/tendermint/tendermint/rpc/client/mock"
@@ -45,7 +45,7 @@ var s *LedgerTestSuite
 type LedgerTestSuite struct {
 	suite.Suite
 
-	app *app.Gridiron
+	app *app.Black
 	ctx sdk.Context
 
 	ledger       *mocks.SECP256K1
@@ -62,7 +62,7 @@ func TestLedger(t *testing.T) {
 	suite.Run(t, s)
 
 	RegisterFailHandler(Fail)
-	RunSpecs(t, "Gridirond Suite")
+	RunSpecs(t, "Blackd Suite")
 }
 
 func (suite *LedgerTestSuite) SetupTest() {
@@ -81,14 +81,14 @@ func (suite *LedgerTestSuite) SetupTest() {
 	suite.accAddr = sdk.AccAddress(ethAddr.Bytes())
 }
 
-func (suite *LedgerTestSuite) SetupGridironApp() {
+func (suite *LedgerTestSuite) SetupBlackApp() {
 	consAddress := sdk.ConsAddress(utiltx.GenerateAddress().Bytes())
 
 	// init app
 	suite.app = app.Setup(false, feemarkettypes.DefaultGenesisState())
 	suite.ctx = suite.app.BaseApp.NewContext(false, tmproto.Header{
 		Height:          1,
-		ChainID:         "blackfury_9001-1",
+		ChainID:         "clockend_4200-1",
 		Time:            time.Now().UTC(),
 		ProposerAddress: consAddress.Bytes(),
 
@@ -143,7 +143,7 @@ func (suite *LedgerTestSuite) NewKeyringAndCtxs(krHome string, input io.Reader, 
 	return kr, initClientCtx, ctx
 }
 
-func (suite *LedgerTestSuite) blackfuryAddKeyCmd() *cobra.Command {
+func (suite *LedgerTestSuite) blackAddKeyCmd() *cobra.Command {
 	cmd := keys.AddKeyCommand()
 
 	algoFlag := cmd.Flag(flags.FlagKeyAlgorithm)
@@ -168,12 +168,12 @@ func (suite *LedgerTestSuite) blackfuryAddKeyCmd() *cobra.Command {
 
 func (suite *LedgerTestSuite) MockKeyringOption() keyring.Option {
 	return func(options *keyring.Options) {
-		options.SupportedAlgos = blackfurykeyring.SupportedAlgorithms
-		options.SupportedAlgosLedger = blackfurykeyring.SupportedAlgorithmsLedger
+		options.SupportedAlgos = blackkeyring.SupportedAlgorithms
+		options.SupportedAlgosLedger = blackkeyring.SupportedAlgorithmsLedger
 		options.LedgerDerivation = func() (cosmosledger.SECP256K1, error) { return suite.ledger, nil }
-		options.LedgerCreateKey = blackfurykeyring.CreatePubkey
-		options.LedgerAppName = blackfurykeyring.AppName
-		options.LedgerSigSkipDERConv = blackfurykeyring.SkipDERConversion
+		options.LedgerCreateKey = blackkeyring.CreatePubkey
+		options.LedgerAppName = blackkeyring.AppName
+		options.LedgerSigSkipDERConv = blackkeyring.SkipDERConversion
 	}
 }
 

@@ -1,17 +1,17 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 
 package config
 
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/fury-labs/blackfury/v13/types"
+	"github.com/fury-labs/black/v13/types"
 )
 
 const (
 	// Bech32Prefix defines the Bech32 prefix used for EthAccounts
-	Bech32Prefix = "blackfury"
+	Bech32Prefix = "black"
 
 	// Bech32PrefixAccAddr defines the Bech32 prefix of an account's address
 	Bech32PrefixAccAddr = Bech32Prefix
@@ -29,8 +29,8 @@ const (
 
 const (
 	// DisplayDenom defines the denomination displayed to users in client applications.
-	DisplayDenom = "blackfury"
-	// BaseDenom defines to the default denomination used in Gridiron (staking, EVM, governance, etc.)
+	DisplayDenom = "fury"
+	// BaseDenom defines to the default denomination used in Black (staking, EVM, governance, etc.)
 	BaseDenom = "afury"
 )
 

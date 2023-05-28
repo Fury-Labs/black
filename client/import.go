@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 package client
 
 import (
@@ -11,9 +11,9 @@ import (
 	"github.com/cosmos/cosmos-sdk/client/input"
 	"github.com/cosmos/cosmos-sdk/crypto"
 	"github.com/ethereum/go-ethereum/common"
-	"github.com/fury-labs/blackfury/v13/crypto/ethsecp256k1"
+	"github.com/fury-labs/black/v13/crypto/ethsecp256k1"
 
-	"github.com/fury-labs/blackfury/v13/crypto/hd"
+	"github.com/fury-labs/black/v13/crypto/hd"
 )
 
 // UnsafeImportKeyCommand imports private keys from a keyfile.

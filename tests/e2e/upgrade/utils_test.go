@@ -46,10 +46,10 @@ func TestCheckLegacyProposal(t *testing.T) {
 	}
 }
 
-// TestGridironVersionsLess tests the GridironVersions type's Less method with
+// TestBlackVersionsLess tests the BlackVersions type's Less method with
 // different version strings
-func TestGridironVersionsLess(t *testing.T) {
-	var version GridironVersions
+func TestBlackVersionsLess(t *testing.T) {
+	var version BlackVersions
 
 	testCases := []struct {
 		Name string
@@ -76,18 +76,18 @@ func TestGridironVersionsLess(t *testing.T) {
 	}
 }
 
-// TestGridironVersionsSwap tests the GridironVersions type's Swap method
-func TestGridironVersionsSwap(t *testing.T) {
-	var version GridironVersions
+// TestBlackVersionsSwap tests the BlackVersions type's Swap method
+func TestBlackVersionsSwap(t *testing.T) {
+	var version BlackVersions
 	value := "v9.1.0"
 	version = []string{value, "v10.0.0"}
 	version.Swap(0, 1)
 	require.Equal(t, value, version[1], "expected: %v, got: %v", value, version[1])
 }
 
-// TestGridironVersionsLen tests the GridironVersions type's Len method
-func TestGridironVersionsLen(t *testing.T) {
-	var version GridironVersions = []string{"v9.1.0", "v10.0.0"}
+// TestBlackVersionsLen tests the BlackVersions type's Len method
+func TestBlackVersionsLen(t *testing.T) {
+	var version BlackVersions = []string{"v9.1.0", "v10.0.0"}
 	require.Equal(t, 2, version.Len(), "expected: %v, got: %v", 2, version.Len())
 }
 

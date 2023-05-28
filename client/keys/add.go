@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 package keys
 
 import (
@@ -9,7 +9,7 @@ import (
 	"fmt"
 	"sort"
 
-	cryptohd "github.com/fury-labs/blackfury/v13/crypto/hd"
+	cryptohd "github.com/fury-labs/black/v13/crypto/hd"
 
 	bip39 "github.com/cosmos/go-bip39"
 	"github.com/spf13/cobra"

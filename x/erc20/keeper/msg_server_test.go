@@ -12,10 +12,10 @@ import (
 
 	"github.com/ethereum/go-ethereum/common"
 
-	"github.com/fury-labs/blackfury/v13/x/erc20/keeper"
-	"github.com/fury-labs/blackfury/v13/x/erc20/types"
-	"github.com/fury-labs/blackfury/v13/x/evm/statedb"
-	evmtypes "github.com/fury-labs/blackfury/v13/x/evm/types"
+	"github.com/fury-labs/black/v13/x/erc20/keeper"
+	"github.com/fury-labs/black/v13/x/erc20/types"
+	"github.com/fury-labs/black/v13/x/evm/statedb"
+	evmtypes "github.com/fury-labs/black/v13/x/evm/types"
 )
 
 func (suite *KeeperTestSuite) TestConvertCoinNativeCoin() {

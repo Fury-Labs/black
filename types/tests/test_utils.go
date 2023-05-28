@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 
 package tests
 
@@ -20,11 +20,11 @@ var (
 	}
 	UatomIbcdenom = UatomDenomtrace.IBCDenom()
 
-	UblackfuryDenomtrace = transfertypes.DenomTrace{
+	UblackDenomtrace = transfertypes.DenomTrace{
 		Path:      "transfer/channel-0",
 		BaseDenom: "afury",
 	}
-	UblackfuryIbcdenom = UblackfuryDenomtrace.IBCDenom()
+	UblackIbcdenom = UblackDenomtrace.IBCDenom()
 
 	UatomOsmoDenomtrace = transfertypes.DenomTrace{
 		Path:      "transfer/channel-0/transfer/channel-1",

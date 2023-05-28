@@ -6,10 +6,10 @@ import (
 
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 
-	blackfurytypes "github.com/fury-labs/blackfury/v13/types"
-	"github.com/fury-labs/blackfury/v13/x/evm/keeper"
-	"github.com/fury-labs/blackfury/v13/x/evm/statedb"
-	evmtypes "github.com/fury-labs/blackfury/v13/x/evm/types"
+	blacktypes "github.com/fury-labs/black/v13/types"
+	"github.com/fury-labs/black/v13/x/evm/keeper"
+	"github.com/fury-labs/black/v13/x/evm/statedb"
+	evmtypes "github.com/fury-labs/black/v13/x/evm/types"
 
 	"github.com/ethereum/go-ethereum/common"
 
@@ -36,14 +36,14 @@ func (suite *KeeperTestSuite) TestWithChainID() {
 			true,
 		},
 		{
-			"success - Gridiron mainnet chain ID",
-			"blackfury_9001-2",
+			"success - Black mainnet chain ID",
+			"clockend_4200-2",
 			9001,
 			false,
 		},
 		{
-			"success - Gridiron testnet chain ID",
-			"blackfury_9000-4",
+			"success - Black testnet chain ID",
+			"highbury_710-4",
 			9000,
 			false,
 		},
@@ -124,7 +124,7 @@ func (suite *KeeperTestSuite) TestGetAccountStorage() {
 			tc.malleate()
 			i := 0
 			suite.app.AccountKeeper.IterateAccounts(suite.ctx, func(account authtypes.AccountI) bool {
-				ethAccount, ok := account.(blackfurytypes.EthAccountI)
+				ethAccount, ok := account.(blacktypes.EthAccountI)
 				if !ok {
 					// ignore non EthAccounts
 					return false

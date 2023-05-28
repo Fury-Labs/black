@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 
 package ibctesting
 
@@ -13,15 +13,15 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	ibctesting "github.com/cosmos/ibc-go/v6/testing"
 	ibchelpers "github.com/cosmos/ibc-go/v6/testing/simapp/helpers"
-	"github.com/fury-labs/blackfury/v13/app"
+	"github.com/fury-labs/black/v13/app"
 	"github.com/stretchr/testify/require"
 )
 
-const DefaultFeeAmt = int64(150_000_000_000_000_000) // 0.15 GRIDIRON
+const DefaultFeeAmt = int64(150_000_000_000_000_000) // 0.15 BLACK
 
 var globalStartTime = time.Date(2020, 1, 2, 0, 0, 0, 0, time.UTC)
 
-// NewCoordinator initializes Coordinator with N EVM TestChain's (Gridiron apps) and M Cosmos chains (Simulation Apps)
+// NewCoordinator initializes Coordinator with N EVM TestChain's (Black apps) and M Cosmos chains (Simulation Apps)
 func NewCoordinator(t *testing.T, nEVMChains, mCosmosChains int) *ibctesting.Coordinator {
 	chains := make(map[string]*ibctesting.TestChain)
 	coord := &ibctesting.Coordinator{
@@ -127,8 +127,8 @@ func SendMsgs(chain *ibctesting.TestChain, feeAmt int64, msgs ...sdk.Msg) (*sdk.
 	// ensure the chain has the latest time
 	chain.Coordinator.UpdateTimeForChain(chain)
 
-	if blackfuryChain, ok := chain.App.(*app.Gridiron); ok {
-		bondDenom = blackfuryChain.StakingKeeper.BondDenom(chain.GetContext())
+	if blackChain, ok := chain.App.(*app.Black); ok {
+		bondDenom = blackChain.StakingKeeper.BondDenom(chain.GetContext())
 	} else {
 		bondDenom = chain.GetSimApp().StakingKeeper.BondDenom(chain.GetContext())
 	}

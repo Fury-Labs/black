@@ -5,16 +5,16 @@ import (
 	"time"
 
 	vestingexported "github.com/cosmos/cosmos-sdk/x/auth/vesting/exported"
-	blackfurytypes "github.com/fury-labs/blackfury/v13/types"
+	blacktypes "github.com/fury-labs/black/v13/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	sdkvesting "github.com/cosmos/cosmos-sdk/x/auth/vesting/types"
 
-	"github.com/fury-labs/blackfury/v13/testutil"
-	utiltx "github.com/fury-labs/blackfury/v13/testutil/tx"
-	"github.com/fury-labs/blackfury/v13/x/vesting/types"
+	"github.com/fury-labs/black/v13/testutil"
+	utiltx "github.com/fury-labs/black/v13/testutil/tx"
+	"github.com/fury-labs/black/v13/x/vesting/types"
 )
 
 var (
@@ -578,7 +578,7 @@ func (suite *KeeperTestSuite) TestConvertVestingAccount() {
 			_, ok := account.(vestingexported.VestingAccount)
 			suite.Require().False(ok)
 
-			_, ok = account.(blackfurytypes.EthAccountI)
+			_, ok = account.(blacktypes.EthAccountI)
 			suite.Require().True(ok)
 
 		} else {

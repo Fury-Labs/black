@@ -5,8 +5,8 @@ package types_test
 import (
 	"testing"
 
-	utiltx "github.com/fury-labs/blackfury/v13/testutil/tx"
-	"github.com/fury-labs/blackfury/v13/x/incentives/types"
+	utiltx "github.com/fury-labs/black/v13/testutil/tx"
+	"github.com/fury-labs/black/v13/x/incentives/types"
 )
 
 func FuzzSplitGasMeterKey(f *testing.F) {

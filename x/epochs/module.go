@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 
 package epochs
 
@@ -23,9 +23,9 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
 
-	"github.com/fury-labs/blackfury/v13/x/epochs/client/cli"
-	"github.com/fury-labs/blackfury/v13/x/epochs/keeper"
-	"github.com/fury-labs/blackfury/v13/x/epochs/types"
+	"github.com/fury-labs/black/v13/x/epochs/client/cli"
+	"github.com/fury-labs/black/v13/x/epochs/keeper"
+	"github.com/fury-labs/black/v13/x/epochs/types"
 )
 
 var (

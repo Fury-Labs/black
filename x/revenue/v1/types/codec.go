@@ -1,4 +1,4 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
+// Copyright Tharsis Labs Ltd.(Black)
 // SPDX-License-Identifier:LGPL-3.0-only
 
 package types
@@ -26,10 +26,10 @@ var (
 
 const (
 	// Amino names
-	cancelRevenueName   = "blackfury/MsgCancelRevenue"
-	registerRevenueName = "blackfury/MsgRegisterRevenue"
-	updateRevenueName   = "blackfury/MsgUpdateRevenue"
-	updateParamsName    = "blackfury/MsgUpdateParams"
+	cancelRevenueName   = "black/MsgCancelRevenue"
+	registerRevenueName = "black/MsgRegisterRevenue"
+	updateRevenueName   = "black/MsgUpdateRevenue"
+	updateParamsName    = "black/MsgUpdateParams"
 )
 
 // NOTE: This is required for the GetSignBytes function

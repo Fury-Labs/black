@@ -6,10 +6,10 @@ import (
 	"cosmossdk.io/math"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/x/feegrant"
-	cosmosante "github.com/fury-labs/blackfury/v13/app/ante/cosmos"
-	"github.com/fury-labs/blackfury/v13/testutil"
-	testutiltx "github.com/fury-labs/blackfury/v13/testutil/tx"
-	"github.com/fury-labs/blackfury/v13/utils"
+	cosmosante "github.com/fury-labs/black/v13/app/ante/cosmos"
+	"github.com/fury-labs/black/v13/testutil"
+	testutiltx "github.com/fury-labs/black/v13/testutil/tx"
+	"github.com/fury-labs/black/v13/utils"
 )
 
 type deductFeeDecoratorTestCase struct {

@@ -1,12 +1,12 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 
 package types
 
 import (
 	fmt "fmt"
 
-	epochstypes "github.com/fury-labs/blackfury/v13/x/epochs/types"
+	epochstypes "github.com/fury-labs/black/v13/x/epochs/types"
 )
 
 // NewGenesisState creates a new GenesisState object

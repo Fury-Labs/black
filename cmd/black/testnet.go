@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 
 package main
 
@@ -40,16 +40,16 @@ import (
 	govv1 "github.com/cosmos/cosmos-sdk/x/gov/types/v1"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 
-	"github.com/fury-labs/blackfury/v13/crypto/hd"
-	"github.com/fury-labs/blackfury/v13/server/config"
-	srvflags "github.com/fury-labs/blackfury/v13/server/flags"
+	"github.com/fury-labs/black/v13/crypto/hd"
+	"github.com/fury-labs/black/v13/server/config"
+	srvflags "github.com/fury-labs/black/v13/server/flags"
 
-	blackfurytypes "github.com/fury-labs/blackfury/v13/types"
-	evmtypes "github.com/fury-labs/blackfury/v13/x/evm/types"
+	blacktypes "github.com/fury-labs/black/v13/types"
+	evmtypes "github.com/fury-labs/black/v13/x/evm/types"
 
-	cmdcfg "github.com/fury-labs/blackfury/v13/cmd/config"
-	blackfurykr "github.com/fury-labs/blackfury/v13/crypto/keyring"
-	"github.com/fury-labs/blackfury/v13/testutil/network"
+	cmdcfg "github.com/fury-labs/black/v13/cmd/config"
+	blackkr "github.com/fury-labs/black/v13/crypto/keyring"
+	"github.com/fury-labs/black/v13/testutil/network"
 )
 
 var (
@@ -215,7 +215,7 @@ func initTestnetFiles(
 	args initArgs,
 ) error {
 	if args.chainID == "" {
-		args.chainID = fmt.Sprintf("blackfury_%d-1", tmrand.Int63n(9999999999999)+1)
+		args.chainID = fmt.Sprintf("clockend_%d-1", tmrand.Int63n(9999999999999)+1)
 	}
 
 	nodeIDs := make([]string, args.numValidators)
@@ -267,7 +267,7 @@ func initTestnetFiles(
 		memo := fmt.Sprintf("%s@%s:26656", nodeIDs[i], ip)
 		genFiles = append(genFiles, nodeConfig.GenesisFile())
 
-		kb, err := keyring.New(sdk.KeyringServiceName(), args.keyringBackend, nodeDir, inBuf, clientCtx.Codec, blackfurykr.Option())
+		kb, err := keyring.New(sdk.KeyringServiceName(), args.keyringBackend, nodeDir, inBuf, clientCtx.Codec, blackkr.Option())
 		if err != nil {
 			return err
 		}
@@ -296,18 +296,18 @@ func initTestnetFiles(
 			return err
 		}
 
-		accStakingTokens := sdk.TokensFromConsensusPower(5000, blackfurytypes.PowerReduction)
+		accStakingTokens := sdk.TokensFromConsensusPower(5000, blacktypes.PowerReduction)
 		coins := sdk.Coins{
 			sdk.NewCoin(cmdcfg.BaseDenom, accStakingTokens),
 		}
 
 		genBalances = append(genBalances, banktypes.Balance{Address: addr.String(), Coins: coins.Sort()})
-		genAccounts = append(genAccounts, &blackfurytypes.EthAccount{
+		genAccounts = append(genAccounts, &blacktypes.EthAccount{
 			BaseAccount: authtypes.NewBaseAccount(addr, nil, 0, 0),
 			CodeHash:    common.BytesToHash(evmtypes.EmptyCodeHash).Hex(),
 		})
 
-		valTokens := sdk.TokensFromConsensusPower(100, blackfurytypes.PowerReduction)
+		valTokens := sdk.TokensFromConsensusPower(100, blacktypes.PowerReduction)
 		createValMsg, err := stakingtypes.NewMsgCreateValidator(
 			sdk.ValAddress(addr),
 			valPubKeys[i],

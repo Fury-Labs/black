@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 
 package ibctesting
 
@@ -22,12 +22,12 @@ import (
 
 	ibcgotesting "github.com/cosmos/ibc-go/v6/testing"
 
-	blackfuryapp "github.com/fury-labs/blackfury/v13/app"
-	"github.com/fury-labs/blackfury/v13/types"
-	"github.com/fury-labs/blackfury/v13/utils"
+	blackapp "github.com/fury-labs/black/v13/app"
+	"github.com/fury-labs/black/v13/types"
+	"github.com/fury-labs/black/v13/utils"
 )
 
-var DefaultTestingAppInit func() (ibcgotesting.TestingApp, map[string]json.RawMessage) = blackfuryapp.SetupTestingApp
+var DefaultTestingAppInit func() (ibcgotesting.TestingApp, map[string]json.RawMessage) = blackapp.SetupTestingApp
 
 // SetupWithGenesisValSet initializes a new SimApp with a validator set and genesis accounts
 // that also act as delegators. For simplicity, each validator is bonded with a delegation
@@ -97,7 +97,7 @@ func SetupWithGenesisValSet(t *testing.T, valSet *tmtypes.ValidatorSet, genAccs 
 		abci.RequestInitChain{
 			ChainId:         chainID,
 			Validators:      []abci.ValidatorUpdate{},
-			ConsensusParams: blackfuryapp.DefaultConsensusParams,
+			ConsensusParams: blackapp.DefaultConsensusParams,
 			AppStateBytes:   stateBytes,
 		},
 	)

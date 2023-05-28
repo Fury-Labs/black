@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 package tx
 
 import (
@@ -18,23 +18,23 @@ import (
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
 
-	"github.com/fury-labs/blackfury/v13/app"
-	"github.com/fury-labs/blackfury/v13/server/config"
-	"github.com/fury-labs/blackfury/v13/utils"
-	evmtypes "github.com/fury-labs/blackfury/v13/x/evm/types"
+	"github.com/fury-labs/black/v13/app"
+	"github.com/fury-labs/black/v13/server/config"
+	"github.com/fury-labs/black/v13/utils"
+	evmtypes "github.com/fury-labs/black/v13/x/evm/types"
 )
 
 // PrepareEthTx creates an ethereum tx and signs it with the provided messages and private key.
 // It returns the signed transaction and an error
 func PrepareEthTx(
 	txCfg client.TxConfig,
-	appGridiron *app.Gridiron,
+	appBlack *app.Black,
 	priv cryptotypes.PrivKey,
 	msgs ...sdk.Msg,
 ) (authsigning.Tx, error) {
 	txBuilder := txCfg.NewTxBuilder()
 
-	signer := ethtypes.LatestSignerForChainID(appGridiron.EvmKeeper.ChainID())
+	signer := ethtypes.LatestSignerForChainID(appBlack.EvmKeeper.ChainID())
 	txFee := sdk.Coins{}
 	txGasLimit := uint64(0)
 
@@ -91,7 +91,7 @@ func PrepareEthTx(
 // Should this not be the case, just pass in zero.
 func CreateEthTx(
 	ctx sdk.Context,
-	appGridiron *app.Gridiron,
+	appBlack *app.Black,
 	privKey cryptotypes.PrivKey,
 	from sdk.AccAddress,
 	dest sdk.AccAddress,
@@ -100,17 +100,17 @@ func CreateEthTx(
 ) (*evmtypes.MsgEthereumTx, error) {
 	toAddr := common.BytesToAddress(dest.Bytes())
 	fromAddr := common.BytesToAddress(from.Bytes())
-	chainID := appGridiron.EvmKeeper.ChainID()
+	chainID := appBlack.EvmKeeper.ChainID()
 
 	// When we send multiple Ethereum Tx's in one Cosmos Tx, we need to increment the nonce for each one.
-	nonce := appGridiron.EvmKeeper.GetNonce(ctx, fromAddr) + uint64(nonceIncrement)
+	nonce := appBlack.EvmKeeper.GetNonce(ctx, fromAddr) + uint64(nonceIncrement)
 	evmTxParams := &evmtypes.EvmTxArgs{
 		ChainID:   chainID,
 		Nonce:     nonce,
 		To:        &toAddr,
 		Amount:    amount,
 		GasLimit:  100000,
-		GasFeeCap: appGridiron.FeeMarketKeeper.GetBaseFee(ctx),
+		GasFeeCap: appBlack.FeeMarketKeeper.GetBaseFee(ctx),
 		GasTipCap: big.NewInt(1),
 		Accesses:  &ethtypes.AccessList{},
 	}
@@ -119,7 +119,7 @@ func CreateEthTx(
 
 	// If we are creating multiple eth Tx's with different senders, we need to sign here rather than later.
 	if privKey != nil {
-		signer := ethtypes.LatestSignerForChainID(appGridiron.EvmKeeper.ChainID())
+		signer := ethtypes.LatestSignerForChainID(appBlack.EvmKeeper.ChainID())
 		err := msgEthereumTx.Sign(signer, NewSigner(privKey))
 		if err != nil {
 			return nil, err

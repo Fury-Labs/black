@@ -14,11 +14,11 @@ import (
 	"github.com/tendermint/tendermint/abci/types"
 	tmrpctypes "github.com/tendermint/tendermint/rpc/core/types"
 
-	"github.com/fury-labs/blackfury/v13/rpc/backend/mocks"
-	rpc "github.com/fury-labs/blackfury/v13/rpc/types"
-	utiltx "github.com/fury-labs/blackfury/v13/testutil/tx"
-	evmtypes "github.com/fury-labs/blackfury/v13/x/evm/types"
-	feemarkettypes "github.com/fury-labs/blackfury/v13/x/feemarket/types"
+	"github.com/fury-labs/black/v13/rpc/backend/mocks"
+	rpc "github.com/fury-labs/black/v13/rpc/types"
+	utiltx "github.com/fury-labs/black/v13/testutil/tx"
+	evmtypes "github.com/fury-labs/black/v13/x/evm/types"
+	feemarkettypes "github.com/fury-labs/black/v13/x/feemarket/types"
 )
 
 func (suite *BackendTestSuite) TestBaseFee() {

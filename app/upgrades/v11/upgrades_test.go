@@ -12,17 +12,17 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	ibctypes "github.com/cosmos/ibc-go/v6/modules/apps/transfer/types"
-	"github.com/fury-labs/blackfury/v13/app"
-	v11 "github.com/fury-labs/blackfury/v13/app/upgrades/v11"
-	"github.com/fury-labs/blackfury/v13/crypto/ethsecp256k1"
-	"github.com/fury-labs/blackfury/v13/testutil"
-	utiltx "github.com/fury-labs/blackfury/v13/testutil/tx"
-	feemarkettypes "github.com/fury-labs/blackfury/v13/x/feemarket/types"
+	"github.com/fury-labs/black/v13/app"
+	v11 "github.com/fury-labs/black/v13/app/upgrades/v11"
+	"github.com/fury-labs/black/v13/crypto/ethsecp256k1"
+	"github.com/fury-labs/black/v13/testutil"
+	utiltx "github.com/fury-labs/black/v13/testutil/tx"
+	feemarkettypes "github.com/fury-labs/black/v13/x/feemarket/types"
 	"github.com/stretchr/testify/suite"
 
 	stakingkeeper "github.com/cosmos/cosmos-sdk/x/staking/keeper"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
-	"github.com/fury-labs/blackfury/v13/utils"
+	"github.com/fury-labs/black/v13/utils"
 	"github.com/tendermint/tendermint/crypto/tmhash"
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 	tmversion "github.com/tendermint/tendermint/proto/tendermint/version"
@@ -33,7 +33,7 @@ type UpgradeTestSuite struct {
 	suite.Suite
 
 	ctx     sdk.Context
-	app     *app.Gridiron
+	app     *app.Black
 	consKey cryptotypes.PubKey
 }
 

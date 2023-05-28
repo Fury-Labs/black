@@ -12,10 +12,10 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 
-	cryptocodec "github.com/fury-labs/blackfury/v13/crypto/codec"
-	"github.com/fury-labs/blackfury/v13/crypto/ethsecp256k1"
-	encodingcodec "github.com/fury-labs/blackfury/v13/encoding/codec"
-	"github.com/fury-labs/blackfury/v13/types"
+	cryptocodec "github.com/fury-labs/black/v13/crypto/codec"
+	"github.com/fury-labs/black/v13/crypto/ethsecp256k1"
+	encodingcodec "github.com/fury-labs/black/v13/encoding/codec"
+	"github.com/fury-labs/black/v13/types"
 )
 
 func init() {

@@ -3,14 +3,14 @@ package keeper_test
 import (
 	"time"
 
-	"github.com/fury-labs/blackfury/v13/x/inflation/types"
+	"github.com/fury-labs/black/v13/x/inflation/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 
-	epochstypes "github.com/fury-labs/blackfury/v13/x/epochs/types"
-	incentivestypes "github.com/fury-labs/blackfury/v13/x/incentives/types"
+	epochstypes "github.com/fury-labs/black/v13/x/epochs/types"
+	incentivestypes "github.com/fury-labs/black/v13/x/incentives/types"
 )
 
 var (

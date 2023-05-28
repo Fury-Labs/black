@@ -5,7 +5,7 @@ import (
 	"math/big"
 	"time"
 
-	"github.com/fury-labs/blackfury/v13/utils"
+	"github.com/fury-labs/black/v13/utils"
 
 	sdkmath "cosmossdk.io/math"
 	"github.com/cosmos/cosmos-sdk/baseapp"
@@ -21,14 +21,14 @@ import (
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
 
-	"github.com/fury-labs/blackfury/v13/app"
-	"github.com/fury-labs/blackfury/v13/crypto/ethsecp256k1"
-	"github.com/fury-labs/blackfury/v13/encoding"
-	"github.com/fury-labs/blackfury/v13/testutil"
-	utiltx "github.com/fury-labs/blackfury/v13/testutil/tx"
-	blackfurytypes "github.com/fury-labs/blackfury/v13/types"
-	evmtypes "github.com/fury-labs/blackfury/v13/x/evm/types"
-	"github.com/fury-labs/blackfury/v13/x/feemarket/types"
+	"github.com/fury-labs/black/v13/app"
+	"github.com/fury-labs/black/v13/crypto/ethsecp256k1"
+	"github.com/fury-labs/black/v13/encoding"
+	"github.com/fury-labs/black/v13/testutil"
+	utiltx "github.com/fury-labs/black/v13/testutil/tx"
+	blacktypes "github.com/fury-labs/black/v13/types"
+	evmtypes "github.com/fury-labs/black/v13/x/evm/types"
+	"github.com/fury-labs/black/v13/x/feemarket/types"
 
 	"github.com/stretchr/testify/require"
 
@@ -51,7 +51,7 @@ func (suite *KeeperTestSuite) SetupApp(checkTx bool) {
 	suite.consAddress = sdk.ConsAddress(priv.PubKey().Address())
 
 	header := testutil.NewHeader(
-		1, time.Now().UTC(), "blackfury_9000-1", suite.consAddress, nil, nil,
+		1, time.Now().UTC(), "highbury_710-1", suite.consAddress, nil, nil,
 	)
 
 	suite.ctx = suite.app.BaseApp.NewContext(checkTx, header)
@@ -60,7 +60,7 @@ func (suite *KeeperTestSuite) SetupApp(checkTx bool) {
 	types.RegisterQueryServer(queryHelper, suite.app.FeeMarketKeeper)
 	suite.queryClient = types.NewQueryClient(queryHelper)
 
-	acc := &blackfurytypes.EthAccount{
+	acc := &blacktypes.EthAccount{
 		BaseAccount: authtypes.NewBaseAccount(sdk.AccAddress(suite.address.Bytes()), nil, 0, 0),
 		CodeHash:    common.BytesToHash(crypto.Keccak256(nil)).String(),
 	}
@@ -147,7 +147,7 @@ func setupChain(localMinGasPricesStr string) {
 	// Initialize the app, so we can use SetMinGasPrices to set the
 	// validator-specific min-gas-prices setting
 	db := dbm.NewMemDB()
-	newapp := app.NewGridiron(
+	newapp := app.NewBlack(
 		log.NewNopLogger(),
 		db,
 		nil,
@@ -169,7 +169,7 @@ func setupChain(localMinGasPricesStr string) {
 	// Initialize the chain
 	newapp.InitChain(
 		abci.RequestInitChain{
-			ChainId:         "blackfury_9000-1",
+			ChainId:         "highbury_710-1",
 			Validators:      []abci.ValidatorUpdate{},
 			AppStateBytes:   stateBytes,
 			ConsensusParams: app.DefaultConsensusParams,

@@ -1,5 +1,5 @@
-// Copyright Tharsis Labs Ltd.(Gridiron)
-// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/blackfury/blob/main/LICENSE)
+// Copyright Tharsis Labs Ltd.(Black)
+// SPDX-License-Identifier:ENCL-1.0(https://github.com/fury-labs/black/blob/main/LICENSE)
 
 package main
 
@@ -23,13 +23,13 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/genutil"
 	genutiltypes "github.com/cosmos/cosmos-sdk/x/genutil/types"
 
-	"github.com/fury-labs/blackfury/v13/types"
-	evmtypes "github.com/fury-labs/blackfury/v13/x/evm/types"
+	"github.com/fury-labs/black/v13/types"
+	evmtypes "github.com/fury-labs/black/v13/x/evm/types"
 
-	blackfurykr "github.com/fury-labs/blackfury/v13/crypto/keyring"
+	blackkr "github.com/fury-labs/black/v13/crypto/keyring"
 
-	vestingcli "github.com/fury-labs/blackfury/v13/x/vesting/client/cli"
-	vestingtypes "github.com/fury-labs/blackfury/v13/x/vesting/types"
+	vestingcli "github.com/fury-labs/black/v13/x/vesting/client/cli"
+	vestingtypes "github.com/fury-labs/black/v13/x/vesting/types"
 )
 
 const (
@@ -69,7 +69,7 @@ contain valid denominations. Accounts may optionally be supplied with vesting pa
 						clientCtx.HomeDir,
 						inBuf,
 						clientCtx.Codec,
-						blackfurykr.Option(),
+						blackkr.Option(),
 					)
 					if err != nil {
 						return err

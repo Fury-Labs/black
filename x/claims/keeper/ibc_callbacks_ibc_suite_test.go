@@ -12,13 +12,13 @@ import (
 	channeltypes "github.com/cosmos/ibc-go/v6/modules/core/04-channel/types"
 	ibcgotesting "github.com/cosmos/ibc-go/v6/testing"
 
-	"github.com/fury-labs/blackfury/v13/app"
-	ibctesting "github.com/fury-labs/blackfury/v13/ibc/testing"
-	"github.com/fury-labs/blackfury/v13/testutil"
-	utiltx "github.com/fury-labs/blackfury/v13/testutil/tx"
-	"github.com/fury-labs/blackfury/v13/utils"
-	"github.com/fury-labs/blackfury/v13/x/claims/types"
-	inflationtypes "github.com/fury-labs/blackfury/v13/x/inflation/types"
+	"github.com/fury-labs/black/v13/app"
+	ibctesting "github.com/fury-labs/black/v13/ibc/testing"
+	"github.com/fury-labs/black/v13/testutil"
+	utiltx "github.com/fury-labs/black/v13/testutil/tx"
+	"github.com/fury-labs/black/v13/utils"
+	"github.com/fury-labs/black/v13/x/claims/types"
+	inflationtypes "github.com/fury-labs/black/v13/x/inflation/types"
 )
 
 type IBCTestingSuite struct {
@@ -26,16 +26,16 @@ type IBCTestingSuite struct {
 	coordinator *ibcgotesting.Coordinator
 
 	// testing chains used for convenience and readability
-	chainA      *ibcgotesting.TestChain // Gridiron chain A
-	chainB      *ibcgotesting.TestChain // Gridiron chain B
+	chainA      *ibcgotesting.TestChain // Black chain A
+	chainB      *ibcgotesting.TestChain // Black chain B
 	chainCosmos *ibcgotesting.TestChain // Cosmos chain
 
-	pathEVM    *ibctesting.Path // chainA (Gridiron) <-->  chainB (Gridiron)
-	pathCosmos *ibctesting.Path // chainA (Gridiron) <--> chainCosmos
+	pathEVM    *ibctesting.Path // chainA (Black) <-->  chainB (Black)
+	pathCosmos *ibctesting.Path // chainA (Black) <--> chainCosmos
 }
 
 func (suite *IBCTestingSuite) SetupTest() {
-	suite.coordinator = ibctesting.NewCoordinator(suite.T(), 2, 1) // initializes 2 Gridiron test chains and 1 Cosmos Chain
+	suite.coordinator = ibctesting.NewCoordinator(suite.T(), 2, 1) // initializes 2 Black test chains and 1 Cosmos Chain
 	suite.chainA = suite.coordinator.GetChain(ibcgotesting.GetChainID(1))
 	suite.chainB = suite.coordinator.GetChain(ibcgotesting.GetChainID(2))
 	suite.chainCosmos = suite.coordinator.GetChain(ibcgotesting.GetChainID(3))
@@ -44,52 +44,52 @@ func (suite *IBCTestingSuite) SetupTest() {
 	suite.coordinator.CommitNBlocks(suite.chainB, 2)
 	suite.coordinator.CommitNBlocks(suite.chainCosmos, 2)
 
-	blackfuryChainA := suite.chainA.App.(*app.Gridiron)
-	blackfuryChainB := suite.chainB.App.(*app.Gridiron)
+	blackChainA := suite.chainA.App.(*app.Black)
+	blackChainB := suite.chainB.App.(*app.Black)
 
 	// Mint coins to pay tx fees
 	amt, ok := sdk.NewIntFromString("1000000000000000000000")
 	suite.Require().True(ok)
-	coinGridiron := sdk.NewCoin(utils.BaseDenom, amt)
-	coins := sdk.NewCoins(coinGridiron)
+	coinBlack := sdk.NewCoin(utils.BaseDenom, amt)
+	coins := sdk.NewCoins(coinBlack)
 
-	err := blackfuryChainA.BankKeeper.MintCoins(suite.chainA.GetContext(), inflationtypes.ModuleName, coins)
+	err := blackChainA.BankKeeper.MintCoins(suite.chainA.GetContext(), inflationtypes.ModuleName, coins)
 	suite.Require().NoError(err)
-	err = blackfuryChainA.BankKeeper.SendCoinsFromModuleToAccount(suite.chainA.GetContext(), inflationtypes.ModuleName, suite.chainA.SenderAccount.GetAddress(), coins)
-	suite.Require().NoError(err)
-
-	err = blackfuryChainB.BankKeeper.MintCoins(suite.chainB.GetContext(), inflationtypes.ModuleName, coins)
-	suite.Require().NoError(err)
-	err = blackfuryChainB.BankKeeper.SendCoinsFromModuleToAccount(suite.chainB.GetContext(), inflationtypes.ModuleName, suite.chainB.SenderAccount.GetAddress(), coins)
+	err = blackChainA.BankKeeper.SendCoinsFromModuleToAccount(suite.chainA.GetContext(), inflationtypes.ModuleName, suite.chainA.SenderAccount.GetAddress(), coins)
 	suite.Require().NoError(err)
 
-	evmParams := blackfuryChainA.EvmKeeper.GetParams(suite.chainA.GetContext())
+	err = blackChainB.BankKeeper.MintCoins(suite.chainB.GetContext(), inflationtypes.ModuleName, coins)
+	suite.Require().NoError(err)
+	err = blackChainB.BankKeeper.SendCoinsFromModuleToAccount(suite.chainB.GetContext(), inflationtypes.ModuleName, suite.chainB.SenderAccount.GetAddress(), coins)
+	suite.Require().NoError(err)
+
+	evmParams := blackChainA.EvmKeeper.GetParams(suite.chainA.GetContext())
 	evmParams.EvmDenom = utils.BaseDenom
-	err = blackfuryChainA.EvmKeeper.SetParams(suite.chainA.GetContext(), evmParams)
+	err = blackChainA.EvmKeeper.SetParams(suite.chainA.GetContext(), evmParams)
 	suite.Require().NoError(err)
-	err = blackfuryChainB.EvmKeeper.SetParams(suite.chainB.GetContext(), evmParams)
+	err = blackChainB.EvmKeeper.SetParams(suite.chainB.GetContext(), evmParams)
 	suite.Require().NoError(err)
 
 	claimsRecord := types.NewClaimsRecord(sdk.NewInt(10000))
 	addr := sdk.AccAddress(utiltx.GenerateAddress().Bytes())
 	coins = sdk.NewCoins(sdk.NewCoin(utils.BaseDenom, sdk.NewInt(10000)))
 
-	err = testutil.FundModuleAccount(suite.chainB.GetContext(), suite.chainB.App.(*app.Gridiron).BankKeeper, types.ModuleName, coins)
+	err = testutil.FundModuleAccount(suite.chainB.GetContext(), suite.chainB.App.(*app.Black).BankKeeper, types.ModuleName, coins)
 	suite.Require().NoError(err)
 
-	suite.chainB.App.(*app.Gridiron).ClaimsKeeper.SetClaimsRecord(suite.chainB.GetContext(), addr, claimsRecord)
+	suite.chainB.App.(*app.Black).ClaimsKeeper.SetClaimsRecord(suite.chainB.GetContext(), addr, claimsRecord)
 
-	err = testutil.FundModuleAccount(suite.chainA.GetContext(), suite.chainA.App.(*app.Gridiron).BankKeeper, types.ModuleName, coins)
+	err = testutil.FundModuleAccount(suite.chainA.GetContext(), suite.chainA.App.(*app.Black).BankKeeper, types.ModuleName, coins)
 	suite.Require().NoError(err)
 
-	suite.chainA.App.(*app.Gridiron).ClaimsKeeper.SetClaimsRecord(suite.chainA.GetContext(), addr, claimsRecord)
+	suite.chainA.App.(*app.Black).ClaimsKeeper.SetClaimsRecord(suite.chainA.GetContext(), addr, claimsRecord)
 
 	params := types.DefaultParams()
 	params.AirdropStartTime = suite.chainA.GetContext().BlockTime()
 	params.EnableClaims = true
-	err = suite.chainA.App.(*app.Gridiron).ClaimsKeeper.SetParams(suite.chainA.GetContext(), params)
+	err = suite.chainA.App.(*app.Black).ClaimsKeeper.SetParams(suite.chainA.GetContext(), params)
 	suite.Require().NoError(err)
-	err = suite.chainB.App.(*app.Gridiron).ClaimsKeeper.SetParams(suite.chainB.GetContext(), params)
+	err = suite.chainB.App.(*app.Black).ClaimsKeeper.SetParams(suite.chainB.GetContext(), params)
 	suite.Require().NoError(err)
 
 	suite.pathEVM = ibctesting.NewTransferPath(suite.chainA, suite.chainB) // clientID, connectionID, channelID empty
@@ -128,8 +128,8 @@ func (suite *IBCTestingSuite) TestOnAcknowledgementPacketIBC() {
 			func(_ int64) {
 				params := types.DefaultParams()
 				params.EnableClaims = false
-				suite.chainA.App.(*app.Gridiron).ClaimsKeeper.SetParams(suite.chainA.GetContext(), params) //nolint:errcheck
-				suite.chainB.App.(*app.Gridiron).ClaimsKeeper.SetParams(suite.chainB.GetContext(), params) //nolint:errcheck
+				suite.chainA.App.(*app.Black).ClaimsKeeper.SetParams(suite.chainA.GetContext(), params) //nolint:errcheck
+				suite.chainB.App.(*app.Black).ClaimsKeeper.SetParams(suite.chainB.GetContext(), params) //nolint:errcheck
 			},
 			4,
 			0,
@@ -149,9 +149,9 @@ func (suite *IBCTestingSuite) TestOnAcknowledgementPacketIBC() {
 				amt := sdk.NewInt(claimableAmount)
 				coins := sdk.NewCoins(sdk.NewCoin("afury", amt))
 
-				suite.chainA.App.(*app.Gridiron).ClaimsKeeper.SetClaimsRecord(suite.chainA.GetContext(), senderAddr, types.NewClaimsRecord(amt))
+				suite.chainA.App.(*app.Black).ClaimsKeeper.SetClaimsRecord(suite.chainA.GetContext(), senderAddr, types.NewClaimsRecord(amt))
 				// update the escrowed account balance to maintain the invariant
-				err := testutil.FundModuleAccount(suite.chainA.GetContext(), suite.chainA.App.(*app.Gridiron).BankKeeper, types.ModuleName, coins)
+				err := testutil.FundModuleAccount(suite.chainA.GetContext(), suite.chainA.App.(*app.Black).BankKeeper, types.ModuleName, coins)
 				suite.Require().NoError(err)
 			},
 			4,
@@ -163,7 +163,7 @@ func (suite *IBCTestingSuite) TestOnAcknowledgementPacketIBC() {
 			func(claimableAmount int64) {
 				amt := sdk.NewInt(claimableAmount)
 
-				suite.chainA.App.(*app.Gridiron).ClaimsKeeper.SetClaimsRecord(suite.chainA.GetContext(), senderAddr, types.ClaimsRecord{InitialClaimableAmount: amt, ActionsCompleted: []bool{true, true, true, true}})
+				suite.chainA.App.(*app.Black).ClaimsKeeper.SetClaimsRecord(suite.chainA.GetContext(), senderAddr, types.ClaimsRecord{InitialClaimableAmount: amt, ActionsCompleted: []bool{true, true, true, true}})
 			},
 			4,
 			0,
@@ -193,9 +193,9 @@ func (suite *IBCTestingSuite) TestOnAcknowledgementPacketIBC() {
 			err = path.RelayPacket(packet)
 			suite.Require().NoError(err)
 
-			coin := suite.chainA.App.(*app.Gridiron).BankKeeper.GetBalance(suite.chainA.GetContext(), senderAddr, "afury")
+			coin := suite.chainA.App.(*app.Black).BankKeeper.GetBalance(suite.chainA.GetContext(), senderAddr, "afury")
 			suite.Require().Equal(sdk.NewCoin("afury", sdk.NewInt(tc.expectedBalance)).String(), coin.String())
-			_, found := suite.chainA.App.(*app.Gridiron).ClaimsKeeper.GetClaimsRecord(suite.chainA.GetContext(), senderAddr)
+			_, found := suite.chainA.App.(*app.Black).ClaimsKeeper.GetClaimsRecord(suite.chainA.GetContext(), senderAddr)
 			if tc.expPass {
 				suite.Require().True(found)
 			} else {
@@ -228,8 +228,8 @@ func (suite *IBCTestingSuite) TestOnRecvPacketIBC() {
 			func(_ int64) {
 				params := types.DefaultParams()
 				params.EnableClaims = false
-				suite.chainA.App.(*app.Gridiron).ClaimsKeeper.SetParams(suite.chainA.GetContext(), params) //nolint:errcheck
-				suite.chainB.App.(*app.Gridiron).ClaimsKeeper.SetParams(suite.chainB.GetContext(), params) //nolint:errcheck
+				suite.chainA.App.(*app.Black).ClaimsKeeper.SetParams(suite.chainA.GetContext(), params) //nolint:errcheck
+				suite.chainB.App.(*app.Black).ClaimsKeeper.SetParams(suite.chainB.GetContext(), params) //nolint:errcheck
 			},
 			func() {},
 			4,
@@ -242,14 +242,14 @@ func (suite *IBCTestingSuite) TestOnRecvPacketIBC() {
 				amt := sdk.NewInt(claimableAmount)
 				coins := sdk.NewCoins(sdk.NewCoin("afury", sdk.NewInt(claimableAmount/4)))
 
-				suite.chainB.App.(*app.Gridiron).ClaimsKeeper.SetClaimsRecord(suite.chainB.GetContext(), senderAddr, types.ClaimsRecord{InitialClaimableAmount: amt, ActionsCompleted: []bool{false, true, true, true}})
+				suite.chainB.App.(*app.Black).ClaimsKeeper.SetClaimsRecord(suite.chainB.GetContext(), senderAddr, types.ClaimsRecord{InitialClaimableAmount: amt, ActionsCompleted: []bool{false, true, true, true}})
 				// update the escrowed account balance to maintain the invariant
-				err := testutil.FundModuleAccount(suite.chainB.GetContext(), suite.chainB.App.(*app.Gridiron).BankKeeper, types.ModuleName, coins)
+				err := testutil.FundModuleAccount(suite.chainB.GetContext(), suite.chainB.App.(*app.Black).BankKeeper, types.ModuleName, coins)
 				suite.Require().NoError(err)
 			},
 			func() {
 				// Check sender claim was not deleted
-				_, found := suite.chainB.App.(*app.Gridiron).ClaimsKeeper.GetClaimsRecord(suite.chainB.GetContext(), senderAddr)
+				_, found := suite.chainB.App.(*app.Black).ClaimsKeeper.GetClaimsRecord(suite.chainB.GetContext(), senderAddr)
 				suite.Require().True(found)
 			},
 			4,
@@ -262,16 +262,16 @@ func (suite *IBCTestingSuite) TestOnRecvPacketIBC() {
 				amt := sdk.NewInt(claimableAmount)
 				coins := sdk.NewCoins(sdk.NewCoin("afury", amt))
 
-				suite.chainB.App.(*app.Gridiron).ClaimsKeeper.SetClaimsRecord(suite.chainB.GetContext(), senderAddr, types.ClaimsRecord{InitialClaimableAmount: amt, ActionsCompleted: []bool{false, false, false, true}})
-				suite.chainB.App.(*app.Gridiron).ClaimsKeeper.SetClaimsRecord(suite.chainB.GetContext(), receiverAddr, types.ClaimsRecord{InitialClaimableAmount: amt, ActionsCompleted: []bool{true, true, true, false}})
+				suite.chainB.App.(*app.Black).ClaimsKeeper.SetClaimsRecord(suite.chainB.GetContext(), senderAddr, types.ClaimsRecord{InitialClaimableAmount: amt, ActionsCompleted: []bool{false, false, false, true}})
+				suite.chainB.App.(*app.Black).ClaimsKeeper.SetClaimsRecord(suite.chainB.GetContext(), receiverAddr, types.ClaimsRecord{InitialClaimableAmount: amt, ActionsCompleted: []bool{true, true, true, false}})
 
 				// update the escrowed account balance to maintain the invariant
-				err := testutil.FundModuleAccount(suite.chainB.GetContext(), suite.chainB.App.(*app.Gridiron).BankKeeper, types.ModuleName, coins)
+				err := testutil.FundModuleAccount(suite.chainB.GetContext(), suite.chainB.App.(*app.Black).BankKeeper, types.ModuleName, coins)
 				suite.Require().NoError(err)
 			},
 			func() {
 				// Check sender claim was not deleted
-				_, found := suite.chainB.App.(*app.Gridiron).ClaimsKeeper.GetClaimsRecord(suite.chainB.GetContext(), senderAddr)
+				_, found := suite.chainB.App.(*app.Black).ClaimsKeeper.GetClaimsRecord(suite.chainB.GetContext(), senderAddr)
 				suite.Require().True(found)
 			},
 			4,
@@ -284,16 +284,16 @@ func (suite *IBCTestingSuite) TestOnRecvPacketIBC() {
 				amt := sdk.NewInt(claimableAmount)
 				coins := sdk.NewCoins(sdk.NewCoin("afury", amt.Add(amt.QuoRaw(2))))
 
-				suite.chainB.App.(*app.Gridiron).ClaimsKeeper.SetClaimsRecord(suite.chainB.GetContext(), senderAddr, types.ClaimsRecord{InitialClaimableAmount: amt, ActionsCompleted: []bool{false, false, false, false}})
-				suite.chainB.App.(*app.Gridiron).ClaimsKeeper.SetClaimsRecord(suite.chainB.GetContext(), receiverAddr, types.ClaimsRecord{InitialClaimableAmount: amt, ActionsCompleted: []bool{false, true, true, false}})
+				suite.chainB.App.(*app.Black).ClaimsKeeper.SetClaimsRecord(suite.chainB.GetContext(), senderAddr, types.ClaimsRecord{InitialClaimableAmount: amt, ActionsCompleted: []bool{false, false, false, false}})
+				suite.chainB.App.(*app.Black).ClaimsKeeper.SetClaimsRecord(suite.chainB.GetContext(), receiverAddr, types.ClaimsRecord{InitialClaimableAmount: amt, ActionsCompleted: []bool{false, true, true, false}})
 
 				// update the escrowed account balance to maintain the invariant
-				err := testutil.FundModuleAccount(suite.chainB.GetContext(), suite.chainB.App.(*app.Gridiron).BankKeeper, types.ModuleName, coins)
+				err := testutil.FundModuleAccount(suite.chainB.GetContext(), suite.chainB.App.(*app.Black).BankKeeper, types.ModuleName, coins)
 				suite.Require().NoError(err)
 			},
 			func() {
 				// Check sender claim was deleted after merge
-				_, found := suite.chainB.App.(*app.Gridiron).ClaimsKeeper.GetClaimsRecord(suite.chainB.GetContext(), senderAddr)
+				_, found := suite.chainB.App.(*app.Black).ClaimsKeeper.GetClaimsRecord(suite.chainB.GetContext(), senderAddr)
 				suite.Require().False(found)
 			},
 			4,
@@ -307,16 +307,16 @@ func (suite *IBCTestingSuite) TestOnRecvPacketIBC() {
 				amt := sdk.NewInt(claimableAmount)
 				coins := sdk.NewCoins(sdk.NewCoin("afury", amt.QuoRaw(2)))
 
-				suite.chainB.App.(*app.Gridiron).ClaimsKeeper.SetClaimsRecord(suite.chainB.GetContext(), senderAddr, types.ClaimsRecord{InitialClaimableAmount: sdk.ZeroInt(), ActionsCompleted: []bool{false, false, false, false}})
-				suite.chainB.App.(*app.Gridiron).ClaimsKeeper.SetClaimsRecord(suite.chainB.GetContext(), receiverAddr, types.ClaimsRecord{InitialClaimableAmount: amt, ActionsCompleted: []bool{false, true, true, false}})
+				suite.chainB.App.(*app.Black).ClaimsKeeper.SetClaimsRecord(suite.chainB.GetContext(), senderAddr, types.ClaimsRecord{InitialClaimableAmount: sdk.ZeroInt(), ActionsCompleted: []bool{false, false, false, false}})
+				suite.chainB.App.(*app.Black).ClaimsKeeper.SetClaimsRecord(suite.chainB.GetContext(), receiverAddr, types.ClaimsRecord{InitialClaimableAmount: amt, ActionsCompleted: []bool{false, true, true, false}})
 
 				// update the escrowed account balance to maintain the invariant
-				err := testutil.FundModuleAccount(suite.chainB.GetContext(), suite.chainB.App.(*app.Gridiron).BankKeeper, types.ModuleName, coins)
+				err := testutil.FundModuleAccount(suite.chainB.GetContext(), suite.chainB.App.(*app.Black).BankKeeper, types.ModuleName, coins)
 				suite.Require().NoError(err)
 			},
 			func() {
 				// Check sender claim was deleted after merge
-				_, found := suite.chainB.App.(*app.Gridiron).ClaimsKeeper.GetClaimsRecord(suite.chainB.GetContext(), senderAddr)
+				_, found := suite.chainB.App.(*app.Black).ClaimsKeeper.GetClaimsRecord(suite.chainB.GetContext(), senderAddr)
 				suite.Require().False(found)
 			},
 			4,
@@ -326,11 +326,11 @@ func (suite *IBCTestingSuite) TestOnRecvPacketIBC() {
 		{
 			"case 2: no-op - only sender claims record found with no claimable amount",
 			func(_ int64) {
-				suite.chainB.App.(*app.Gridiron).ClaimsKeeper.SetClaimsRecord(suite.chainB.GetContext(), senderAddr, types.ClaimsRecord{InitialClaimableAmount: sdk.ZeroInt(), ActionsCompleted: []bool{false, false, false, false}})
+				suite.chainB.App.(*app.Black).ClaimsKeeper.SetClaimsRecord(suite.chainB.GetContext(), senderAddr, types.ClaimsRecord{InitialClaimableAmount: sdk.ZeroInt(), ActionsCompleted: []bool{false, false, false, false}})
 			},
 			func() {
 				// Check sender claim was not deleted
-				_, found := suite.chainB.App.(*app.Gridiron).ClaimsKeeper.GetClaimsRecord(suite.chainB.GetContext(), senderAddr)
+				_, found := suite.chainB.App.(*app.Black).ClaimsKeeper.GetClaimsRecord(suite.chainB.GetContext(), senderAddr)
 				suite.Require().True(found)
 			},
 			0,
@@ -342,15 +342,15 @@ func (suite *IBCTestingSuite) TestOnRecvPacketIBC() {
 			func(claimableAmount int64) {
 				amt := sdk.NewInt(claimableAmount)
 				coins := sdk.NewCoins(sdk.NewCoin("afury", amt))
-				suite.chainB.App.(*app.Gridiron).ClaimsKeeper.SetClaimsRecord(suite.chainB.GetContext(), senderAddr, types.NewClaimsRecord(amt))
+				suite.chainB.App.(*app.Black).ClaimsKeeper.SetClaimsRecord(suite.chainB.GetContext(), senderAddr, types.NewClaimsRecord(amt))
 
 				// update the escrowed account balance to maintain the invariant
-				err := testutil.FundModuleAccount(suite.chainB.GetContext(), suite.chainB.App.(*app.Gridiron).BankKeeper, types.ModuleName, coins)
+				err := testutil.FundModuleAccount(suite.chainB.GetContext(), suite.chainB.App.(*app.Black).BankKeeper, types.ModuleName, coins)
 				suite.Require().NoError(err)
 			},
 			func() {
 				// Check sender claim was deleted
-				_, found := suite.chainB.App.(*app.Gridiron).ClaimsKeeper.GetClaimsRecord(suite.chainB.GetContext(), senderAddr)
+				_, found := suite.chainB.App.(*app.Black).ClaimsKeeper.GetClaimsRecord(suite.chainB.GetContext(), senderAddr)
 				suite.Require().False(found)
 			},
 			4,
@@ -361,11 +361,11 @@ func (suite *IBCTestingSuite) TestOnRecvPacketIBC() {
 			"case 3: pass/claim - only recipient claims record found",
 			func(claimableAmount int64) {
 				amt := sdk.NewInt(claimableAmount)
-				suite.chainB.App.(*app.Gridiron).ClaimsKeeper.SetClaimsRecord(suite.chainB.GetContext(), receiverAddr, types.ClaimsRecord{InitialClaimableAmount: amt, ActionsCompleted: []bool{false, false, false, false}})
+				suite.chainB.App.(*app.Black).ClaimsKeeper.SetClaimsRecord(suite.chainB.GetContext(), receiverAddr, types.ClaimsRecord{InitialClaimableAmount: amt, ActionsCompleted: []bool{false, false, false, false}})
 
 				coins := sdk.NewCoins(sdk.NewCoin("afury", amt))
 				// update the escrowed account balance to maintain the invariant
-				err := testutil.FundModuleAccount(suite.chainB.GetContext(), suite.chainB.App.(*app.Gridiron).BankKeeper, types.ModuleName, coins)
+				err := testutil.FundModuleAccount(suite.chainB.GetContext(), suite.chainB.App.(*app.Black).BankKeeper, types.ModuleName, coins)
 				suite.Require().NoError(err)
 			},
 			func() {},
@@ -377,7 +377,7 @@ func (suite *IBCTestingSuite) TestOnRecvPacketIBC() {
 			"case 3: no-op - only recipient claims record found, but recipient already claimed ibc transfer",
 			func(claimableAmount int64) {
 				amt := sdk.NewInt(claimableAmount)
-				suite.chainB.App.(*app.Gridiron).ClaimsKeeper.SetClaimsRecord(suite.chainB.GetContext(), receiverAddr, types.ClaimsRecord{InitialClaimableAmount: amt, ActionsCompleted: []bool{true, true, true, true}})
+				suite.chainB.App.(*app.Black).ClaimsKeeper.SetClaimsRecord(suite.chainB.GetContext(), receiverAddr, types.ClaimsRecord{InitialClaimableAmount: amt, ActionsCompleted: []bool{true, true, true, true}})
 			},
 			func() {},
 			4,
@@ -388,11 +388,11 @@ func (suite *IBCTestingSuite) TestOnRecvPacketIBC() {
 			"case 3: no-op - only sender claims record found with no claimable amount",
 			func(claimableAmount int64) {
 				amt := sdk.NewInt(claimableAmount)
-				suite.chainB.App.(*app.Gridiron).ClaimsKeeper.SetClaimsRecord(suite.chainB.GetContext(), receiverAddr, types.ClaimsRecord{InitialClaimableAmount: amt, ActionsCompleted: []bool{false, false, false, false}})
+				suite.chainB.App.(*app.Black).ClaimsKeeper.SetClaimsRecord(suite.chainB.GetContext(), receiverAddr, types.ClaimsRecord{InitialClaimableAmount: amt, ActionsCompleted: []bool{false, false, false, false}})
 
 				coins := sdk.NewCoins(sdk.NewCoin("afury", amt))
 				// update the escrowed account balance to maintain the invariant
-				err := testutil.FundModuleAccount(suite.chainB.GetContext(), suite.chainB.App.(*app.Gridiron).BankKeeper, types.ModuleName, coins)
+				err := testutil.FundModuleAccount(suite.chainB.GetContext(), suite.chainB.App.(*app.Black).BankKeeper, types.ModuleName, coins)
 				suite.Require().NoError(err)
 			},
 			func() {},
@@ -432,9 +432,9 @@ func (suite *IBCTestingSuite) TestOnRecvPacketIBC() {
 			err = path.EndpointB.RecvPacket(packet)
 			suite.Require().NoError(err)
 
-			coin := suite.chainB.App.(*app.Gridiron).BankKeeper.GetBalance(suite.chainB.GetContext(), receiverAddr, "afury")
+			coin := suite.chainB.App.(*app.Black).BankKeeper.GetBalance(suite.chainB.GetContext(), receiverAddr, "afury")
 			suite.Require().Equal(coin.String(), sdk.NewCoin("afury", sdk.NewInt(tc.expectedBalance)).String())
-			_, found := suite.chainB.App.(*app.Gridiron).ClaimsKeeper.GetClaimsRecord(suite.chainB.GetContext(), receiverAddr)
+			_, found := suite.chainB.App.(*app.Black).ClaimsKeeper.GetClaimsRecord(suite.chainB.GetContext(), receiverAddr)
 			if tc.expectedRecipientFound {
 				suite.Require().True(found)
 			} else {

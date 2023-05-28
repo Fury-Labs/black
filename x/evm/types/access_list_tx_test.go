@@ -4,7 +4,7 @@ import (
 	"math/big"
 
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
-	"github.com/fury-labs/blackfury/v13/x/evm/types"
+	"github.com/fury-labs/black/v13/x/evm/types"
 )
 
 func (suite *TxDataTestSuite) TestAccessListTxCopy() {

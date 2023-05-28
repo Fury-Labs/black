@@ -9,12 +9,12 @@ import (
 	clienttypes "github.com/cosmos/ibc-go/v6/modules/core/02-client/types"
 	channeltypes "github.com/cosmos/ibc-go/v6/modules/core/04-channel/types"
 	ibcgotesting "github.com/cosmos/ibc-go/v6/testing"
-	"github.com/fury-labs/blackfury/v13/app"
-	ibctesting "github.com/fury-labs/blackfury/v13/ibc/testing"
-	"github.com/fury-labs/blackfury/v13/utils"
-	claimstypes "github.com/fury-labs/blackfury/v13/x/claims/types"
-	inflationtypes "github.com/fury-labs/blackfury/v13/x/inflation/types"
-	"github.com/fury-labs/blackfury/v13/x/recovery/types"
+	"github.com/fury-labs/black/v13/app"
+	ibctesting "github.com/fury-labs/black/v13/ibc/testing"
+	"github.com/fury-labs/black/v13/utils"
+	claimstypes "github.com/fury-labs/black/v13/x/claims/types"
+	inflationtypes "github.com/fury-labs/black/v13/x/inflation/types"
+	"github.com/fury-labs/black/v13/x/recovery/types"
 )
 
 func CreatePacket(amount, denom, sender, receiver, srcPort, srcChannel, dstPort, dstChannel string, seq, timeout uint64) channeltypes.Packet {
@@ -39,30 +39,30 @@ func CreatePacket(amount, denom, sender, receiver, srcPort, srcChannel, dstPort,
 func (suite *IBCTestingSuite) SetupTest() {
 	// initializes 3 test chains
 	suite.coordinator = ibctesting.NewCoordinator(suite.T(), 1, 2)
-	suite.GridironChain = suite.coordinator.GetChain(ibcgotesting.GetChainID(1))
+	suite.BlackChain = suite.coordinator.GetChain(ibcgotesting.GetChainID(1))
 	suite.IBCOsmosisChain = suite.coordinator.GetChain(ibcgotesting.GetChainID(2))
 	suite.IBCCosmosChain = suite.coordinator.GetChain(ibcgotesting.GetChainID(3))
-	suite.coordinator.CommitNBlocks(suite.GridironChain, 2)
+	suite.coordinator.CommitNBlocks(suite.BlackChain, 2)
 	suite.coordinator.CommitNBlocks(suite.IBCOsmosisChain, 2)
 	suite.coordinator.CommitNBlocks(suite.IBCCosmosChain, 2)
 
-	// Mint coins locked on the blackfury account generated with secp.
+	// Mint coins locked on the black account generated with secp.
 	amt, ok := sdk.NewIntFromString("1000000000000000000000")
 	suite.Require().True(ok)
-	coinGridiron := sdk.NewCoin(utils.BaseDenom, amt)
-	coins := sdk.NewCoins(coinGridiron)
-	err := suite.GridironChain.App.(*app.Gridiron).BankKeeper.MintCoins(suite.GridironChain.GetContext(), inflationtypes.ModuleName, coins)
+	coinBlack := sdk.NewCoin(utils.BaseDenom, amt)
+	coins := sdk.NewCoins(coinBlack)
+	err := suite.BlackChain.App.(*app.Black).BankKeeper.MintCoins(suite.BlackChain.GetContext(), inflationtypes.ModuleName, coins)
 	suite.Require().NoError(err)
 
 	// Fund sender address to pay fees
-	err = suite.GridironChain.App.(*app.Gridiron).BankKeeper.SendCoinsFromModuleToAccount(suite.GridironChain.GetContext(), inflationtypes.ModuleName, suite.GridironChain.SenderAccount.GetAddress(), coins)
+	err = suite.BlackChain.App.(*app.Black).BankKeeper.SendCoinsFromModuleToAccount(suite.BlackChain.GetContext(), inflationtypes.ModuleName, suite.BlackChain.SenderAccount.GetAddress(), coins)
 	suite.Require().NoError(err)
 
-	coinGridiron = sdk.NewCoin(utils.BaseDenom, sdk.NewInt(10000))
-	coins = sdk.NewCoins(coinGridiron)
-	err = suite.GridironChain.App.(*app.Gridiron).BankKeeper.MintCoins(suite.GridironChain.GetContext(), inflationtypes.ModuleName, coins)
+	coinBlack = sdk.NewCoin(utils.BaseDenom, sdk.NewInt(10000))
+	coins = sdk.NewCoins(coinBlack)
+	err = suite.BlackChain.App.(*app.Black).BankKeeper.MintCoins(suite.BlackChain.GetContext(), inflationtypes.ModuleName, coins)
 	suite.Require().NoError(err)
-	err = suite.GridironChain.App.(*app.Gridiron).BankKeeper.SendCoinsFromModuleToAccount(suite.GridironChain.GetContext(), inflationtypes.ModuleName, suite.IBCOsmosisChain.SenderAccount.GetAddress(), coins)
+	err = suite.BlackChain.App.(*app.Black).BankKeeper.SendCoinsFromModuleToAccount(suite.BlackChain.GetContext(), inflationtypes.ModuleName, suite.IBCOsmosisChain.SenderAccount.GetAddress(), coins)
 	suite.Require().NoError(err)
 
 	// Mint coins on the osmosis side which we'll use to unlock our afury
@@ -95,30 +95,30 @@ func (suite *IBCTestingSuite) SetupTest() {
 	suite.Require().NoError(err)
 
 	claimparams := claimstypes.DefaultParams()
-	claimparams.AirdropStartTime = suite.GridironChain.GetContext().BlockTime()
+	claimparams.AirdropStartTime = suite.BlackChain.GetContext().BlockTime()
 	claimparams.EnableClaims = true
-	err = suite.GridironChain.App.(*app.Gridiron).ClaimsKeeper.SetParams(suite.GridironChain.GetContext(), claimparams)
+	err = suite.BlackChain.App.(*app.Black).ClaimsKeeper.SetParams(suite.BlackChain.GetContext(), claimparams)
 	suite.Require().NoError(err)
 
 	params := types.DefaultParams()
 	params.EnableRecovery = true
-	err = suite.GridironChain.App.(*app.Gridiron).RecoveryKeeper.SetParams(suite.GridironChain.GetContext(), params)
+	err = suite.BlackChain.App.(*app.Black).RecoveryKeeper.SetParams(suite.BlackChain.GetContext(), params)
 	suite.Require().NoError(err)
 
-	evmParams := suite.GridironChain.App.(*app.Gridiron).EvmKeeper.GetParams(s.GridironChain.GetContext())
+	evmParams := suite.BlackChain.App.(*app.Black).EvmKeeper.GetParams(s.BlackChain.GetContext())
 	evmParams.EvmDenom = utils.BaseDenom
-	err = suite.GridironChain.App.(*app.Gridiron).EvmKeeper.SetParams(s.GridironChain.GetContext(), evmParams)
+	err = suite.BlackChain.App.(*app.Black).EvmKeeper.SetParams(s.BlackChain.GetContext(), evmParams)
 	suite.Require().NoError(err)
 
-	suite.pathOsmosisGridiron = ibctesting.NewTransferPath(suite.IBCOsmosisChain, suite.GridironChain) // clientID, connectionID, channelID empty
-	suite.pathCosmosGridiron = ibctesting.NewTransferPath(suite.IBCCosmosChain, suite.GridironChain)
+	suite.pathOsmosisBlack = ibctesting.NewTransferPath(suite.IBCOsmosisChain, suite.BlackChain) // clientID, connectionID, channelID empty
+	suite.pathCosmosBlack = ibctesting.NewTransferPath(suite.IBCCosmosChain, suite.BlackChain)
 	suite.pathOsmosisCosmos = ibctesting.NewTransferPath(suite.IBCCosmosChain, suite.IBCOsmosisChain)
-	ibctesting.SetupPath(suite.coordinator, suite.pathOsmosisGridiron) // clientID, connectionID, channelID filled
-	ibctesting.SetupPath(suite.coordinator, suite.pathCosmosGridiron)
+	ibctesting.SetupPath(suite.coordinator, suite.pathOsmosisBlack) // clientID, connectionID, channelID filled
+	ibctesting.SetupPath(suite.coordinator, suite.pathCosmosBlack)
 	ibctesting.SetupPath(suite.coordinator, suite.pathOsmosisCosmos)
-	suite.Require().Equal("07-tendermint-0", suite.pathOsmosisGridiron.EndpointA.ClientID)
-	suite.Require().Equal("connection-0", suite.pathOsmosisGridiron.EndpointA.ConnectionID)
-	suite.Require().Equal("channel-0", suite.pathOsmosisGridiron.EndpointA.ChannelID)
+	suite.Require().Equal("07-tendermint-0", suite.pathOsmosisBlack.EndpointA.ClientID)
+	suite.Require().Equal("connection-0", suite.pathOsmosisBlack.EndpointA.ConnectionID)
+	suite.Require().Equal("channel-0", suite.pathOsmosisBlack.EndpointA.ChannelID)
 }
 
 var timeoutHeight = clienttypes.NewHeight(1000, 1000)

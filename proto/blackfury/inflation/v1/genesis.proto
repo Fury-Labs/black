@@ -1,11 +1,11 @@
 syntax = "proto3";
-package blackfury.inflation.v1;
+package black.inflation.v1;
 
 import "gogoproto/gogo.proto";
 
-import "blackfury/inflation/v1/inflation.proto";
+import "black/inflation/v1/inflation.proto";
 
-option go_package = "github.com/fury-labs/blackfury/v13/x/inflation/types";
+option go_package = "github.com/fury-labs/black/v13/x/inflation/types";
 
 // GenesisState defines the inflation module's genesis state.
 message GenesisState {
